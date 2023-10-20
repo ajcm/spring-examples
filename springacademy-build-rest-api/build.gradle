@@ -17,11 +17,18 @@ repositories {
 
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.springframework.boot:spring-boot-starter-data-jdbc'
+	implementation 'org.springframework.boot:spring-boot-starter-validation'
+
+
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
 	// database
+
 	implementation 'org.springframework.data:spring-data-jdbc'
-	testImplementation 'com.h2database:h2'
+
+
+	runtimeOnly 'com.h2database:h2'
 }
 
 tasks.named('test') {
