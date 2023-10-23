@@ -12,7 +12,7 @@
 
     <Logger name="org.springframework.data.repository" level="DEBUG"></Logger>
 
-    <root level="DEBUG">
+    <root level="WARN">
         <appender-ref ref="STDOUT"/>
     </root>
 </configuration>
