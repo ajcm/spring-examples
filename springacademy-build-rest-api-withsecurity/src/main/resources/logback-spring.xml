@@ -10,9 +10,9 @@
     </appender>
 
 
-    <Logger name="org.springframework.data.repository" level="TRACE"></Logger>
+    <Logger name="org.springframework.data.repository" level="DEBUG"></Logger>
 
-    <root level="TRACE">
+    <root level="DEBUG">
         <appender-ref ref="STDOUT"/>
     </root>
 </configuration>
