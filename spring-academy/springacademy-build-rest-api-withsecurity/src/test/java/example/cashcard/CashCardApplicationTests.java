@@ -94,7 +94,7 @@ class CashCardApplicationTests {
 
     @Test
     void shouldReturnAPageOfCashCards() {
-        ResponseEntity<String> response =restTemplate
+        ResponseEntity<String> response =getTestRestTemplate()
                 .getForEntity("/cashcards?page=0&size=1", String.class);
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
 
