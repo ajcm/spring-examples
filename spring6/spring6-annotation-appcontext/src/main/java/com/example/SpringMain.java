@@ -5,14 +5,9 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 
 public class SpringMain {
 
-    public static void  main(String[] args){
+    public static void main(String[] args) {
         ApplicationContext applicationContext = new AnnotationConfigApplicationContext(ApplicationConfiguration.class);
-
-
-
-     MessageBean messageBean =   applicationContext.getBean(MessageBean.class);
-
-
-        System.out.println("->" +messageBean.getMessage());
+        MessageBean messageBean = applicationContext.getBean(MessageBean.class);
+        System.out.println("->" + messageBean.getMessage());
     }
 }
