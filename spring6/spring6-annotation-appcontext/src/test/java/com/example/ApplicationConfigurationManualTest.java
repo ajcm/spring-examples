@@ -21,6 +21,6 @@ public class ApplicationConfigurationManualTest {
         ConfigurableApplicationContext context
                 = new AnnotationConfigApplicationContext(ApplicationConfiguration.class);
         MessageBean messageBean = context.getBean(MessageBean.class);
-        Assertions.assertEquals("this is my message",messageBean.getMessage());
+        Assertions.assertEquals("this is a bean",messageBean.getMessage());
     }
 }
