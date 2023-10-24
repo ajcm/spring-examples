@@ -19,8 +19,8 @@ import java.util.Optional;
 @RequestMapping("/cashcards")
 public class CashCardController {
 
-    Logger LOG = LoggerFactory.getLogger(CashCardController.class);
     private final CashCardRepository cashCardRepository;
+    Logger LOG = LoggerFactory.getLogger(CashCardController.class);
 
 
     public CashCardController(CashCardRepository cashCardRepository) {
@@ -66,7 +66,16 @@ public class CashCardController {
         return ResponseEntity.noContent().build();
     }
 
+    @DeleteMapping("/{id}")
+    private ResponseEntity<Void> deleteCashCard(@PathVariable Long id, Principal principal) {
 
+        if (!cashCardRepository.existsByIdAndOwner(id, principal.getName())) {
+            return ResponseEntity.notFound().build();
+        }
+
+        cashCardRepository.deleteById(id);
+        return ResponseEntity.noContent().build();
+    }
 
     @GetMapping
     public ResponseEntity<List<CashCard>> findAll(Pageable pageable, Principal principal) {
@@ -79,7 +88,6 @@ public class CashCardController {
 
         return ResponseEntity.ok(page.getContent());
     }
-
 
 
 }
