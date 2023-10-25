@@ -18,7 +18,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class ProducerGroup {
-   static Logger logger = LoggerFactory.getLogger(GreetingController.class);
+   static Logger logger = LoggerFactory.getLogger(ProducerGroup.class);
 
     public static void produce(String[] args) throws Exception {
         String bootstrapServers = "127.0.1.1:9092";
