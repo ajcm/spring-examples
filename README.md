@@ -13,7 +13,6 @@ Example creating ApplicationContext using ClassPathXmlApplicationContext
 Example creating ApplicationContext using annotations and  AnnotationConfigApplicationContext
 
 <br/>
-<br/>
 
 ## Spring Boot 3
 
