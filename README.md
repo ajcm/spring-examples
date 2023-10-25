@@ -4,40 +4,49 @@ Projects supporting Spring v6 and Spring Boot v3
 
 ## Spring Framework v6
 
-- spring-xml-appcontext
+#### spring-xml-appcontext
 
 Example creating ApplicationContext using ClassPathXmlApplicationContext
 
-- spring-annotation-appcontext
+#### spring-annotation-appcontext
 
 Example creating ApplicationContext using annotations and  AnnotationConfigApplicationContext
 
-
 <br/>
+<br/>
+
 ## Spring Boot 3
 
-
-- springboot-helloword
+#### springboot-helloword
 
 spring boot application that list the beans
 
-- spring-rest-helloword
+<br/>
 
+#### spring-rest-helloword
 Hello world using RestController
 
-- spring-security
+<br/>
+
+#### spring-security
 
 simple example from Spring repo using SecurityConfig and @PreAuthorize in a controller
 
-- spring-datajdbc (incomplete)
+<br/>
+
+#### spring-datajdbc (incomplete)
 
 example using rest api and spring data jdbc as persistence
 
+<br/>
 
-- spring-kafka (incomplete)
+
+#### spring-kafka (incomplete)
 
 example using Kafka consumers and producers
 
+<br/>
+<br/>
 
 ## Spring Academy
 Code from Spring Academy Courses (https://spring.academy/courses)
