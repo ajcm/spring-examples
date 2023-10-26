@@ -2,18 +2,18 @@
 Spring and Spring Boot project examples
 Projects supporting Spring v6 and Spring Boot v3
 
-<br/>
-<br/>
 
 ## Spring Framework v6
 
 #### spring-javaconfig-xml
 
 Example with Spring Java configuration(@Configuration and @Bean).
+
 Using ClassPathXmlApplicationContext and xml file configuration.
 
 #### spring-javaconfig-annotations
 Example with Spring Java configuration (@Configuration and @Bean).
+
 Using AnnotationConfigApplicationContext and annotations.
 
 #### spring-javaconfig-properties
@@ -21,10 +21,10 @@ Example with Spring Java configurationand different types of property injection.
 
 #### spring-annotationconfig
 Example with Spring Annotation configuration (@Component, @Autowiring)
+
 Different autowiring types and property injection
 
 
-<br/>
 <br/>
 
 ## Spring Boot 3
