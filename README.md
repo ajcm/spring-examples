@@ -2,6 +2,7 @@
 Spring and Spring Boot project examples
 Projects supporting Spring v6 and Spring Boot v3
 
+<br/>
 
 ## Spring Framework v6
 
@@ -45,8 +46,9 @@ example using rest api and spring data jdbc as persistence
 
 example using Kafka consumers and producers
 
+
 <br/>
-<br/>
+
 
 ## Spring Academy
 Code from Spring Academy Courses (https://spring.academy/courses)
