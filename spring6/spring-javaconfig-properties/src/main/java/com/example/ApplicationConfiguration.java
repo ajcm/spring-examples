@@ -25,7 +25,7 @@ public class ApplicationConfiguration {
     public MessageBean getMessageBean() {
         return new HelloWorldBean();
     }
-    
+
     @Bean(name = "message")
     public String messageString(@Value("${message}") String message) {
         return message;

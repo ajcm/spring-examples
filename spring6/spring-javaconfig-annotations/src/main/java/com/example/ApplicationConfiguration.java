@@ -11,7 +11,7 @@ import org.springframework.context.annotation.PropertySource;
 public class ApplicationConfiguration {
 
     @Bean
-    public MessageBean getMessageBean(){
-        return  new HelloWorldBean();
+    public MessageBean getMessageBean() {
+        return new HelloWorldBean();
     }
 }

@@ -21,7 +21,7 @@ import java.util.Map;
  * This implementation caches restaurants to improve performance.
  * The cache is populated on initialization and cleared on destruction.
  */
-@Repository("restaurantRepository")
+@Repository("restaurantRepositoryxxx")
 public class JdbcRestaurantRepository implements RestaurantRepository {
 
 	private DataSource dataSource;

@@ -2,43 +2,44 @@
 Spring and Spring Boot project examples
 Projects supporting Spring v6 and Spring Boot v3
 
+<br/>
+<br/>
+
 ## Spring Framework v6
 
-#### spring-xml-appcontext
+#### spring-javaconfig-xml
 
-Example creating ApplicationContext using ClassPathXmlApplicationContext
+Example with Spring Java configuration(@Configuration and @Bean).
+Using ClassPathXmlApplicationContext and xml file configuration.
 
-#### spring-annotation-appcontext
+#### spring-javaconfig-annotations
+Example with Spring Java configuration (@Configuration and @Bean).
+Using AnnotationConfigApplicationContext and annotations.
 
-Example creating ApplicationContext using annotations and  AnnotationConfigApplicationContext
+#### spring-javaconfig-properties
+Example with Spring Java configurationand different types of property injection.
 
+#### spring-annotationconfig
+Example with Spring Annotation configuration (@Component, @Autowiring)
+Different autowiring types and property injection
+
+
+<br/>
 <br/>
 
 ## Spring Boot 3
 
 #### springboot-helloword
-
 spring boot application that list the beans
-
-<br/>
 
 #### spring-rest-helloword
 Hello world using RestController
 
-<br/>
-
 #### spring-security
-
 simple example from Spring repo using SecurityConfig and @PreAuthorize in a controller
 
-<br/>
-
 #### spring-datajdbc (incomplete)
-
 example using rest api and spring data jdbc as persistence
-
-<br/>
-
 
 #### spring-kafka (incomplete)
 
@@ -50,9 +51,7 @@ example using Kafka consumers and producers
 ## Spring Academy
 Code from Spring Academy Courses (https://spring.academy/courses)
 
-
 ### Building a REST API with Spring Boot
-
 https://spring.academy/courses/building-a-rest-api-with-spring-boot
 
 - springacademy-build-rest-api
