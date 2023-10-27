@@ -8,11 +8,11 @@ import org.springframework.stereotype.Component;
 @PropertySource("classpath:app.properties")
 public class AppPropertiesOther {
 
-    private String name;
+    private final String name;
 
-    private String version;
+    private final String version;
 
-    private String description;
+    private final String description;
 
 
     public AppPropertiesOther(
