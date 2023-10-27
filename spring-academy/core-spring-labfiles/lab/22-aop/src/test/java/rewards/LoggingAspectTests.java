@@ -27,6 +27,7 @@ public class LoggingAspectTests {
 		if (TestConstants.CHECK_CONSOLE_OUTPUT) {
 			// AOP VERIFICATION
 			// LoggingAspect should have output an INFO message to console
+		//	System.out.println(capture.toString());
 			String consoleOutput = capture.toString();
 			assertTrue(consoleOutput.startsWith("INFO"));
 			assertTrue(consoleOutput.contains("rewards.internal.aspects.LoggingAspect"));
