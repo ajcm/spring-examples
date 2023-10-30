@@ -2,12 +2,11 @@ package rewards.internal.restaurant;
 
 import common.money.Percentage;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.jdbc.core.JdbcTemplate;
 import rewards.Dining;
 import rewards.internal.account.Account;
 
 import javax.sql.DataSource;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -38,111 +37,117 @@ import java.sql.SQLException;
 
 public class JdbcRestaurantRepository implements RestaurantRepository {
 
-	private DataSource dataSource;
+    private JdbcTemplate jdbcTemplate;
 
-	public JdbcRestaurantRepository(DataSource dataSource) {
-		this.dataSource = dataSource;
-	}
+    public JdbcRestaurantRepository(DataSource dataSource) {
+        this.jdbcTemplate = new JdbcTemplate(dataSource);
+    }
 
-	public Restaurant findByMerchantNumber(String merchantNumber) {
-		String sql = "select MERCHANT_NUMBER, NAME, BENEFIT_PERCENTAGE, BENEFIT_AVAILABILITY_POLICY"
-				+ " from T_RESTAURANT where MERCHANT_NUMBER = ?";
-		Restaurant restaurant = null;
+    public Restaurant findByMerchantNumber(String merchantNumber) {
+        String sql = "select MERCHANT_NUMBER, NAME, BENEFIT_PERCENTAGE, BENEFIT_AVAILABILITY_POLICY"
+                + " from T_RESTAURANT where MERCHANT_NUMBER = ?";
 
-		try (Connection conn = dataSource.getConnection();
-			 PreparedStatement ps = conn.prepareStatement(sql) ){
-			ps.setString(1, merchantNumber);
-			ResultSet rs = ps.executeQuery();
-			advanceToNextRow(rs);
-			restaurant = mapRestaurant(rs);
-		} catch (SQLException e) {
-			throw new RuntimeException("SQL exception occurred finding by merchant number", e);
-		}
 
-		return restaurant;
-	}
+        return jdbcTemplate.queryForObject(sql,
+                (rs, rowNum) -> mapRestaurant(rs),
+                merchantNumber);
 
-	/**
-	 * Maps a row returned from a query of T_RESTAURANT to a Restaurant object.
-	 * @param rs the result set with its cursor positioned at the current row
-	 */
-	private Restaurant mapRestaurant(ResultSet rs) throws SQLException {
-		// Get the row column data
-		String name = rs.getString("NAME");
-		String number = rs.getString("MERCHANT_NUMBER");
-		Percentage benefitPercentage = Percentage.valueOf(rs.getString("BENEFIT_PERCENTAGE"));
+//		try (Connection conn = dataSource.getConnection();
+//			 PreparedStatement ps = conn.prepareStatement(sql) ){
+//			ps.setString(1, merchantNumber);
+//			ResultSet rs = ps.executeQuery();
+//			advanceToNextRow(rs);
+//			restaurant = mapRestaurant(rs);
+//		} catch (SQLException e) {
+//			throw new RuntimeException("SQL exception occurred finding by merchant number", e);
+//		}
 
-		// Map to the object
-		Restaurant restaurant = new Restaurant(number, name);
-		restaurant.setBenefitPercentage(benefitPercentage);
-		restaurant.setBenefitAvailabilityPolicy(mapBenefitAvailabilityPolicy(rs));
-		return restaurant;
-	}
 
-	/**
-	 * Advances a ResultSet to the next row and throws an exception if there are no rows.
-	 * @param rs the ResultSet to advance
-	 * @throws EmptyResultDataAccessException if there is no next row
-	 * @throws SQLException
-	 */
-	private void advanceToNextRow(ResultSet rs) throws EmptyResultDataAccessException, SQLException {
-		if (!rs.next()) {
-			throw new EmptyResultDataAccessException(1);
-		}
-	}
+    }
 
-	/**
-	 * Helper method that maps benefit availability policy data in the ResultSet to a fully-configured
-	 * {@link BenefitAvailabilityPolicy} object. The key column is 'BENEFIT_AVAILABILITY_POLICY', which is a
-	 * discriminator column containing a string code that identifies the type of policy. Currently supported types are:
-	 * 'A' for 'always available' and 'N' for 'never available'.
-	 *
-	 * More types could be added easily by enhancing this method. For example, 'W' for 'Weekdays only' or 'M' for 'Max
-	 * Rewards per Month'. Some of these types might require additional database column values to be configured, for
-	 * example a 'MAX_REWARDS_PER_MONTH' data column.
-	 * 
-	 * @param rs the result set used to map the policy object from database column values
-	 * @return the matching benefit availability policy
-	 * @throws IllegalArgumentException if the mapping could not be performed
-	 */
-	private BenefitAvailabilityPolicy mapBenefitAvailabilityPolicy(ResultSet rs) throws SQLException {
-		String policyCode = rs.getString("BENEFIT_AVAILABILITY_POLICY");
-		if ("A".equals(policyCode)) {
-			return AlwaysAvailable.INSTANCE;
-		} else if ("N".equals(policyCode)) {
-			return NeverAvailable.INSTANCE;
-		} else {
-			throw new IllegalArgumentException("Not a supported policy code " + policyCode);
-		}
-	}
+    /**
+     * Maps a row returned from a query of T_RESTAURANT to a Restaurant object.
+     *
+     * @param rs the result set with its cursor positioned at the current row
+     */
+    private Restaurant mapRestaurant(ResultSet rs) throws SQLException {
+        // Get the row column data
+        String name = rs.getString("NAME");
+        String number = rs.getString("MERCHANT_NUMBER");
+        Percentage benefitPercentage = Percentage.valueOf(rs.getString("BENEFIT_PERCENTAGE"));
 
-	/**
-	 * Returns true indicating benefit is always available.
-	 */
-	static class AlwaysAvailable implements BenefitAvailabilityPolicy {
-		static final BenefitAvailabilityPolicy INSTANCE = new AlwaysAvailable();
+        // Map to the object
+        Restaurant restaurant = new Restaurant(number, name);
+        restaurant.setBenefitPercentage(benefitPercentage);
+        restaurant.setBenefitAvailabilityPolicy(mapBenefitAvailabilityPolicy(rs));
+        return restaurant;
+    }
 
-		public boolean isBenefitAvailableFor(Account account, Dining dining) {
-			return true;
-		}
+    /**
+     * Advances a ResultSet to the next row and throws an exception if there are no rows.
+     *
+     * @param rs the ResultSet to advance
+     * @throws EmptyResultDataAccessException if there is no next row
+     * @throws SQLException
+     */
+    private void advanceToNextRow(ResultSet rs) throws EmptyResultDataAccessException, SQLException {
+        if (!rs.next()) {
+            throw new EmptyResultDataAccessException(1);
+        }
+    }
 
-		public String toString() {
-			return "alwaysAvailable";
-		}
-	}
+    /**
+     * Helper method that maps benefit availability policy data in the ResultSet to a fully-configured
+     * {@link BenefitAvailabilityPolicy} object. The key column is 'BENEFIT_AVAILABILITY_POLICY', which is a
+     * discriminator column containing a string code that identifies the type of policy. Currently supported types are:
+     * 'A' for 'always available' and 'N' for 'never available'.
+     * <p>
+     * More types could be added easily by enhancing this method. For example, 'W' for 'Weekdays only' or 'M' for 'Max
+     * Rewards per Month'. Some of these types might require additional database column values to be configured, for
+     * example a 'MAX_REWARDS_PER_MONTH' data column.
+     *
+     * @param rs the result set used to map the policy object from database column values
+     * @return the matching benefit availability policy
+     * @throws IllegalArgumentException if the mapping could not be performed
+     */
+    private BenefitAvailabilityPolicy mapBenefitAvailabilityPolicy(ResultSet rs) throws SQLException {
+        String policyCode = rs.getString("BENEFIT_AVAILABILITY_POLICY");
+        if ("A".equals(policyCode)) {
+            return AlwaysAvailable.INSTANCE;
+        } else if ("N".equals(policyCode)) {
+            return NeverAvailable.INSTANCE;
+        } else {
+            throw new IllegalArgumentException("Not a supported policy code " + policyCode);
+        }
+    }
 
-	/**
-	 * Returns false indicating benefit is never available.
-	 */
-	static class NeverAvailable implements BenefitAvailabilityPolicy {
-		static final BenefitAvailabilityPolicy INSTANCE = new NeverAvailable();
+    /**
+     * Returns true indicating benefit is always available.
+     */
+    static class AlwaysAvailable implements BenefitAvailabilityPolicy {
+        static final BenefitAvailabilityPolicy INSTANCE = new AlwaysAvailable();
 
-		public boolean isBenefitAvailableFor(Account account, Dining dining) {
-			return false;
-		}
+        public boolean isBenefitAvailableFor(Account account, Dining dining) {
+            return true;
+        }
 
-		public String toString() {
-			return "neverAvailable";
-		}
-	}
+        public String toString() {
+            return "alwaysAvailable";
+        }
+    }
+
+    /**
+     * Returns false indicating benefit is never available.
+     */
+    static class NeverAvailable implements BenefitAvailabilityPolicy {
+        static final BenefitAvailabilityPolicy INSTANCE = new NeverAvailable();
+
+        public boolean isBenefitAvailableFor(Account account, Dining dining) {
+            return false;
+        }
+
+        public String toString() {
+            return "neverAvailable";
+        }
+    }
 }
