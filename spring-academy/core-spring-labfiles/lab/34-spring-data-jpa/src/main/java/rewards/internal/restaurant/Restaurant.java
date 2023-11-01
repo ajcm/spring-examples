@@ -1,35 +1,39 @@
 package rewards.internal.restaurant;
 
-import common.money.MonetaryAmount;
-import common.money.Percentage;
+import javax.persistence.AttributeOverride;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+
 import rewards.Dining;
 import rewards.internal.account.Account;
 
-import javax.persistence.Transient;
+import common.money.MonetaryAmount;
+import common.money.Percentage;
 
 /**
+ * A restaurant establishment in the network. Like AppleBee's.
+ *
  * Restaurants calculate how much benefit may be awarded to an account for
  * dining based on a availability policy and a benefit percentage.
  */
-// TODO-05: Map this class using JPA Annotations.
-// - Use the following SQL statement in the schema.sql as a guidance.
-//
-// create table T_RESTAURANT (ID integer identity primary key,
-//                            MERCHANT_NUMBER varchar(10) not null,
-//                            NAME varchar(80) not null,
-//                            BENEFIT_PERCENTAGE decimal(5,2) not null,
-//                            BENEFIT_AVAILABILITY_POLICY varchar(1) not null, unique(MERCHANT_NUMBER));
+@Entity
+@Table(name = "T_RESTAURANT")
 public class Restaurant {
 
+	@Id
+	@Column(name = "id")
 	private Long entityId;
 
+	@Column(name = "MERCHANT_NUMBER")
 	private String number;
 
+	// No need for @Column, mapped automatically to NAME
 	private String name;
 
-	// This is not a simple mapping as Percentage is not a simple type.
-	// You need to map Percentage.value from a column in T_RESTAURANT.  If unsure,
-	// look at how Beneficiary does it.
+	@AttributeOverride(name="value",column=@Column(name="BENEFIT_PERCENTAGE"))
 	private Percentage benefitPercentage;
 
 
@@ -38,13 +42,14 @@ public class Restaurant {
 	@Transient
 	private BenefitAvailabilityPolicy benefitAvailabilityPolicy = AlwaysAvailable.INSTANCE;
 
+
 	public Restaurant() {
 		//Needed by the JPA spec
 	}
 
 	/**
 	 * Creates a new restaurant.
-	 * 
+	 *
 	 * @param number
 	 *            the restaurant's merchant number
 	 * @param name
@@ -58,7 +63,7 @@ public class Restaurant {
 	/**
 	 * Sets the percentage benefit to be awarded for eligible dining
 	 * transactions.
-	 * 
+	 *
 	 * @param benefitPercentage
 	 *            the benefit percentage
 	 */
@@ -69,7 +74,7 @@ public class Restaurant {
 	/**
 	 * Sets the policy that determines if a dining by an account at this
 	 * restaurant is eligible for benefit.
-	 * 
+	 *
 	 * @param benefitAvailabilityPolicy
 	 *            the benefit availability policy
 	 */
@@ -116,7 +121,7 @@ public class Restaurant {
 	/**
 	 * Calculate the benefit eligible to this account for dining at this
 	 * restaurant.
-	 * 
+	 *
 	 * @param account
 	 *            the account that dined at this restaurant
 	 * @param dining
