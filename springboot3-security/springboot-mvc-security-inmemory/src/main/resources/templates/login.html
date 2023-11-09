@@ -1,38 +1,44 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+<html th:replace="~{fragments/layout :: layout(~{::title}, ~{::section})}">
 <head>
-    <title>Spring MVC + JPA + Security</title>
+    <title>Page Title</title>
 </head>
-
-<div th:insert="~{header :: nav}"></div>
-
 <body>
-<h1>Login </h1>
-<form action="#" method="post"  th:object="${user}">
-    <table>
+<section class="py-5 text-center container">
+    <div class="row py-lg-5">
+        <div class="col-lg-6 col-md-8 mx-auto">
+            <h1 class="fw-light">Hello</h1>
+            <p class="lead text-body-secondary">Spring Mvc Application with Security.</p>
+            <p class="text-body-secondary">Use user/password or admin/password</p>
 
-        <tr>
-            <td>Email:</td>
-            <td><input th:field="*{email}" type="text"/></td>
-            <td th:errors="*{email}" th:if="${#fields.hasErrors('email')}">Email Error</td>
-        </tr>
+        </div>
 
 
-        <tr>
-            <td>Password:</td>
-            <td><input th:field="*{password}" type="password"/></td>
-            <td th:errors="*{password}" th:if="${#fields.hasErrors('password')}">Password Error</td>
-        </tr>
 
-        <tr>
-            <td>
-                <button type="submit">Submit</button>
-            </td>
-        </tr>
-    </table>
-</form>
+        <div style="color:red;" th:if="${param.error}">
+            Invalid username and password.
+        </div>
+        <div style="color:blue;" th:if="${param.logout}">
+            You have been logged out.
+        </div>
+
+
+        <main class="form-signin w-100 m-auto">
+
+
+            <form th:action="@{/login}" method="post">
+
+                <div  style="padding: 15px;">
+                    <label> User Name :  </label>
+                    <input type="text" name="username"/></div>
+                <div style="padding: 10px;">
+                    <label> Password: <input type="password" name="password"/> </label></div>
+                <div style="padding: 10px;">
+                    <input type="submit" value="Sign In"/></div>
+            </form>
+        </main>
+
+    </div>
+</section>
 </body>
-
-<div th:insert="~{footer :: copy}"></div>
-
 </html>

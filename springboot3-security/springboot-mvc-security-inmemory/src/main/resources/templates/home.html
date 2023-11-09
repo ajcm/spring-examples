@@ -7,10 +7,16 @@
 <section class="py-5 text-center container">
     <div class="row py-lg-5">
         <div class="col-lg-6 col-md-8 mx-auto">
-            <h1 class="fw-light">Sorry</h1>
-            <p class="lead text-body-secondary">Some error occurred.</p>
+            <h1 class="fw-light">Hello : User</h1>
+            <p class="lead text-body-secondary">This is an hello message.</p>
+
+            <form th:action="@{/logout}" method="post">
+                <input type="submit" value="Sign Out"/>
+            </form>
 
         </div>
+
+
     </div>
 </section>
 </body>
