@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <title>Spring MVC + JPA + Security</title>
+</head>
+
+<div th:insert="~{header :: nav}"></div>
+
+<body>
+<h1>Login </h1>
+<form action="#" method="post"  th:object="${user}">
+    <table>
+
+        <tr>
+            <td>Email:</td>
+            <td><input th:field="*{email}" type="text"/></td>
+            <td th:errors="*{email}" th:if="${#fields.hasErrors('email')}">Email Error</td>
+        </tr>
+
+
+        <tr>
+            <td>Password:</td>
+            <td><input th:field="*{password}" type="password"/></td>
+            <td th:errors="*{password}" th:if="${#fields.hasErrors('password')}">Password Error</td>
+        </tr>
+
+        <tr>
+            <td>
+                <button type="submit">Submit</button>
+            </td>
+        </tr>
+    </table>
+</form>
+</body>
+
+<div th:insert="~{footer :: copy}"></div>
+
+</html>
