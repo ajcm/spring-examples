@@ -1,6 +1,8 @@
 package org.example;
 
-import org.example.dao.UserDao;
+import org.example.dao.RoleRepository;
+import org.example.dao.UserRepository;
+import org.example.model.Role;
 import org.example.model.User;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
@@ -10,6 +12,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.List;
 
 public class SpringApplication {
 
@@ -17,15 +20,47 @@ public class SpringApplication {
 
         ConfigurableApplicationContext applicationContext = new AnnotationConfigApplicationContext(ApplicationConfiguration.class);
 
+        UserRepository userRepository = applicationContext.getBean(UserRepository.class);
+        RoleRepository roleRepository = applicationContext.getBean(RoleRepository.class);
+
+        Role role = new Role();
+        role.setDescription("admin");
+
+        Role role2 = new Role();
+        role2.setDescription("user");
+
+        role = roleRepository.save(role);
+        role2 = roleRepository.save(role2);
+
+        List<Role> roles = roleRepository.findAll();
+
+        for (Role r : roles) {
+            System.out.println(r);
+        }
+
         User user1 = applicationContext.getBean(User.class);
         User user2 = applicationContext.getBean(User.class);
 
-        UserDao userDao = applicationContext.getBean(UserDao.class);
-        userDao.save(user1);
-        userDao.save(user2);
+        user1.getRoles().add(role);
+        user1.getRoles().add(role2);
 
-        DataSource dataSource = applicationContext.getBean(DataSource.class);
-        runQuery(dataSource);
+        user2.getRoles().add(role);
+
+        userRepository.save(user1);
+        userRepository.save(user2);
+
+
+        User testUser1 = userRepository.findByEmail(user1.getEmail());
+        System.out.println(testUser1);
+
+
+//
+//
+//        user1.getRoles().add(role);
+//        userRepository.save(user1);
+//
+//        DataSource dataSource = applicationContext.getBean(DataSource.class);
+//        runQuery(dataSource);
 
         applicationContext.close();
     }
