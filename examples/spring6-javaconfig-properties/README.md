@@ -1,4 +1,3 @@
-
-###  spring-javaconfig-properties
-- Examples using properties injection types
+###  spring6-javaconfig-properties
+- Examples using Java configuration and different types of injection types
 

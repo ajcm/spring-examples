@@ -1,8 +1,6 @@
 # Spring Examples
 Spring and Spring Boot project examples
 <br/>
-<br/>
-
 
 # Spring Academy
 Code from Spring Academy Courses 
