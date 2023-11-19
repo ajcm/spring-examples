@@ -22,7 +22,7 @@ Example using jdbc template
 Spring with Jpa/Hibernate (no spring data)
 
 #### spring6-data-jpa
-Spring Data JAP (Hibernate)
+Spring Data Jpa (Hibernate)
 
 #### spring6-hello-mvc-security
 Spring6 security config with MvcWebApplicationInitializer
