@@ -9,7 +9,7 @@ Example with Spring Java configuration  AnnotationConfigApplicationContext (@Con
 #### spring6-javaconfig-properties
 Example with different properties configuration and injection types.
 
-#### spring6-annotations
+#### spring6-configurations
 Example with Spring Annotation configuration (@Component, @Autowiring).
 
 #### spring6-aop

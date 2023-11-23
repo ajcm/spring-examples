@@ -23,6 +23,8 @@ public class ApplicationConfigurationTest {
     @Autowired
     MessageBean messageBean;
 
+    @Autowired
+    Writer writer;
 
     @Test
     public void testApplicationContext() {
@@ -35,6 +37,12 @@ public class ApplicationConfigurationTest {
     @Test
     public void testMessageBean() {
         Assertions.assertEquals(MESSAGE, messageBean.getMessage());
+    }
+
+
+    @Test
+    public void testWriter() {
+        Assertions.assertEquals("this is a bean", writer.write());
     }
 
 }

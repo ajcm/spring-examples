@@ -14,4 +14,9 @@ public class ApplicationConfiguration {
     public MessageBean getMessageBean() {
         return new HelloWorldBean();
     }
+
+    @Bean
+    public Writer myWriter(MessageBean messageBean){ //no need for @Autowired
+        return  new MyWriter(messageBean);
+    }
 }
