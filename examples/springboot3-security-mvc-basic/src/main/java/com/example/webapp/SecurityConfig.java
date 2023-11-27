@@ -52,39 +52,5 @@ public class SecurityConfig {
                 .build();
         return new InMemoryUserDetailsManager(user, admin);
     }
-//
-//    @Bean
-//    public SecurityFilterChain filterChainxx(HttpSecurity http) throws Exception {
-//
-//        return http
-//                // .csrf(csrf -> csrf.ignoringAntMatchers("/h2-console/**"))
-//                .authorizeRequests(auth -> auth
-////                        .requestMatchers("/h2-console/**").permitAll()
-////                        .requestMatchers("/api/posts/**").permitAll()
-//                                .anyRequest().authenticated()
-//                )
-//                //    .userDetailsService(myUserDetailsService)
-//                //   .headers(headers -> headers.frameOptions().sameOrigin())
-//                //  .httpBasic(withDefaults())
-//                .formLogin(form -> form
-//                        .loginPage("/login")
-//                        .permitAll())
-//                .build();
-//
-//        //   return http.build();
-//
-////        return http
-////                //.csrf(csrf -> csrf.ignoringAntMatchers("/h2-console/**"))
-////                .authorizeRequests(auth -> auth
-////                  //      .antMatchers("/h2-console/**").permitAll()
-////                        .requestMatchers("/api/posts/**").permitAll()
-////                        .anyRequest().authenticated()
-////                )
-////              // .userDetailsService(myUserDetailsService)
-////                //.headers(headers -> headers.frameOptions().sameOrigin())
-////                .httpBasic(withDefaults())
-////                .build();
 
-
-    //   }
 }
