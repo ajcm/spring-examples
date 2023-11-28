@@ -10,6 +10,11 @@ import java.security.Principal;
 public class MvcController {
 
 
+    @RequestMapping(path = "/login")
+    public String login(){
+        return "login";
+    }
+
     @RequestMapping(path = "/nonauth")
     public ModelAndView doNonAuthenticated(Principal principal) {
         ModelAndView modelAndView = new ModelAndView();
