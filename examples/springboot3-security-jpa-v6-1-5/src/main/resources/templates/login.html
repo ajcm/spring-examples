@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html th:replace="~{fragments/layout :: layout(~{::title}, ~{::section})}">
+<head>
+    <title>Page Title</title>
+</head>
+<body>
+<section class="py-5 text-center container">
+    <div class="row py-lg-5">
+        <div class="col-lg-6 col-md-8 mx-auto">
+            <h1 class="fw-light">Hello</h1>
+            <p class="lead text-body-secondary">Spring Mvc Application with Security.</p>
+            <p class="text-body-secondary">Use user/user or admin/admin</p>
+
+        </div>
+
+
+
+        <div style="color:red;" th:if="${param.error}">
+            Invalid username and password.
+        </div>
+        <div style="color:blue;" th:if="${param.logout}">
+            You have been logged out.
+        </div>
+
+
+        <main class="form-signin w-100 m-auto">
+            <form th:action="@{/login}" method="post">
+
+                <div  style="padding: 15px;">
+                    <label> User Name :  </label>
+                    <input type="text" name="username"/></div>
+                <div style="padding: 10px;">
+                    <label> Password: <input type="password" name="password"/> </label></div>
+                <div style="padding: 10px;">
+                    <input type="submit" value="Sign In"/></div>
+            </form>
+        </main>
+
+    </div>
+</section>
+</body>
+</html>
