@@ -7,18 +7,19 @@
 <section class="py-5 text-center container">
     <div class="row py-lg-5">
         <div class="col-lg-6 col-md-8 mx-auto">
-            <h1 class="fw-light">Hellor</h1>
-            <p class="lead text-body-secondary">This is an hello message.</p>
+            <h1 class="fw-light">Hello</h1>
 
-            <form th:action="@{/login}" method="post">
-                <input type="submit" value="Sign In"/>
-            </form>
 
-            <form th:action="@{/logout}" method="post">
-                <input type="submit" value="Sign Out"/>
-            </form>
+            <div th:if="${username != null}">Logged as <strong th:text="${username}"></strong>
+                <p> <a href="/logout"> Sign Out</a></p>
+            </div>
 
-        </div>
+            <div th:if="${username == null}">
+                <p class="lead text-body-secondary">Please Login</p>
+                <a href="/login"> Login</a>
+            </div>
+
+        </div >
 
 
     </div>

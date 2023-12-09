@@ -34,6 +34,7 @@ public class DatabaseInitializer {
 
             AuthUserDetails user2 = new AuthUserDetails();
             user2.setUsername("user");
+            user2.setEmail("user@email.com");
             user2.setPassword(passwordEncoder.encode("password"));
             user2.setEnabled(true);
             user2.setCredentialsNonExpired(true);

@@ -26,7 +26,6 @@ import org.springframework.web.servlet.handler.HandlerMappingIntrospector;
 @EnableMethodSecurity
 public class SecurityConfig  {
 
-
     @Autowired
     private JpaUserDetailsManager jpaUserDetailsManager;
 

@@ -3,6 +3,8 @@ package com.example.webapp.service;
 import com.example.webapp.model.AuthUserDetails;
 import com.example.webapp.repository.AuthUserDetailsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.context.SecurityContextHolderStrategy;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.provisioning.UserDetailsManager;
@@ -15,6 +17,9 @@ public class JpaUserDetailsManager  implements UserDetailsManager {
 
     @Autowired
     private AuthUserDetailsRepository userDetailsRepository;
+
+    private SecurityContextHolderStrategy securityContextHolderStrategy = SecurityContextHolder
+            .getContextHolderStrategy();
 
 
     @Override
