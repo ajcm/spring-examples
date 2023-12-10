@@ -7,10 +7,12 @@ import com.example.webapp.repository.AuthGrantedAuthorityRepository;
 import com.example.webapp.repository.AuthUserDetailsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
-import org.springframework.context.annotation.*;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import java.util.Collections;
+import java.util.List;
+import java.util.Set;
 
 @Configuration
 public class DatabaseInitializer {
@@ -27,8 +29,25 @@ public class DatabaseInitializer {
     // initialize the user in DB
     @Bean
     public CommandLineRunner initialize() {
-        return (args)->{
-            System.out.println("application started");
+        return (args) -> {
+
+            AuthUserDetails adminUser = new AuthUserDetails();
+            adminUser.setUsername("admin");
+            adminUser.setName("Administrator");
+            adminUser.setEmail("admin@email.com");
+            adminUser.setPassword(passwordEncoder.encode("password"));
+            adminUser.setEnabled(true);
+            adminUser.setCredentialsNonExpired(true);
+            adminUser.setAccountNonExpired(true);
+            adminUser.setAccountNonLocked(true);
+
+            AuthGrantedAuthority userGrant = new AuthGrantedAuthority("USER",adminUser);
+            AuthGrantedAuthority adminGrant = new AuthGrantedAuthority("ADMIN",adminUser);
+
+            adminUser.setAuthorities(Set.of(userGrant,adminGrant));
+
+            authUserDetailsRepository.save(adminUser);
+            authGrantedAuthorityRepository.saveAll(Set.of(userGrant,adminGrant));
 
 
             AuthUserDetails user2 = new AuthUserDetails();
@@ -41,12 +60,11 @@ public class DatabaseInitializer {
             user2.setAccountNonExpired(true);
             user2.setAccountNonLocked(true);
 
-            AuthGrantedAuthority grantedAuthority = new AuthGrantedAuthority();
-            grantedAuthority.setAuthority("USER");
-            grantedAuthority.setAuthUserDetails(user2);
+            AuthGrantedAuthority userGrant2 = new AuthGrantedAuthority("USER",user2);
+            user2.setAuthorities(Set.of(userGrant2));
+
             authUserDetailsRepository.save(user2);
-            authGrantedAuthorityRepository.save(grantedAuthority);
-            user2.setAuthorities(Collections.singleton(grantedAuthority));
+            authGrantedAuthorityRepository.save(userGrant2);
         };
 
     }

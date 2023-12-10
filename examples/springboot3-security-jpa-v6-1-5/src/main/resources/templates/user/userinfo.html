@@ -18,11 +18,11 @@
 
 
             <tr th:if="${authorities.empty}">
-                <td colspan="3">No authorities</td>
+                <p class="lead text-body-secondary">No Authorities</p>
             </tr>
 
             <br/>
-            <div th:if="${authorities != null}">
+            <div th:if="${!authorities.empty}">
                 <p class="lead text-body-secondary">Authorities</p>
                 <tr th:each="auth : ${authorities}">
                     <td th:text="${auth}"> auth</td>

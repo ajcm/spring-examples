@@ -16,7 +16,7 @@ public class AuthGrantedAuthority implements GrantedAuthority {
     @JoinColumn(name = "auth_user_detail_id")
     private AuthUserDetails authUserDetails;
 
-    //constructors
+
     //getters and setters
     public Long getId() {
         return id;
@@ -42,4 +42,15 @@ public class AuthGrantedAuthority implements GrantedAuthority {
     public void setAuthUserDetails(AuthUserDetails authUserDetails) {
         this.authUserDetails = authUserDetails;
     }
+
+    //constructors
+    public AuthGrantedAuthority(String authority,AuthUserDetails userDetails) {
+        this.authority = authority;
+        this.authUserDetails = userDetails;
+    }
+
+    public AuthGrantedAuthority(){
+
+    }
+
 }

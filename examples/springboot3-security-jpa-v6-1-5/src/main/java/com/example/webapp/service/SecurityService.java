@@ -25,13 +25,10 @@ public class SecurityService {
     }
 
     public List<String> getAuthorities() {
-
         SecurityContext securityContext = securityContextHolderStrategy.getContext();
 
         if (securityContext.getAuthentication() != null) {
-
             var authentication = securityContext.getAuthentication();
-
             return authentication.getAuthorities().stream().map(GrantedAuthority::getAuthority).collect(Collectors.toList());
         }
         return List.of();
@@ -39,7 +36,6 @@ public class SecurityService {
 
 
     public Optional<AuthUserDetails> getAuthUserDetails() {
-
         var authentication = getAuthentication();
 
         if (authentication == null) {
