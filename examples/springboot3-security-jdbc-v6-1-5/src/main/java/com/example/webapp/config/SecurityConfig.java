@@ -7,7 +7,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabase;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
-import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -85,30 +84,6 @@ public class SecurityConfig {
     }
 
 
-    /* Other way of configuring it
-    @Configuration
-    public class SecurityConfiguration {
-
-        @Bean
-        public SecurityFilterChain filterChain(HttpSecurity httpSecurity)
-          throws Exception {
-            httpSecurity.authorizeRequests()
-              .antMatchers("/h2-console/**")
-              .permitAll()
-              .anyRequest()
-              .authenticated()
-              .and()
-              .formLogin();
-
-            httpSecurity.csrf()
-              .ignoringAntMatchers("/h2-console/**");
-            httpSecurity.headers()
-              .frameOptions()
-              .sameOrigin();
-          return http.build();
-        }
-    }
-     */
     @Bean
     JdbcUserDetailsManager users(
             @Autowired DataSource dataSource,
@@ -129,7 +104,7 @@ public class SecurityConfig {
 
         JdbcUserDetailsManager jdbcUserDetailsManager = new JdbcUserDetailsManager(dataSource);
         jdbcUserDetailsManager.createUser(user);
-//        jdbcUserDetailsManager.createUser(admin);
+        jdbcUserDetailsManager.createUser(admin);
         return jdbcUserDetailsManager;
     }
 

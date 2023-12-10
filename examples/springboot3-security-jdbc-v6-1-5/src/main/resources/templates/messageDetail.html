@@ -11,17 +11,19 @@
 
             <p class="lead text-body-secondary">Message</p>
 
-            <div class="container-sm"  th:if="${message}">
-                <form  th:action="@{/messages/delete}"  method="post" >
+            <div class="container-sm" th:if="${message}">
+                <form method="post" th:action="@{/messages/delete}">
 
                     <div class="mb-3">
                         <label class="form-label">Date</label>
-                        <p class="p-1 bg-body-tertiary border rounded-1" th:text="${message.created} ?: 'n/a'">Subject</p>
+                        <p class="p-1 bg-body-tertiary border rounded-1" th:text="${message.created} ?: 'n/a'">
+                            Subject</p>
                     </div>
 
                     <div class="mb-3">
                         <label class="form-label">Sender</label>
-                        <p class="p-1 bg-body-tertiary border rounded-1"th:text="${message.sender} ?: 'n/a'">Subject</p>
+                        <p class="p-1 bg-body-tertiary border rounded-1" th:text="${message.sender} ?: 'n/a'">
+                            Subject</p>
                     </div>
 
                     <div class="mb-3">
@@ -30,12 +32,13 @@
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Body</label>
-                        <p class="p-3 bg-body-tertiary border rounded-1" th:text="${message.body}" >Body</p>
+                        <p class="p-3 bg-body-tertiary border rounded-1" th:text="${message.body}">Body</p>
                     </div>
 
                     <div class="mb-4 d-flex ">
-                        <a class="link-primary nav-link py-2 px-0 px-lg-2 " aria-current="true" href="/messages/all" >Back</a>
-                        <a class="link-danger py-2 px-0 px-lg-2 " aria-current="true" th:href="@{'/messages/delete/' + ${message.id}}" >Delete</a>
+                        <a aria-current="true" class="link-primary nav-link py-2 px-0 px-lg-2 " href="/messages/all">Back</a>
+                        <a aria-current="true" class="link-danger py-2 px-0 px-lg-2 "
+                           th:href="@{'/messages/delete/' + ${message.id}}">Delete</a>
                     </div>
                 </form>
             </div>

@@ -30,10 +30,10 @@ public class DatabaseInitializer {
         return (args)->{
             System.out.println("application started");
 
-            //uncomment if required
 
             AuthUserDetails user2 = new AuthUserDetails();
             user2.setUsername("user");
+            user2.setName("John Doe");
             user2.setEmail("user@email.com");
             user2.setPassword(passwordEncoder.encode("password"));
             user2.setEnabled(true);

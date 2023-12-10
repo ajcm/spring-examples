@@ -36,15 +36,15 @@
             <p class="lead text-body-secondary">New Message</p>
 
             <div class="container-sm">
-                <form  th:action="@{/messages/post}"  method="post" >
+                <form method="post" th:action="@{/messages/post}">
                     <div class="mb-3">
-                        <label for="exampleFormControlInput1" class="form-label">Subject</label>
-                        <input name="subject" class="form-control" id="exampleFormControlInput1"
+                        <label class="form-label" for="exampleFormControlInput1">Subject</label>
+                        <input class="form-control" id="exampleFormControlInput1" name="subject"
                                placeholder="subject">
                     </div>
                     <div class="mb-3">
-                        <label for="exampleFormControlTextarea1" class="form-label">Body</label>
-                        <textarea name="body" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                        <label class="form-label" for="exampleFormControlTextarea1">Body</label>
+                        <textarea class="form-control" id="exampleFormControlTextarea1" name="body" rows="3"></textarea>
                     </div>
 
                     <div class="mb-3">

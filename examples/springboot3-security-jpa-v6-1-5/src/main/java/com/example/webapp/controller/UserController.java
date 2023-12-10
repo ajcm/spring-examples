@@ -29,9 +29,9 @@ public class UserController {
     public ModelAndView list() {
         List<AuthUserDetails> users = userRepository.findAll();
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("users");
         modelAndView.addObject("users", users);
 
+        modelAndView.setViewName("user/users");
         return modelAndView;
     }
 
@@ -53,10 +53,9 @@ public class UserController {
         Optional<AuthUserDetails> optionalUser = userRepository.findByUsername(username);
 
         ModelAndView modelAndView = new ModelAndView();
-
         modelAndView.addObject("user", optionalUser.get());
-        modelAndView.setViewName("user");
 
+        modelAndView.setViewName("user/user");
         return modelAndView;
     }
 

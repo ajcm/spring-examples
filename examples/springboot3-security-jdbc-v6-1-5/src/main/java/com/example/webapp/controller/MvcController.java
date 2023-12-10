@@ -11,7 +11,7 @@ public class MvcController {
 
 
     @RequestMapping(path = "/login")
-    public String login(){
+    public String login() {
         return "login";
     }
 
