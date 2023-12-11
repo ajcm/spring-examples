@@ -5,9 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -24,27 +22,25 @@ import org.springframework.web.servlet.handler.HandlerMappingIntrospector;
 @Configuration
 @EnableWebSecurity
 @EnableMethodSecurity
-public class SecurityConfig  {
+public class SecurityConfig {
 
-    @Autowired
-    private JpaUserDetailsManager jpaUserDetailsManager;
 
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
+    // This is done automatically by Spring Boot (bean is not in Spring context)
+    //    @Bean
+    //    public AuthenticationManager authManager(HttpSecurity http) throws Exception {
+    //        AuthenticationManagerBuilder authenticationManagerBuilder =
+    //                http.getSharedObject(AuthenticationManagerBuilder.class);
+    //        authenticationManagerBuilder.authenticationProvider(jpaDaoAuthenticationProvider());
+    //        return authenticationManagerBuilder.build();
+    //    }
 
     @Bean
-    public AuthenticationManager authManager(HttpSecurity http) throws Exception {
-        AuthenticationManagerBuilder authenticationManagerBuilder =
-                http.getSharedObject(AuthenticationManagerBuilder.class);
-        authenticationManagerBuilder.authenticationProvider(jpaDaoAuthenticationProvider());
-        return authenticationManagerBuilder.build();
-    }
-
-    @Bean
-    public DaoAuthenticationProvider jpaDaoAuthenticationProvider() {
+    public DaoAuthenticationProvider jpaDaoAuthenticationProvider(JpaUserDetailsManager jpaUserDetailsManager) {
         DaoAuthenticationProvider daoAuthenticationProvider = new DaoAuthenticationProvider();
         daoAuthenticationProvider.setUserDetailsService(jpaUserDetailsManager);
         daoAuthenticationProvider.setPasswordEncoder(passwordEncoder());

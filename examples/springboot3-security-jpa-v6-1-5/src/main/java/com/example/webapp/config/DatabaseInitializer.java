@@ -41,14 +41,13 @@ public class DatabaseInitializer {
             adminUser.setAccountNonExpired(true);
             adminUser.setAccountNonLocked(true);
 
-            AuthGrantedAuthority userGrant = new AuthGrantedAuthority("USER",adminUser);
-            AuthGrantedAuthority adminGrant = new AuthGrantedAuthority("ADMIN",adminUser);
+            AuthGrantedAuthority userGrant = new AuthGrantedAuthority("ROLE_USER",adminUser);
+            AuthGrantedAuthority adminGrant = new AuthGrantedAuthority("ROLE_ADMIN",adminUser);
 
             adminUser.setAuthorities(Set.of(userGrant,adminGrant));
 
             authUserDetailsRepository.save(adminUser);
             authGrantedAuthorityRepository.saveAll(Set.of(userGrant,adminGrant));
-
 
             AuthUserDetails user2 = new AuthUserDetails();
             user2.setUsername("user");
@@ -60,11 +59,23 @@ public class DatabaseInitializer {
             user2.setAccountNonExpired(true);
             user2.setAccountNonLocked(true);
 
-            AuthGrantedAuthority userGrant2 = new AuthGrantedAuthority("USER",user2);
+            AuthGrantedAuthority userGrant2 = new AuthGrantedAuthority("ROLE_USER",user2);
             user2.setAuthorities(Set.of(userGrant2));
 
             authUserDetailsRepository.save(user2);
             authGrantedAuthorityRepository.save(userGrant2);
+
+            AuthUserDetails user3 = new AuthUserDetails();
+            user3.setUsername("guest");
+            user3.setName("Guest User");
+            user3.setEmail("guest@email.com");
+            user3.setPassword(passwordEncoder.encode("password"));
+            user3.setEnabled(true);
+            user3.setCredentialsNonExpired(true);
+            user3.setAccountNonExpired(true);
+            user3.setAccountNonLocked(true);
+
+            authUserDetailsRepository.save(user3);
         };
 
     }

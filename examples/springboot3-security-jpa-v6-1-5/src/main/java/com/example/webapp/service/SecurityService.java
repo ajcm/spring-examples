@@ -1,6 +1,9 @@
 package com.example.webapp.service;
 
 import com.example.webapp.model.AuthUserDetails;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationProvider;
+import org.springframework.security.authentication.ProviderManager;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContext;
@@ -14,6 +17,10 @@ import java.util.stream.Collectors;
 
 @Service
 public class SecurityService {
+
+    @Autowired
+    private AuthenticationProvider authenticationProvider;
+
 
     private SecurityContextHolderStrategy securityContextHolderStrategy = SecurityContextHolder
             .getContextHolderStrategy();
