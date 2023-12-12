@@ -3,6 +3,7 @@ package com.example.webapp.service;
 import com.example.webapp.model.AuthUserDetails;
 import com.example.webapp.repository.AuthUserDetailsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Profile;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.context.SecurityContextHolderStrategy;
 import org.springframework.security.core.userdetails.UserDetails;
