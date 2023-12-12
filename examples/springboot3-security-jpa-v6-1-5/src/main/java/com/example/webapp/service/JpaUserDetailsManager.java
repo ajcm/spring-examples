@@ -13,12 +13,12 @@ import org.springframework.transaction.annotation.Transactional;
 
 
 @Service
-public class JpaUserDetailsManager  implements UserDetailsManager {
+public class JpaUserDetailsManager implements UserDetailsManager {
 
     @Autowired
     private AuthUserDetailsRepository userDetailsRepository;
 
-    private SecurityContextHolderStrategy securityContextHolderStrategy = SecurityContextHolder
+    private final SecurityContextHolderStrategy securityContextHolderStrategy = SecurityContextHolder
             .getContextHolderStrategy();
 
 

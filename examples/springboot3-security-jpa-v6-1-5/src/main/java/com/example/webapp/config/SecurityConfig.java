@@ -1,7 +1,6 @@
 package com.example.webapp.config;
 
 import com.example.webapp.service.JpaUserDetailsManager;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -24,20 +23,6 @@ import org.springframework.web.servlet.handler.HandlerMappingIntrospector;
 @EnableMethodSecurity
 public class SecurityConfig {
 
-
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
-
-    // This is done automatically by Spring Boot (bean is not in Spring context)
-    //    @Bean
-    //    public AuthenticationManager authManager(HttpSecurity http) throws Exception {
-    //        AuthenticationManagerBuilder authenticationManagerBuilder =
-    //                http.getSharedObject(AuthenticationManagerBuilder.class);
-    //        authenticationManagerBuilder.authenticationProvider(jpaDaoAuthenticationProvider());
-    //        return authenticationManagerBuilder.build();
-    //    }
 
     @Bean
     public DaoAuthenticationProvider jpaDaoAuthenticationProvider(JpaUserDetailsManager jpaUserDetailsManager) {
@@ -82,6 +67,12 @@ public class SecurityConfig {
                 .permitAll());
 
         return http.build();
+    }
+
+
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
     }
 
 

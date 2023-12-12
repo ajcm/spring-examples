@@ -17,10 +17,15 @@ import java.util.List;
 public class AuthUserController {
 
     @Autowired
-    private AuthUserDetailsRepository authUserDetailsRepository;
+    private final AuthUserDetailsRepository authUserDetailsRepository;
 
     @Autowired
     private SecurityService securityService;
+
+    //getters setters
+    public AuthUserController(AuthUserDetailsRepository authUserDetailsRepository) {
+        this.authUserDetailsRepository = authUserDetailsRepository;
+    }
 
     @GetMapping("id")
     public String getId(Principal principal) {
@@ -39,11 +44,5 @@ public class AuthUserController {
     @GetMapping("users")
     public List<AuthUserDetails> getAllUser() {
         return authUserDetailsRepository.findAll();
-    }
-
-
-    //getters setters
-    public AuthUserController(AuthUserDetailsRepository authUserDetailsRepository) {
-        this.authUserDetailsRepository = authUserDetailsRepository;
     }
 }

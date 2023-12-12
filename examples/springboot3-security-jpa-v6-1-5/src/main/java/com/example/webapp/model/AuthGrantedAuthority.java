@@ -17,6 +17,16 @@ public class AuthGrantedAuthority implements GrantedAuthority {
     private AuthUserDetails authUserDetails;
 
 
+    //constructors
+    public AuthGrantedAuthority(String authority, AuthUserDetails userDetails) {
+        this.authority = authority;
+        this.authUserDetails = userDetails;
+    }
+
+    public AuthGrantedAuthority() {
+
+    }
+
     //getters and setters
     public Long getId() {
         return id;
@@ -41,16 +51,6 @@ public class AuthGrantedAuthority implements GrantedAuthority {
 
     public void setAuthUserDetails(AuthUserDetails authUserDetails) {
         this.authUserDetails = authUserDetails;
-    }
-
-    //constructors
-    public AuthGrantedAuthority(String authority,AuthUserDetails userDetails) {
-        this.authority = authority;
-        this.authUserDetails = userDetails;
-    }
-
-    public AuthGrantedAuthority(){
-
     }
 
 }

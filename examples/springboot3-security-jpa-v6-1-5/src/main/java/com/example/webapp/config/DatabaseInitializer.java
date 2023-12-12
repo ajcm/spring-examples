@@ -11,7 +11,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import java.util.List;
 import java.util.Set;
 
 @Configuration
@@ -41,13 +40,13 @@ public class DatabaseInitializer {
             adminUser.setAccountNonExpired(true);
             adminUser.setAccountNonLocked(true);
 
-            AuthGrantedAuthority userGrant = new AuthGrantedAuthority("ROLE_USER",adminUser);
-            AuthGrantedAuthority adminGrant = new AuthGrantedAuthority("ROLE_ADMIN",adminUser);
+            AuthGrantedAuthority userGrant = new AuthGrantedAuthority("ROLE_USER", adminUser);
+            AuthGrantedAuthority adminGrant = new AuthGrantedAuthority("ROLE_ADMIN", adminUser);
 
-            adminUser.setAuthorities(Set.of(userGrant,adminGrant));
+            adminUser.setAuthorities(Set.of(userGrant, adminGrant));
 
             authUserDetailsRepository.save(adminUser);
-            authGrantedAuthorityRepository.saveAll(Set.of(userGrant,adminGrant));
+            authGrantedAuthorityRepository.saveAll(Set.of(userGrant, adminGrant));
 
             AuthUserDetails user2 = new AuthUserDetails();
             user2.setUsername("user");
@@ -59,7 +58,7 @@ public class DatabaseInitializer {
             user2.setAccountNonExpired(true);
             user2.setAccountNonLocked(true);
 
-            AuthGrantedAuthority userGrant2 = new AuthGrantedAuthority("ROLE_USER",user2);
+            AuthGrantedAuthority userGrant2 = new AuthGrantedAuthority("ROLE_USER", user2);
             user2.setAuthorities(Set.of(userGrant2));
 
             authUserDetailsRepository.save(user2);

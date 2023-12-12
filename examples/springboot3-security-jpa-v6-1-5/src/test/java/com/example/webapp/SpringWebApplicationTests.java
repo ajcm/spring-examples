@@ -9,6 +9,8 @@ import org.springframework.context.annotation.Import;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.security.authentication.AuthenticationManager;
 
+import javax.sql.DataSource;
+
 @SpringBootTest
 class SpringWebApplicationTests {
 
@@ -21,6 +23,11 @@ class SpringWebApplicationTests {
 
 	@Test
 	void contextLoads() {
+
+	}
+
+	@Test
+	void contextLoads(	@Autowired DataSource dataSource) {
 
 	}
 
