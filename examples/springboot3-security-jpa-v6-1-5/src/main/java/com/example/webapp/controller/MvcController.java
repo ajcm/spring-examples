@@ -51,7 +51,7 @@ public class MvcController {
             modelAndView.addObject("authUserDetails", optionalAuthUserDetails.get());
         }
 
-        modelAndView.setViewName("user/userinfo");
+        modelAndView.setViewName("user/userInfo");
         return modelAndView;
 
     }

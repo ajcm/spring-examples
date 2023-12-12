@@ -1,17 +1,15 @@
 package com.example.webapp.controller;
 
 import com.example.webapp.model.AuthUserDetails;
+import com.example.webapp.repository.AuthGrantedAuthorityRepository;
 import com.example.webapp.repository.AuthUserDetailsRepository;
+import com.example.webapp.service.SecurityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
@@ -25,8 +23,13 @@ public class UserController {
     private AuthUserDetailsRepository userRepository;
 
     @Autowired
-    private PasswordEncoder passwordEncoder;
+    private AuthGrantedAuthorityRepository grantedAuthorityRepository;
 
+    @Autowired
+    private SecurityService securityService;
+
+//    @Autowired
+//    private JpaUserDetailsManager userDetailsManager;
 
     @PreAuthorize("hasRole('ROLE_USER')")
     @GetMapping("/all")
@@ -37,17 +40,6 @@ public class UserController {
 
         modelAndView.setViewName("user/users");
         return modelAndView;
-    }
-
-    @PostMapping("post")
-    public String doPost(AuthUserDetails user, BindingResult bindingResult) {
-
-        var password = user.getPassword();
-        var encPassword = passwordEncoder.encode(password);
-        user.setPassword(encPassword);
-
-        userRepository.save(user);
-        return "redirect:/users/all";
     }
 
 
@@ -68,6 +60,47 @@ public class UserController {
     public String deleteDetails(@PathVariable String username) {
         userRepository.deleteByUsername(username);
         return "redirect:/users/all";
+    }
+
+    @GetMapping("add")
+    @Transactional
+    public String addUser() {
+        return "user/addUser";
+    }
+
+
+    @GetMapping("changePassword")
+    public ModelAndView changePassword() {
+        ModelAndView modelAndView = new ModelAndView();
+
+        var optionalAuthUserDetails = securityService.getAuthUserDetails();
+
+        if (optionalAuthUserDetails.isPresent()) {
+            modelAndView.addObject("authUserDetails", optionalAuthUserDetails.get());
+        }
+
+        modelAndView.setViewName("user/changePassword");
+        return modelAndView;
+    }
+
+
+    @PostMapping("changePassword")
+    @Transactional
+    public String doChangePassword(@RequestParam String oldPassword, @RequestParam String newPassword) {
+        securityService.changePassword(oldPassword, newPassword);
+        return "redirect:user/userInfo";
+    }
+
+    @PostMapping("add")
+    public String doPost(AuthUserDetails user, BindingResult bindingResult) {
+
+        if (securityService.userExists(user.getUsername())) {
+            return "user/userExists";
+        }
+
+        securityService.addUser(user);
+
+        return "redirect:/login";
     }
 
 

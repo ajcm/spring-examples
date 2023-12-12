@@ -25,8 +25,6 @@ import org.springframework.web.servlet.handler.HandlerMappingIntrospector;
 public class SecurityConfig {
 
 
-
-
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http,
                                            HandlerMappingIntrospector introspector) throws Exception {
@@ -41,6 +39,7 @@ public class SecurityConfig {
 
         http.authorizeHttpRequests(auth ->
                 auth
+                        .requestMatchers(mvcMatcherBuilder.pattern("/users/add")).permitAll()
                         .requestMatchers(mvcMatcherBuilder.pattern("/user")).hasRole("USER")
                         .requestMatchers(mvcMatcherBuilder.pattern("/admin")).hasRole("ADMIN")
                         .requestMatchers(mvcMatcherBuilder.pattern("/nonauth")).permitAll()
