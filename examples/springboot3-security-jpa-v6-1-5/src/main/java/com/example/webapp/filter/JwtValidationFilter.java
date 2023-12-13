@@ -42,7 +42,7 @@ public class JwtValidationFilter extends OncePerRequestFilter {
                         .build();
 
                 Jwt<JwsHeader, Claims> token = jwtParser.parseClaimsJws(jwt);
-                Claims claims =  token.getBody();
+                Claims claims = token.getBody();
                 String username = String.valueOf(claims.get("username"));
                 String authorities = (String) claims.get("authorities");
 

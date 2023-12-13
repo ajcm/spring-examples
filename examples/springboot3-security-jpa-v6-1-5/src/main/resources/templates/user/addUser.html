@@ -12,31 +12,31 @@
             <p class="lead text-body-secondary">New User</p>
 
             <div class="container-sm">
-                <form th:action="@{/users/add}" method="post">
+                <form method="post" th:action="@{/users/add}">
 
                     <div class="mb-4 " style="width: 50%;">
-                        <label for="exampleFormControlInput1" class="form-label">Username</label>
-                        <input name="username" class="form-control" id="exampleFormControlInput1"
+                        <label class="form-label" for="exampleFormControlInput1">Username</label>
+                        <input class="form-control" id="exampleFormControlInput1" name="username"
                                placeholder="Username">
                     </div>
 
                     <div class="mb-3" style="width: 75%;">
-                        <label for="exampleFormControlInput2" class="form-label">Fullname</label>
-                        <input name="name" class="form-control" id="exampleFormControlInput2"
+                        <label class="form-label" for="exampleFormControlInput2">Fullname</label>
+                        <input class="form-control" id="exampleFormControlInput2" name="name"
                                placeholder="Fullname">
                     </div>
 
 
                     <div class="mb-3" style="width: 50%;">
-                        <label for="exampleFormControlInput3" class="form-label">Email</label>
-                        <input name="email" class="form-control" id="exampleFormControlInput3"
+                        <label class="form-label" for="exampleFormControlInput3">Email</label>
+                        <input class="form-control" id="exampleFormControlInput3" name="email"
                                placeholder="Email">
                     </div>
 
 
                     <div class="mb-3" style="width: 50%;">
-                        <label for="exampleFormControlInput4" class="form-label">Password</label>
-                        <input name="password" class="form-control" id="exampleFormControlInput4"
+                        <label class="form-label" for="exampleFormControlInput4">Password</label>
+                        <input class="form-control" id="exampleFormControlInput4" name="password"
                                placeholder="Password">
                     </div>
 

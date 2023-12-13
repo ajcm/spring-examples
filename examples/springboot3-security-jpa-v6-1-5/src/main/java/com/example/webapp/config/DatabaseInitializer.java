@@ -45,10 +45,10 @@ public class DatabaseInitializer {
             AuthGrantedAuthority adminGrant = new AuthGrantedAuthority("ROLE_ADMIN", adminUser);
             AuthGrantedAuthority viewMessages = new AuthGrantedAuthority("VIEW_MESSAGES", adminUser);
 
-            adminUser.setAuthorities(Set.of(userGrant, adminGrant,viewMessages));
+            adminUser.setAuthorities(Set.of(userGrant, adminGrant, viewMessages));
 
             authUserDetailsRepository.save(adminUser);
-            authGrantedAuthorityRepository.saveAll(Set.of(userGrant, adminGrant,viewMessages));
+            authGrantedAuthorityRepository.saveAll(Set.of(userGrant, adminGrant, viewMessages));
 
             AuthUserDetails user2 = new AuthUserDetails();
             user2.setUsername("user");
@@ -62,10 +62,10 @@ public class DatabaseInitializer {
 
             AuthGrantedAuthority userGrant2 = new AuthGrantedAuthority("ROLE_USER", user2);
             AuthGrantedAuthority userGrant3 = new AuthGrantedAuthority("VIEW_MESSAGES", user2);
-            user2.setAuthorities(Set.of(userGrant2,userGrant3));
+            user2.setAuthorities(Set.of(userGrant2, userGrant3));
 
             authUserDetailsRepository.save(user2);
-            authGrantedAuthorityRepository.saveAll(List.of(userGrant2,userGrant3));
+            authGrantedAuthorityRepository.saveAll(List.of(userGrant2, userGrant3));
 
             AuthUserDetails user3 = new AuthUserDetails();
             user3.setUsername("guest");

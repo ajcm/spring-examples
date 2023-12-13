@@ -11,7 +11,7 @@
             <p class="lead text-body-secondary">Users details</p>
 
             <div class="container-sm" th:if="${user}">
-                <form th:action="@{/users/delete}" method="post">
+                <form method="post" th:action="@{/users/delete}">
 
                     <div class="mb-3">
                         <label class="form-label">Username</label>
@@ -34,9 +34,9 @@
 
 
                     <div class="mb-4 d-flex ">
-                        <a class="link-primary nav-link py-2 px-0 px-lg-2 " aria-current="true"
+                        <a aria-current="true" class="link-primary nav-link py-2 px-0 px-lg-2 "
                            href="/users/all">Back</a>
-                        <a class="link-danger py-2 px-0 px-lg-2 " aria-current="true"
+                        <a aria-current="true" class="link-danger py-2 px-0 px-lg-2 "
                            th:href="@{'/users/delete/' + ${user.username}}">Delete</a>
                     </div>
                 </form>
