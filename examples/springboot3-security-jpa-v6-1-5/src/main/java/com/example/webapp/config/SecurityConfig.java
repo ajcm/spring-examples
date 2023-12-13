@@ -1,6 +1,11 @@
 package com.example.webapp.config;
 
+import com.example.webapp.filter.JwtGeneratorFilter;
+import com.example.webapp.filter.JwtValidationFilter;
+import com.example.webapp.filter.MyLoggingFilter;
 import com.example.webapp.service.JpaUserDetailsManager;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -11,9 +16,12 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.annotation.web.configurers.HeadersConfigurer;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 import org.springframework.security.web.servlet.util.matcher.MvcRequestMatcher;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.web.servlet.handler.HandlerMappingIntrospector;
@@ -21,8 +29,9 @@ import org.springframework.web.servlet.handler.HandlerMappingIntrospector;
 
 @Configuration
 @EnableWebSecurity
-@EnableMethodSecurity
+@EnableMethodSecurity(securedEnabled = true, jsr250Enabled = true, prePostEnabled = true)
 public class SecurityConfig {
+    private static Logger LOG = LoggerFactory.getLogger(SecurityConfig.class);
 
 
     @Bean
@@ -32,9 +41,23 @@ public class SecurityConfig {
         MvcRequestMatcher.Builder mvcMatcherBuilder = new MvcRequestMatcher.Builder(introspector);
         AntPathRequestMatcher antPathRequestMatcher = new AntPathRequestMatcher("/h2-console/**");
 
+
         http.csrf(AbstractHttpConfigurer::disable);
 
-        http.headers(headersConfigurer ->
+        http.addFilterAfter(new MyLoggingFilter(), BasicAuthenticationFilter.class)
+                .addFilterAfter(new JwtGeneratorFilter(), BasicAuthenticationFilter.class)
+                .addFilterBefore(new JwtValidationFilter(), BasicAuthenticationFilter.class);
+
+        http.addFilterAfter((request, response, filterChain) -> {
+
+            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+            if (null != authentication) {
+                LOG.info("User " + authentication.getName() + " is successfully authenticated and "
+                        + "has the authorities " + authentication.getAuthorities().toString());
+            }
+
+            filterChain.doFilter(request, response);
+        }, BasicAuthenticationFilter.class).headers(headersConfigurer ->
                 headersConfigurer.frameOptions(HeadersConfigurer.FrameOptionsConfig::sameOrigin));
 
         http.authorizeHttpRequests(auth ->

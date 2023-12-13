@@ -3,6 +3,8 @@ package com.example.webapp.controller;
 import com.example.webapp.model.Message;
 import com.example.webapp.service.MessageJdbcService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,6 +24,7 @@ public class MessageController {
     MessageJdbcService messageService;
 
 
+    @PreAuthorize("hasAuthority('VIEW_MESSAGES')")
     @GetMapping("/all")
     public ModelAndView messages() {
         List<Message> messages = messageService.getMessages();
@@ -33,6 +36,7 @@ public class MessageController {
         return modelAndView;
     }
 
+    @PreAuthorize("hasRole('USER')")
     @PostMapping("post")
     public String doPost(Message message, Principal principal, BindingResult bindingResult) {
 
@@ -63,6 +67,7 @@ public class MessageController {
     }
 
 
+    @Secured("ROLE_ADMIN")
     @GetMapping("delete/{id}")
     public String delete(@PathVariable String id) {
         messageService.delete(id);

@@ -11,6 +11,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import java.util.List;
 import java.util.Set;
 
 @Configuration
@@ -42,11 +43,12 @@ public class DatabaseInitializer {
 
             AuthGrantedAuthority userGrant = new AuthGrantedAuthority("ROLE_USER", adminUser);
             AuthGrantedAuthority adminGrant = new AuthGrantedAuthority("ROLE_ADMIN", adminUser);
+            AuthGrantedAuthority viewMessages = new AuthGrantedAuthority("VIEW_MESSAGES", adminUser);
 
-            adminUser.setAuthorities(Set.of(userGrant, adminGrant));
+            adminUser.setAuthorities(Set.of(userGrant, adminGrant,viewMessages));
 
             authUserDetailsRepository.save(adminUser);
-            authGrantedAuthorityRepository.saveAll(Set.of(userGrant, adminGrant));
+            authGrantedAuthorityRepository.saveAll(Set.of(userGrant, adminGrant,viewMessages));
 
             AuthUserDetails user2 = new AuthUserDetails();
             user2.setUsername("user");
@@ -59,10 +61,11 @@ public class DatabaseInitializer {
             user2.setAccountNonLocked(true);
 
             AuthGrantedAuthority userGrant2 = new AuthGrantedAuthority("ROLE_USER", user2);
-            user2.setAuthorities(Set.of(userGrant2));
+            AuthGrantedAuthority userGrant3 = new AuthGrantedAuthority("VIEW_MESSAGES", user2);
+            user2.setAuthorities(Set.of(userGrant2,userGrant3));
 
             authUserDetailsRepository.save(user2);
-            authGrantedAuthorityRepository.save(userGrant2);
+            authGrantedAuthorityRepository.saveAll(List.of(userGrant2,userGrant3));
 
             AuthUserDetails user3 = new AuthUserDetails();
             user3.setUsername("guest");
