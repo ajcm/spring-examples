@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html th:replace="~{fragments/layout :: layout(~{::title}, ~{::section})}">
+<head>
+    <title>Page Title</title>
+</head>
+<body>
+<section class="py-3 container">
+    <div class="row py-lg-5">
+
+        <main class="form-signin w-75 m-auto">
+            <table class="table table-bordered table-striped">
+                <thead>
+                <tr>
+                    <td>Date</td>
+                    <td>Sender</td>
+                    <td>Subject</td>
+                </tr>
+                </thead>
+
+                <tbody>
+                <tr th:if="${messages.empty}">
+                    <td colspan="3">No users</td>
+                </tr>
+
+                <tr th:each="message : ${messages}">
+                    <td style=" width: 25%;" th:text="${message.created} ?: 'n/a'">n/a</td>
+                    <td th:text="${message.sender}">Sender</td>
+                    <td><a th:href="@{'/messages/read/' + ${message.id}}" th:text="${message.subject}"> Subject </a>
+                    </td>
+
+                </tr>
+                </tbody>
+            </table>
+
+
+            <p class="lead text-body-secondary">New Message</p>
+
+            <div class="container-sm">
+                <form method="post" th:action="@{/messages/post}">
+                    <div class="mb-3">
+                        <label class="form-label" for="exampleFormControlInput1">Subject</label>
+                        <input class="form-control" id="exampleFormControlInput1" name="subject"
+                               placeholder="subject">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="exampleFormControlTextarea1">Body</label>
+                        <textarea class="form-control" id="exampleFormControlTextarea1" name="body" rows="3"></textarea>
+                    </div>
+
+                    <div class="mb-3">
+                        <input type="submit" value="Submit"/>
+                    </div>
+                </form>
+            </div>
+
+        </main>
+
+
+    </div>
+</section>
+</body>
+</html>

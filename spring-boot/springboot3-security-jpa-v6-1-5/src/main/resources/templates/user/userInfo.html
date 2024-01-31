@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html th:replace="~{fragments/layout :: layout(~{::title}, ~{::section})}">
+<head>
+    <title>Page Title</title>
+</head>
+<body>
+<section class="py-5 text-center container">
+    <div class="row py-lg-5">
+
+        <main class="form-signin w-100 m-auto">
+            <p class="lead text-body-primary">User details</p>
+
+            <div th:if="${token != null}">
+                <p th:text="${token}"></p>
+            </div>
+
+
+            <tr th:if="${authorities.empty}">
+                <p class="lead text-body-secondary">No Authorities</p>
+            </tr>
+
+            <br/>
+            <div th:if="${!authorities.empty}">
+                <p class="lead text-body-secondary">Authorities</p>
+                <tr th:each="auth : ${authorities}">
+                    <td th:text="${auth}"> auth</td>
+                </tr>
+            </div>
+
+            <br/>
+            <div th:if="${authUserDetails != null}">
+                <p class="lead text-body-secondary">Details</p>
+                <p th:text="|Username: ${authUserDetails.username}|"></p>
+                <p th:text="|Email: ${authUserDetails.email}|"></p>
+                <p th:text="|Enabled: ${authUserDetails.enabled}|"></p>
+            </div>
+
+            <a href="/users/changePassword"> Change Password </a>
+
+        </main>
+    </div>
+</section>
+</body>
+</html>
