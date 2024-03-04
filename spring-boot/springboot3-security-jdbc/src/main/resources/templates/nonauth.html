@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html th:replace="~{fragments/layout :: layout(~{::title}, ~{::section})}">
+<head>
+    <title>Page Title</title>
+</head>
+<body>
+<section class="py-5 text-center container">
+    <div class="row py-lg-5">
+
+        <main class="form-signin w-100 m-auto">
+            <b> This page is not authenticated </b>
+
+            <div th:if="${username != null}" >
+               <p th:text="${username}"></p>
+            </div>
+        </main>
+    </div>
+</section>
+</body>
+</html>
