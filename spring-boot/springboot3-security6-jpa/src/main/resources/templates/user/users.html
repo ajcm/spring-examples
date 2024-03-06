@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html th:replace="~{fragments/layout :: layout(~{::title}, ~{::section})}">
+<head>
+    <title>Users</title>
+</head>
+<body>
+<section class="py-3 container">
+    <div class="row py-lg-5">
+
+        <main class="form-signin w-75 m-auto">
+            <table class="table table-bordered table-striped">
+                <thead>
+                <tr>
+                    <td>Username</td>
+                    <td>Name</td>
+                    <td>Email</td>
+                    <td>Roles</td>
+                </tr>
+                </thead>
+
+                <tbody>
+                <tr th:if="${users.empty}">
+                    <td colspan="3">No users</td>
+                </tr>
+
+                <tr th:each="user : ${users}">
+                    <td><a th:href="@{'/users/details/' + ${user.username}}" th:text="${user.username}"> username </a>
+                    </td>
+                    <td th:text="${user.name}"> username</td>
+                    <td th:text="${user.email}"> username</td>
+                    <td>
+                        <li th:each="item : *{user.authorities}" th:text="${item.authority}">Item description here...
+                        </li>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+
+
+            <!--            <p class="lead text-body-secondary">New User</p>-->
+
+            <!--            <div class="container-sm">-->
+            <!--                <form th:action="@{/users/post}" method="post">-->
+
+
+            <!--                    <div class="mb-4 " style="width: 50%;">-->
+            <!--                        <label for="exampleFormControlInput1" class="form-label">Username</label>-->
+            <!--                        <input name="username" class="form-control" id="exampleFormControlInput1"-->
+            <!--                               placeholder="Username">-->
+            <!--                    </div>-->
+
+            <!--                    <div class="mb-3" style="width: 75%;">-->
+            <!--                        <label for="exampleFormControlInput2" class="form-label">Fullname</label>-->
+            <!--                        <input name="name" class="form-control" id="exampleFormControlInput2"-->
+            <!--                               placeholder="Fullname">-->
+            <!--                    </div>-->
+
+
+            <!--                    <div class="mb-3" style="width: 50%;">-->
+            <!--                        <label for="exampleFormControlInput3" class="form-label">Email</label>-->
+            <!--                        <input name="email" class="form-control" id="exampleFormControlInput3"-->
+            <!--                               placeholder="Email">-->
+            <!--                    </div>-->
+
+
+            <!--                    <div class="mb-3" style="width: 50%;">-->
+            <!--                        <label for="exampleFormControlInput4" class="form-label">Password</label>-->
+            <!--                        <input name="password" class="form-control" id="exampleFormControlInput4"-->
+            <!--                               placeholder="Password">-->
+            <!--                    </div>-->
+
+
+            <!--                    <div class="mb-3">-->
+            <!--                        <input type="submit" value="Submit"/>-->
+            <!--                    </div>-->
+            <!--                </form>-->
+            <!--            </div>-->
+
+        </main>
+
+
+    </div>
+</section>
+</body>
+</html>

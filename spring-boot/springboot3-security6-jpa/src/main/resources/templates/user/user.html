@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html th:replace="~{fragments/layout :: layout(~{::title}, ~{::section})}">
+<head>
+    <title>Page Title</title>
+</head>
+<body>
+<section class="py-5 text-center container">
+    <div class="row py-lg-5">
+        <div class="col-lg-6 col-md-8 mx-auto">
+            <h1 class="fw-light">User</h1>
+            <p class="lead text-body-secondary">Users details</p>
+
+            <div class="container-sm" th:if="${user}">
+                <form method="post" th:action="@{/users/delete}">
+
+                    <div class="mb-3">
+                        <label class="form-label">Username</label>
+                        <p class="p-1 bg-body-tertiary border rounded-1" th:text="${user.username} ?: 'n/a'">
+                            username</p>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Fullname</label>
+                        <p class="p-1 bg-body-tertiary border rounded-1" th:text="${user.name} ?: 'n/a'">
+                            username</p>
+                    </div>
+
+
+                    <div class="mb-3">
+                        <label class="form-label">Email</label>
+                        <p class="p-1 bg-body-tertiary border rounded-1" th:text="${user.email} ?: 'n/a'">
+                            username</p>
+                    </div>
+
+
+                    <div class="mb-4 d-flex ">
+                        <a aria-current="true" class="link-primary nav-link py-2 px-0 px-lg-2 "
+                           href="/users/all">Back</a>
+                        <a aria-current="true" class="link-danger py-2 px-0 px-lg-2 "
+                           th:href="@{'/users/delete/' + ${user.username}}">Delete</a>
+                    </div>
+                </form>
+            </div>
+
+            <div class="container-sm" th:if="${user == null}">
+                <p> User not found </p>
+            </div>
+
+        </div>
+    </div>
+</section>
+</body>
+</html>
