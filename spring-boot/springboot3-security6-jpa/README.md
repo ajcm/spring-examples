@@ -13,6 +13,11 @@ Authorization: Basic xxxxx
 Response example:
 Authorization	Bearer eyJhbGciOiJI.....
 
+Requires:
+
+    http.httpBasic(Customizer.withDefaults());
+
+
 ## Login with JWT
 Bearer Token
 jwt
