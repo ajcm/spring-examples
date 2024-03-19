@@ -1,6 +1,8 @@
 package com.example.webapp.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -13,10 +15,15 @@ public class AuthUserDetails implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @JsonIgnore
     private Long id;
+
+    @NotNull
     private String name;
-    private String username;
+
+    @NotNull
     private String password;
+    @NotNull
     private String email;
     private boolean accountNonExpired;
     private boolean accountNonLocked;
@@ -40,17 +47,13 @@ public class AuthUserDetails implements UserDetails {
         return this.password;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
     @Override
     public String getUsername() {
-        return this.username;
+        return this.email;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     @Override
@@ -114,4 +117,5 @@ public class AuthUserDetails implements UserDetails {
     public void setName(String name) {
         this.name = name;
     }
+
 }

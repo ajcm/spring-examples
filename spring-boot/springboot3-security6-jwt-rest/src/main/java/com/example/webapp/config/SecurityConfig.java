@@ -28,6 +28,10 @@ import org.springframework.security.web.servlet.util.matcher.MvcRequestMatcher;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.web.filter.CorsFilter;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.handler.HandlerMappingIntrospector;
 
 import java.util.Arrays;
@@ -53,27 +57,10 @@ public class SecurityConfig {
 
         http.csrf(AbstractHttpConfigurer::disable);
 
-        http.cors(corsCustomizer -> corsCustomizer.configurationSource(new CorsConfigurationSource() {
-            @Override
-            public CorsConfiguration getCorsConfiguration(HttpServletRequest request) {
-                CorsConfiguration config = new CorsConfiguration();
-                config.setAllowedOrigins(Collections.singletonList("http://localhost:3000"));
-                config.setAllowedMethods(Collections.singletonList("*"));
-                config.setAllowCredentials(true);
-                config.setAllowedHeaders(Collections.singletonList("*"));
-                config.setExposedHeaders(Arrays.asList("Authorization"));
-                config.setMaxAge(3600L);
-                return config;
-            }
-        }));
-
         http.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
         http.exceptionHandling(exception -> exception.authenticationEntryPoint(unauthorizedHandler));
 
         http.addFilterAfter(new AuthTokenFilter(), BasicAuthenticationFilter.class);
-        //  http.addFilterAfter(signInRequestFilter, BasicAuthenticationFilter.class);
-        //  .addFilterBefore(new JwtValidationFilter(), BasicAuthenticationFilter.class);
-
         http.addFilterAfter((request, response, filterChain) -> {
             Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
             if (null != authentication) {
@@ -93,12 +80,13 @@ public class SecurityConfig {
 //                        .requestMatchers(mvcMatcherBuilder.pattern("/admin")).hasRole("ADMIN")
 //                        .requestMatchers(mvcMatcherBuilder.pattern("/nonauth")).permitAll()
 //                        .requestMatchers(mvcMatcherBuilder.pattern("/messages/**")).permitAll()
+                                .requestMatchers(mvcMatcherBuilder.pattern("/")).permitAll()
+                                .requestMatchers(mvcMatcherBuilder.pattern("/demo/**")).permitAll()
+                                .requestMatchers(mvcMatcherBuilder.pattern("/api/admin/users")).permitAll()
                                 .requestMatchers(new AntPathRequestMatcher("/api/auth/signin", "POST")).permitAll()
-                                //This line is optional in .authenticated() case as .anyRequest().authenticated()
-                                //would be applied for H2 path anyway
                                 .requestMatchers(PathRequest.toH2Console()).permitAll()
                                 .requestMatchers(antPathRequestMatcher).permitAll()
-                                .anyRequest().authenticated()
+                                .anyRequest().permitAll()
         );
 
 
@@ -118,5 +106,15 @@ public class SecurityConfig {
         return new BCryptPasswordEncoder();
     }
 
+
+    @Bean
+    public WebMvcConfigurer corsConfigurer() {
+        return new WebMvcConfigurer() {
+            @Override
+            public void addCorsMappings(CorsRegistry registry) {
+                registry.addMapping("/**").allowedOrigins("*");
+            }
+        };
+    }
 
 }

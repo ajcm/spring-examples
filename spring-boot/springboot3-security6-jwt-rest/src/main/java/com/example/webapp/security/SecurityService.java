@@ -1,9 +1,6 @@
 package com.example.webapp.security;
 
-import com.example.webapp.model.AuthGrantedAuthority;
 import com.example.webapp.model.AuthUserDetails;
-import com.example.webapp.repository.AuthGrantedAuthorityRepository;
-import com.example.webapp.repository.AuthUserDetailsRepository;
 import com.example.webapp.service.JpaUserDetailsManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -11,12 +8,10 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.context.SecurityContextHolderStrategy;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
@@ -25,14 +20,6 @@ public class SecurityService {
     private final SecurityContextHolderStrategy securityContextHolderStrategy = SecurityContextHolder
             .getContextHolderStrategy();
 
-//    @Autowired
-//    private AuthUserDetailsRepository userRepository;
-
-//    @Autowired
-//    private AuthGrantedAuthorityRepository grantedAuthorityRepository;
-
-//    @Autowired
-//    private PasswordEncoder passwordEncoder;
 
     @Autowired
     private JpaUserDetailsManager userDetailsManager;
@@ -66,11 +53,11 @@ public class SecurityService {
             return Optional.empty();
         }
 
-        if (authUserDetails instanceof String username) {
-            if (!userDetailsManager.userExists(username)) {
+        if (authUserDetails instanceof String email) {
+            if (!userDetailsManager.userExists(email)) {
                 return Optional.empty();
             } else {
-                return Optional.ofNullable((AuthUserDetails) userDetailsManager.loadUserByUsername(username));
+                return Optional.ofNullable((AuthUserDetails) userDetailsManager.loadUserByUsername(email));
             }
         }
 
@@ -79,10 +66,6 @@ public class SecurityService {
         }
         return Optional.empty();
     }
-
-
-
-
 
 
 }

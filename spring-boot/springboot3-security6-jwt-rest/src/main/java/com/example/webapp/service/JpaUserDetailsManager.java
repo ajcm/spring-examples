@@ -1,7 +1,7 @@
 package com.example.webapp.service;
 
 import com.example.webapp.model.AuthUserDetails;
-import com.example.webapp.repository.AuthUserDetailsRepository;
+import com.example.webapp.repository.AuthUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -17,18 +17,17 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class JpaUserDetailsManager implements UserDetailsManager {
 
-    private final SecurityContextHolderStrategy securityContextHolderStrategy = SecurityContextHolder
-            .getContextHolderStrategy();
+    private final SecurityContextHolderStrategy securityContextHolderStrategy = SecurityContextHolder.getContextHolderStrategy();
+
     @Autowired
     private PasswordEncoder passwordEncoder;
+
     @Autowired
-    private AuthUserDetailsRepository userDetailsRepository;
+    private AuthUserRepository userDetailsRepository;
 
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return userDetailsRepository.findByUsername(username)
-                .orElseThrow(
-                        () -> new UsernameNotFoundException("No user found with username = " + username));
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        return userDetailsRepository.findByEmail(email).orElseThrow(() -> new UsernameNotFoundException("No user found with email:  " + email));
     }
 
     @Override
@@ -42,9 +41,8 @@ public class JpaUserDetailsManager implements UserDetailsManager {
     }
 
     @Override
-    public void deleteUser(String username) {
-        AuthUserDetails userDetails = userDetailsRepository.findByUsername(username)
-                .orElseThrow(() -> new UsernameNotFoundException("No User found for username -> " + username));
+    public void deleteUser(String email) {
+        AuthUserDetails userDetails = userDetailsRepository.findByEmail(email).orElseThrow(() -> new UsernameNotFoundException("No User found for email: " + email));
         userDetailsRepository.delete(userDetails);
     }
 
@@ -52,8 +50,8 @@ public class JpaUserDetailsManager implements UserDetailsManager {
      * This method assumes that both oldPassword and the newPassword params
      * are encoded with configured passwordEncoder
      *
-     * @param oldPassword the old password of the user
-     * @param newPassword the new password of the user
+     * @param rawOldPassword the old password of the user
+     * @param rawNewPassword the new password of the user
      */
     @Override
     @Transactional
@@ -61,9 +59,8 @@ public class JpaUserDetailsManager implements UserDetailsManager {
         SecurityContext securityContext = securityContextHolderStrategy.getContext();
 
         var auth = securityContext.getAuthentication();
-        var username = (String) auth.getPrincipal();
-        var user = userDetailsRepository.findByUsername(username)
-                .orElseThrow(() -> new UsernameNotFoundException("No user found with username = " + username));
+        var email = (String) auth.getPrincipal();
+        var user = userDetailsRepository.findByEmail(email).orElseThrow(() -> new UsernameNotFoundException("No user found with email: " + email));
 
         var match = passwordEncoder.matches(rawOldPassword, user.getPassword());
         if (!match) {
@@ -74,9 +71,15 @@ public class JpaUserDetailsManager implements UserDetailsManager {
         userDetailsRepository.save(user);
     }
 
+
+    @Transactional
+    public String encryptPassword(String rawPassword) {
+      return  passwordEncoder.encode(rawPassword);
+    }
+
     @Override
-    public boolean userExists(String username) {
-        return userDetailsRepository.findByUsername(username).isPresent();
+    public boolean userExists(String email) {
+        return userDetailsRepository.findByEmail(email).isPresent();
     }
 
 

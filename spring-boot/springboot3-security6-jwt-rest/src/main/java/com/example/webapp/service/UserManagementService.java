@@ -2,8 +2,8 @@ package com.example.webapp.service;
 
 import com.example.webapp.model.AuthGrantedAuthority;
 import com.example.webapp.model.AuthUserDetails;
-import com.example.webapp.repository.AuthGrantedAuthorityRepository;
-import com.example.webapp.repository.AuthUserDetailsRepository;
+import com.example.webapp.repository.AuthAuthorityRepository;
+import com.example.webapp.repository.AuthUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -13,10 +13,10 @@ import java.util.Set;
 @Service
 public class UserManagementService {
     @Autowired
-    private AuthUserDetailsRepository userRepository;
+    private AuthUserRepository userRepository;
 
     @Autowired
-    private AuthGrantedAuthorityRepository grantedAuthorityRepository;
+    private AuthAuthorityRepository grantedAuthorityRepository;
 
     @Autowired
     private PasswordEncoder passwordEncoder;

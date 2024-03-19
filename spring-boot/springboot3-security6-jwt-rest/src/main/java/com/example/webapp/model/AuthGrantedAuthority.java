@@ -1,19 +1,27 @@
 package com.example.webapp.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import org.springframework.security.core.GrantedAuthority;
 
 @Entity
 public class AuthGrantedAuthority implements GrantedAuthority {
+
+    public static String ROLE_USER = "ROLE_USER";
+    public static String ROLE_ADMIN = "ROLE_ADMIN";
+
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
+    @JsonIgnore
     private Long id;
 
     private String authority;
 
     @ManyToOne
     @JoinColumn(name = "auth_user_detail_id")
+    @JsonIgnore
     private AuthUserDetails authUserDetails;
 
 

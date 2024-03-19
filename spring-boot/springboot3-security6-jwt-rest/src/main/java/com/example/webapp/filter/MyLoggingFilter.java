@@ -21,7 +21,7 @@ public class MyLoggingFilter extends OncePerRequestFilter {
         if (null != authentication) {
             LOG.info("User " + authentication.getName() + " is successfully authenticated and "
                     + "has the authorities " + authentication.getAuthorities().toString());
-        }else{
+        } else {
             LOG.info("User is not authenticated");
         }
 

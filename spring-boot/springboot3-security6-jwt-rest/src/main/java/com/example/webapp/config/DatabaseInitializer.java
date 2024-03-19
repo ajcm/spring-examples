@@ -3,8 +3,8 @@ package com.example.webapp.config;
 
 import com.example.webapp.model.AuthGrantedAuthority;
 import com.example.webapp.model.AuthUserDetails;
-import com.example.webapp.repository.AuthGrantedAuthorityRepository;
-import com.example.webapp.repository.AuthUserDetailsRepository;
+import com.example.webapp.repository.AuthAuthorityRepository;
+import com.example.webapp.repository.AuthUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
@@ -13,15 +13,16 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.List;
 import java.util.Set;
+import java.util.UUID;
 
 @Configuration
 public class DatabaseInitializer {
 
     @Autowired
-    private AuthUserDetailsRepository authUserDetailsRepository;
+    private AuthUserRepository authUserRepository;
 
     @Autowired
-    private AuthGrantedAuthorityRepository authGrantedAuthorityRepository;
+    private AuthAuthorityRepository authAuthorityRepository;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -32,9 +33,8 @@ public class DatabaseInitializer {
         return (args) -> {
 
             AuthUserDetails adminUser = new AuthUserDetails();
-            adminUser.setUsername("admin");
             adminUser.setName("Administrator");
-            adminUser.setEmail("admin@email.com");
+            adminUser.setEmail("admin");
             adminUser.setPassword(passwordEncoder.encode("password"));
             adminUser.setEnabled(true);
             adminUser.setCredentialsNonExpired(true);
@@ -43,41 +43,12 @@ public class DatabaseInitializer {
 
             AuthGrantedAuthority userGrant = new AuthGrantedAuthority("ROLE_USER", adminUser);
             AuthGrantedAuthority adminGrant = new AuthGrantedAuthority("ROLE_ADMIN", adminUser);
-            AuthGrantedAuthority viewMessages = new AuthGrantedAuthority("VIEW_MESSAGES", adminUser);
 
-            adminUser.setAuthorities(Set.of(userGrant, adminGrant, viewMessages));
+            adminUser.setAuthorities(Set.of(userGrant, adminGrant));
 
-            authUserDetailsRepository.save(adminUser);
-            authGrantedAuthorityRepository.saveAll(Set.of(userGrant, adminGrant, viewMessages));
+            authUserRepository.save(adminUser);
+            authAuthorityRepository.saveAll(Set.of(userGrant, adminGrant));
 
-            AuthUserDetails user2 = new AuthUserDetails();
-            user2.setUsername("user");
-            user2.setName("John Doe");
-            user2.setEmail("user@email.com");
-            user2.setPassword(passwordEncoder.encode("password"));
-            user2.setEnabled(true);
-            user2.setCredentialsNonExpired(true);
-            user2.setAccountNonExpired(true);
-            user2.setAccountNonLocked(true);
-
-            AuthGrantedAuthority userGrant2 = new AuthGrantedAuthority("ROLE_USER", user2);
-            AuthGrantedAuthority userGrant3 = new AuthGrantedAuthority("VIEW_MESSAGES", user2);
-            user2.setAuthorities(Set.of(userGrant2, userGrant3));
-
-            authUserDetailsRepository.save(user2);
-            authGrantedAuthorityRepository.saveAll(List.of(userGrant2, userGrant3));
-
-            AuthUserDetails user3 = new AuthUserDetails();
-            user3.setUsername("guest");
-            user3.setName("Guest User");
-            user3.setEmail("guest@email.com");
-            user3.setPassword(passwordEncoder.encode("password"));
-            user3.setEnabled(true);
-            user3.setCredentialsNonExpired(true);
-            user3.setAccountNonExpired(true);
-            user3.setAccountNonLocked(true);
-
-            authUserDetailsRepository.save(user3);
         };
 
     }
