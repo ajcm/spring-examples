@@ -49,6 +49,23 @@ public class DatabaseInitializer {
             authUserRepository.save(adminUser);
             authAuthorityRepository.saveAll(Set.of(userGrant, adminGrant));
 
+            AuthUserDetails user = new AuthUserDetails();
+            user.setName("User");
+            user.setEmail("user");
+            user.setPassword(passwordEncoder.encode("password"));
+            user.setEnabled(true);
+            user.setCredentialsNonExpired(true);
+            user.setAccountNonExpired(true);
+            user.setAccountNonLocked(true);
+
+            AuthGrantedAuthority userGrant2 = new AuthGrantedAuthority("ROLE_USER", user);
+
+
+            user.setAuthorities(Set.of(userGrant2));
+
+            authUserRepository.save(user);
+            authAuthorityRepository.saveAll(Set.of(userGrant2));
+
         };
 
     }

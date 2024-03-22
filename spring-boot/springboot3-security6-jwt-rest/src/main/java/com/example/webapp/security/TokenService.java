@@ -6,12 +6,14 @@ import io.jsonwebtoken.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
 
-@Component
+@Service
 public class TokenService {
     private static final Logger logger = LoggerFactory.getLogger(TokenService.class);
 
@@ -56,11 +58,18 @@ public class TokenService {
 
     public JwtResponse getJwtResponse(AuthUserDetails userDetails) {
         var token = generateJwtToken(userDetails.getUsername());
+
         var response = new JwtResponse(token,
                 userDetails.getId(),
                 userDetails.getUsername(),
                 userDetails.getEmail(),
                 List.of());
+
+        if (!userDetails.getAuthorities().isEmpty()){
+
+            var auth = userDetails.getAuthorities().stream().map(GrantedAuthority::getAuthority).toList();
+            response.setAuthorities(auth);
+        }
 
         return response;
     }

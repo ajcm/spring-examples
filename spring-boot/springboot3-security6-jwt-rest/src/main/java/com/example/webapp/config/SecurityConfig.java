@@ -47,6 +47,12 @@ public class SecurityConfig {
     @Autowired
     private AuthEntryPointJwt unauthorizedHandler;
 
+
+    @Bean
+    public AuthTokenFilter authenticationJwtTokenFilter() {
+        return new AuthTokenFilter();
+    }
+
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http,
                                            AuthenticationManager authenticationManager,
@@ -60,7 +66,7 @@ public class SecurityConfig {
         http.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
         http.exceptionHandling(exception -> exception.authenticationEntryPoint(unauthorizedHandler));
 
-        http.addFilterAfter(new AuthTokenFilter(), BasicAuthenticationFilter.class);
+        http.addFilterAfter(authenticationJwtTokenFilter(), BasicAuthenticationFilter.class);
         http.addFilterAfter((request, response, filterChain) -> {
             Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
             if (null != authentication) {
@@ -80,10 +86,11 @@ public class SecurityConfig {
 //                        .requestMatchers(mvcMatcherBuilder.pattern("/admin")).hasRole("ADMIN")
 //                        .requestMatchers(mvcMatcherBuilder.pattern("/nonauth")).permitAll()
 //                        .requestMatchers(mvcMatcherBuilder.pattern("/messages/**")).permitAll()
-                                .requestMatchers(mvcMatcherBuilder.pattern("/")).permitAll()
+                               // .requestMatchers(mvcMatcherBuilder.pattern("/")).permitAll()
                                 .requestMatchers(mvcMatcherBuilder.pattern("/demo/**")).permitAll()
                                 .requestMatchers(mvcMatcherBuilder.pattern("/api/admin/users")).permitAll()
-                                .requestMatchers(new AntPathRequestMatcher("/api/auth/signin", "POST")).permitAll()
+                                .requestMatchers(new AntPathRequestMatcher("/api/auth/**", "POST")).permitAll()
+                                .requestMatchers(new AntPathRequestMatcher("/api/auth/**", "GET")).permitAll()
                                 .requestMatchers(PathRequest.toH2Console()).permitAll()
                                 .requestMatchers(antPathRequestMatcher).permitAll()
                                 .anyRequest().permitAll()

@@ -59,7 +59,7 @@ public class AuthorizationController {
 
     @CrossOrigin
     @PostMapping("/signin")
-    public ResponseEntity<JwtResponse> authenticate(@Valid @RequestBody LoginRequest loginRequest, HttpServletRequest request, HttpServletResponse response) {
+    public ResponseEntity<Void> authenticate(@Valid @RequestBody LoginRequest loginRequest, HttpServletRequest request, HttpServletResponse response) {
 
         try {
             Authentication authentication = authenticationManager.authenticate(
@@ -74,21 +74,44 @@ public class AuthorizationController {
             }
 
             JwtResponse jwtResponse = tokenService.getJwtResponse(optionalAuthUserDetails.get());
+            response.addHeader("Token", jwtResponse.getAccessToken());
+            response.addHeader("Access-Control-Expose-Headers", "Token");
 
-            return ResponseEntity.ok(jwtResponse);
-
-
+            return ResponseEntity.ok().build();
         } catch (BadCredentialsException ex) {
             LOG.info("Bad credentials");
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
 
         }
+    }
 
+    @GetMapping("/identity")
+    public ResponseEntity<JwtResponse> identity( HttpServletRequest request, HttpServletResponse response) {
+
+        try {
+//            Authentication authentication = authenticationManager.authenticate(
+//                    new UsernamePasswordAuthenticationToken(loginRequest.getEmail(), loginRequest.getPassword()));
+//
+//            SecurityContextHolder.getContext().setAuthentication(authentication);
+
+            var optionalAuthUserDetails = securityService.getAuthUserDetails();
+            if (optionalAuthUserDetails.isEmpty()) {
+                throw new BadCredentialsException("Cannot find username.");
+            }
+            JwtResponse jwtResponse = tokenService.getJwtResponse(optionalAuthUserDetails.get());
+
+            return ResponseEntity.ok(jwtResponse);
+        } catch (BadCredentialsException ex) {
+            LOG.info("Bad credentials");
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+
+        }
     }
 
 
+
     @PostMapping("/signup")
-    public ResponseEntity<Void> registerUser(@Valid @RequestBody SignupRequest request) {
+    public ResponseEntity<Void> registerUser( @RequestBody SignupRequest request) {
 
 
         //
@@ -98,8 +121,6 @@ public class AuthorizationController {
             throw new ResponseStatusException(
                     HttpStatus.CONFLICT, "Email already exists");
         }
-
-        UUID uuid = UUID.randomUUID();
 
         AuthUserDetails userDetails = new AuthUserDetails();
 
