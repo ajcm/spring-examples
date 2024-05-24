@@ -14,6 +14,7 @@
                     <td>Username</td>
                     <td>Name</td>
                     <td>Email</td>
+                    <td>Enabled</td>
                     <td>Roles</td>
                 </tr>
                 </thead>
@@ -27,7 +28,8 @@
                     <td><a th:href="@{'/users/details/' + ${user.username}}" th:text="${user.username}"> username </a>
                     </td>
                     <td th:text="${user.name}"> username</td>
-                    <td th:text="${user.email}"> username</td>
+                    <td th:text="${user.email}"> email</td>
+                    <td th:text="${user.enabled}"> enabled</td>
                     <td>
                         <li th:each="item : *{user.authorities}" th:text="${item.authority}">Item description here...
                         </li>

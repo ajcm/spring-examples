@@ -35,7 +35,7 @@ public class DatabaseInitializer {
             adminUser.setUsername("admin");
             adminUser.setName("Administrator");
             adminUser.setEmail("admin@email.com");
-            adminUser.setPassword(passwordEncoder.encode("password"));
+            adminUser.setPassword(passwordEncoder.encode("admin"));
             adminUser.setEnabled(true);
             adminUser.setCredentialsNonExpired(true);
             adminUser.setAccountNonExpired(true);
@@ -54,7 +54,7 @@ public class DatabaseInitializer {
             user2.setUsername("user");
             user2.setName("John Doe");
             user2.setEmail("user@email.com");
-            user2.setPassword(passwordEncoder.encode("password"));
+            user2.setPassword(passwordEncoder.encode("user"));
             user2.setEnabled(true);
             user2.setCredentialsNonExpired(true);
             user2.setAccountNonExpired(true);
@@ -71,7 +71,7 @@ public class DatabaseInitializer {
             user3.setUsername("guest");
             user3.setName("Guest User");
             user3.setEmail("guest@email.com");
-            user3.setPassword(passwordEncoder.encode("password"));
+            user3.setPassword(passwordEncoder.encode("guest"));
             user3.setEnabled(true);
             user3.setCredentialsNonExpired(true);
             user3.setAccountNonExpired(true);

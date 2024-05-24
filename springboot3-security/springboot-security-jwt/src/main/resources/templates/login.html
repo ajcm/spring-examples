@@ -24,10 +24,21 @@
             <form method="post" th:action="@{/login}">
 
                 <div style="padding: 15px;">
-                    <label> User Name : </label>
-                    <input name="username" type="text"/></div>
+                    <label> User Name</label>
+                </div>
+
+                <div style="padding: 15px;">
+                    <input name="username" type="text"/>
+                </div>
+
+                <div style="padding: 15px;">
+                    <label>Password</label>
+                </div>
+
                 <div style="padding: 10px;">
-                    <label> Password: <input name="password" type="password"/> </label></div>
+                    <input name="password" type="password"/>
+                </div>
+
                 <div style="padding: 10px;">
                     <input type="submit" value="Sign In"/></div>
             </form>

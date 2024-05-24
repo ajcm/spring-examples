@@ -60,12 +60,6 @@ public class UserController {
         return "redirect:/users/all";
     }
 
-    @GetMapping("add")
-    @Transactional
-    public String addUser() {
-        return "user/addUser";
-    }
-
 
     @GetMapping("changePassword")
     public ModelAndView changePassword() {
@@ -89,17 +83,7 @@ public class UserController {
         return "redirect:user/userInfo";
     }
 
-    @PostMapping("add")
-    public String doPost(AuthUserDetails user, BindingResult bindingResult) {
 
-        if (securityService.userExists(user.getUsername())) {
-            return "user/userExists";
-        }
-
-        securityService.addUser(user);
-
-        return "redirect:/login";
-    }
 
 
 }

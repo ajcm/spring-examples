@@ -60,7 +60,8 @@ public class SecurityConfig {
 
         http.authorizeHttpRequests(auth ->
                 auth
-                        .requestMatchers(mvcMatcherBuilder.pattern("/users/add")).permitAll()
+                        .requestMatchers(mvcMatcherBuilder.pattern("/users/**")).hasRole("ADMIN")
+                        .requestMatchers(mvcMatcherBuilder.pattern("/register")).permitAll()
                         .requestMatchers(mvcMatcherBuilder.pattern("/user")).hasRole("USER")
                         .requestMatchers(mvcMatcherBuilder.pattern("/admin")).hasRole("ADMIN")
                         .requestMatchers(mvcMatcherBuilder.pattern("/nonauth")).permitAll()

@@ -1,7 +1,7 @@
 ## Spring MVC JPA JWT
-- example with Mvc interface and DaoAuthenticationProvider
-- custom CustomAuthenticationProvider (CustomAuthenticationProvider)
-- AuthUserDetails/AuthGrantedAuthorityRepository
+- Example with MVC interface and DaoAuthenticationProvider
+- Custom AuthenticationProvider (CustomAuthenticationProvider)
+- Domain classes AuthUserDetails/AuthGrantedAuthorityRepository
 - MessageJdbcService with JDBC Template
 - H2 Console
 
