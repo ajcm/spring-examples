@@ -46,8 +46,6 @@ public class JwtController {
             principal = object.toString();
         }
 
-
-
         return ResponseEntity.ok(principal);
     }
 

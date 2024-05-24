@@ -30,19 +30,20 @@
                 </div>
 
                 <div style="padding: 10px;">
-                    <input name="password" type="password"/>
+                    <input id="password" name="password" type="password"/>
                 </div>
 
                 <div style="padding: 10px;">
-                    <button id="submit" value="Generate">Generate</button>
+                    <button id="submit">Login</button>
                 </div>
 
                 <p id="message"></p>
 
+
         </main>
 
     </div>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
     <script>
 
        // js init
@@ -57,29 +58,29 @@
             var username = $("#username").val();
             var password = $("#password").val();
 
+
             var request = $.ajax({
             url: "/jwt/token",
             method: "GET",
 
-<!--            beforeSend: function (xhr) {-->
-<!--             xhr.setRequestHeader ("Authorization", "Basic " + btoa(username + ":" + password));-->
-<!--            },-->
+            beforeSend: function (xhr) {
+             xhr.setRequestHeader ("Authorization", "Basic " + btoa(username+":"+password));
+            },
 
           });
 
-          request.done(function( msg ) {
-            $( "#message" ).html("Token:  " +  msg );
-            alert('OK')
+          request.done(function(data, textStatus, request  ) {
+                var value = request.getResponseHeader('Authorization');
+                $("#message" ).html("Authorization successful");
+                localStorage.setItem("JWT-TOKEN",value);
           });
 
           request.fail(function( jqXHR, textStatus, x ) {
-
-          console.log(jqXHR)
-           if (jqXHR.status  == 401){
-              $("#message").html("Authorization failed");
-            }else{
-              alert( "Request failed: " + textStatus + jqXHR.status );
-            }
+               if (jqXHR.status  == 401){
+                  $("#message").html("Authorization failed");
+                }else{
+                $("#message").html("Request failed: " + textStatus + jqXHR.status );
+                }
           });
 
 

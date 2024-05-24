@@ -43,7 +43,7 @@ public class SecurityConfig {
 
         http.csrf(AbstractHttpConfigurer::disable);
 
-//        http.addFilterAfter(new JwtGeneratorFilter(), BasicAuthenticationFilter.class)
+        http.addFilterAfter(new JwtGeneratorFilter(), BasicAuthenticationFilter.class);
         http.addFilterBefore(new JwtValidationFilter(), BasicAuthenticationFilter.class);
 
 //        http.addFilterAfter((request, response, filterChain) -> {

@@ -17,6 +17,11 @@
             <form method="post" th:action="@{/login}">
 
 
+                <p> using JWT Token</p>
+                <p id="jwttoken">
+                </p>
+
+
                 <p id="message">
                 </p>
 
@@ -31,45 +36,27 @@
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script>
+
+
+         function clear(){
+             var jwttoken = localStorage.removeItem("JWT-TOKEN");
+         }
+
+        // js init
         $(document).ready(function(){
 
+          var jwttoken = localStorage.getItem("JWT-TOKEN");
 
+          checkToken();
 
-          $("#submit").click(function(e){
+          function checkToken(){
 
-              var username = $("#username").val();
-              var password = $("#password").val();
+              console.log("refresh token" + jwttoken);
 
-              var request = $.ajax({
-              url: "/rest/auth/token",
-              method: "GET",
-
-              beforeSend: function (xhr) {
-               xhr.setRequestHeader ("Authorization", "Basic " + btoa(username + ":" + password));
-              },
-
-            });
-
-            request.done(function( msg ) {
-              $( "#message" ).html("Token:  " +  msg );
-              alert('OK')
-            });
-
-            request.fail(function( jqXHR, textStatus, x ) {
-
-            console.log(jqXHR)
-             if (jqXHR.status  == 401){
-                $("#message").html("Authorization failed");
-              }else{
-                alert( "Request failed: " + textStatus + jqXHR.status );
-              }
-            });
-
-
-             e.preventDefault();
-          });
-
-
+             if (jwttoken !== null){
+                 $("#tokenv").html(""+jwttoken);
+             }
+         }
 
         });
 
