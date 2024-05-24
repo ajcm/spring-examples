@@ -68,6 +68,13 @@ public class SecurityConfig {
                         .requestMatchers(mvcMatcherBuilder.pattern("/messages/**")).permitAll()
 
                         .requestMatchers(mvcMatcherBuilder.pattern("/login")).permitAll()
+                        .requestMatchers(mvcMatcherBuilder.pattern("/login-jwt")).permitAll()
+
+                        //fine grained authentication
+                        .requestMatchers(mvcMatcherBuilder.pattern("/rest/**")).permitAll()
+
+
+                        //H2 Console
                         //This line is optional in .authenticated() case as .anyRequest().authenticated()
                         //would be applied for H2 path anyway
                         .requestMatchers(PathRequest.toH2Console()).permitAll()

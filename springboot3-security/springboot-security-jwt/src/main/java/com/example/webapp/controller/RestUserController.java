@@ -1,7 +1,6 @@
-package com.example.webapp.rest;
+package com.example.webapp.controller;
 
 
-import com.example.webapp.model.AuthUserDetails;
 import com.example.webapp.repository.AuthUserDetailsRepository;
 import com.example.webapp.service.SecurityService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,11 +9,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.security.Principal;
-import java.util.List;
 
 @RestController
-@RequestMapping("/rest/auth")
-public class AuthUserController {
+@RequestMapping("/rest/userinfo")
+public class RestUserController {
 
     @Autowired
     private final AuthUserDetailsRepository authUserDetailsRepository;
@@ -23,9 +21,11 @@ public class AuthUserController {
     private SecurityService securityService;
 
     //getters setters
-    public AuthUserController(AuthUserDetailsRepository authUserDetailsRepository) {
+    public RestUserController(AuthUserDetailsRepository authUserDetailsRepository) {
         this.authUserDetailsRepository = authUserDetailsRepository;
     }
+
+
 
     @GetMapping("id")
     public String getId(Principal principal) {
@@ -41,8 +41,4 @@ public class AuthUserController {
 
     }
 
-    @GetMapping("users")
-    public List<AuthUserDetails> getAllUser() {
-        return authUserDetailsRepository.findAll();
-    }
 }
