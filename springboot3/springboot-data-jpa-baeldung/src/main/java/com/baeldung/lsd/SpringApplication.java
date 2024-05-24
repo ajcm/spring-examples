@@ -85,19 +85,6 @@ public class SpringApplication implements ApplicationRunner {
             t.setProject(p);
             taskRepository.save(t);
         }
-
-
-//        var workers = workerRepository.findAll();
-//        var tasks = taskRepository.findAll();
-
-//		System.out.println("Projects:");
-//		projects.forEach(System.out::println);
-//
-//		System.out.println("Workers:");
-//		workers.forEach(System.out::println);
-//
-//		System.out.println("Tasks:");
-//		tasks.forEach(System.out::println);
     }
 
 

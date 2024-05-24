@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="GradleSettings">
+    <option name="linkedExternalProjectsSettings">
+      <GradleProjectSettings>
+        <option name="delegatedBuild" value="false" />
+        <option name="testRunner" value="PLATFORM" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/springboot-cmdline" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$/springboot-cmdline" />
+          </set>
+        </option>
+      </GradleProjectSettings>
+      <GradleProjectSettings>
+        <option name="externalProjectPath" value="$PROJECT_DIR$/springboot-data-jdbc" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$/springboot-data-jdbc" />
+          </set>
+        </option>
+      </GradleProjectSettings>
+      <GradleProjectSettings>
+        <option name="externalProjectPath" value="$PROJECT_DIR$/springboot-data-jpa-baeldung" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$/springboot-data-jpa-baeldung" />
+          </set>
+        </option>
+      </GradleProjectSettings>
+      <GradleProjectSettings>
+        <option name="externalProjectPath" value="$PROJECT_DIR$/springboot-mvc-form-validation" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$/springboot-mvc-form-validation" />
+          </set>
+        </option>
+      </GradleProjectSettings>
+      <GradleProjectSettings>
+        <option name="externalProjectPath" value="$PROJECT_DIR$/springboot-rest" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$/springboot-rest" />
+          </set>
+        </option>
+      </GradleProjectSettings>
+    </option>
+  </component>
+</project>

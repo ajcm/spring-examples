@@ -21,11 +21,11 @@ public class ProjectService {
 
 
     @Transactional
-    public void close(Project project){
+    public void close(Project project) {
 
         project.getTasks().forEach(t -> t.setStatus(TaskStatus.DONE));
 
-        taskRepository.saveAll( project.getTasks());
+        taskRepository.saveAll(project.getTasks());
 
     }
 }

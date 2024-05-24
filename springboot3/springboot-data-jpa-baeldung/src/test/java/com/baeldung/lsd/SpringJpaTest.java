@@ -288,15 +288,15 @@ public class SpringJpaTest {
         projectRepository.flush();
 
         ExampleMatcher matcher = ExampleMatcher.matching()
-                .withMatcher("code",ExampleMatcher.GenericPropertyMatchers.startsWith().ignoreCase());
+                .withMatcher("code", ExampleMatcher.GenericPropertyMatchers.startsWith().ignoreCase());
 
 
-        Example<Project> projectExample = Example.of(p,matcher);
+        Example<Project> projectExample = Example.of(p, matcher);
 
         var list = projectRepository.findAll(projectExample);
 
         //does not work
-       // Assertions.assertEquals(list.size(),2);
+        // Assertions.assertEquals(list.size(),2);
     }
 
 

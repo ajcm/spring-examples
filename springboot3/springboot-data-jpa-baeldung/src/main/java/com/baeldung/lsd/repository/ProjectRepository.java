@@ -26,8 +26,6 @@ public interface ProjectRepository extends JpaRepository<Project, Long> {
     Iterable<Project> findByCodeContains(String expression);
 
 
-
-
     @Query("select p from Project p where p.code like %:codeexp% and p.description like %:descexp%")
     List<Project> findByCodeAndDescription(@Param("codeexp") String code, @Param("descexp") String description);
 

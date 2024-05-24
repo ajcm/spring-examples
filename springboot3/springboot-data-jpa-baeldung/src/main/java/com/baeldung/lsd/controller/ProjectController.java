@@ -18,11 +18,6 @@ public class ProjectController {
         this.projectRepository = projectRepository;
     }
 
-    @GetMapping(path = "hello")
-    public String sayHello() {
-        return "hello";
-    }
-
     @GetMapping(path = "/code/{code}")
     public Project getByCode(@PathVariable String code) {
         var optProject = projectRepository.findByCodeEquals(code);

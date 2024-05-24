@@ -18,11 +18,6 @@ public class ApplicationController {
         this.projectRepository = projectRepository;
     }
 
-    @GetMapping("hello")
-    String sayHello() {
-        return "hello";
-    }
-
     @GetMapping(path = "projectByCode")
     ResponseEntity<Project> getProjectByCode(@RequestParam String code) {
         var optProject = projectRepository.findByCodeEquals(code);

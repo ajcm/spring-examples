@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
-public class CustomWorkRepositoryImpl implements CustomWorkRepository{
+public class CustomWorkRepositoryImpl implements CustomWorkRepository {
 
     @Autowired
     private EntityManager entityManager;

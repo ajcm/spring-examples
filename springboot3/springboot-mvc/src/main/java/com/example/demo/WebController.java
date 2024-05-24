@@ -23,7 +23,6 @@ public class WebController implements WebMvcConfigurer {
         return "greeting";
     }
 
-    //Form
     @GetMapping("/")
     public String showForm(PersonForm personForm) {
         return "form";

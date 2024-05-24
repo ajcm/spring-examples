@@ -59,7 +59,6 @@ class SpringApplicationTests {
     void test() throws Exception {
 
 
-
         for (int i = 0; i < 5; i++) {
             Project p = projectFactory.getObject();
             projectRepository.save(p);

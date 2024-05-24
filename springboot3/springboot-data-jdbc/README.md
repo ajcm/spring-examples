@@ -1,3 +1,3 @@
-# Spring Boot3 - Data JDBC
+### springboot-data/jdbc
 
-Example not finished
+- simple data jpa repository + rest controller
