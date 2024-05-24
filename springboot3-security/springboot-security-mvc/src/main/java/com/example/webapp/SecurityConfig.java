@@ -22,14 +22,15 @@ public class SecurityConfig {
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers("/user").hasRole("USER")
                         .requestMatchers("/admin").hasRole("ADMIN")
+                        .requestMatchers("/login").permitAll()
                         .anyRequest().authenticated()
                 )
                 .exceptionHandling((exceptionHandling) ->
                         exceptionHandling
                                 .accessDeniedPage("/access-denied"))
+
                 .formLogin(form -> form
                         .loginPage("/login")
-
                         .permitAll());
 
         return http.build();
@@ -42,12 +43,12 @@ public class SecurityConfig {
         User.UserBuilder users = User.withDefaultPasswordEncoder();
         UserDetails user = users
                 .username("user")
-                .password("password")
+                .password("user")
                 .roles("USER")
                 .build();
         UserDetails admin = users
                 .username("admin")
-                .password("password")
+                .password("admin")
                 .roles("USER", "ADMIN")
                 .build();
         return new InMemoryUserDetailsManager(user, admin);
