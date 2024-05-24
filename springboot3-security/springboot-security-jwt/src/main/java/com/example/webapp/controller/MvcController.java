@@ -55,4 +55,19 @@ public class MvcController {
         return modelAndView;
 
     }
+
+
+    @RequestMapping(path = "/nonauth")
+    public ModelAndView doNonAuthenticated(Principal principal) {
+        ModelAndView modelAndView = new ModelAndView();
+
+
+        if (principal != null) {
+            modelAndView.addObject("username", principal.getName());
+
+        }
+        modelAndView.setViewName("nonauth");
+        return modelAndView;
+
+    }
 }

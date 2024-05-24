@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html th:replace="~{fragments/layout :: layout(~{::title}, ~{::section})}" xmlns="http://www.w3.org/1999/html">
+<head>
+    <title>Page Title</title>
+
+</head>
+<body>
+<section class="py-5 text-center container">
+    <div class="row py-lg-5">
+
+        <div class="col-lg-6 col-md-8 mx-auto">
+            <h2 class="fw-light">Public Rest Page</h2>
+        </div>
+
+        <main class="form-signin w-100 m-auto">
+            <form method="post" th:action="@{/login}">
+
+                <div style="padding: 15px;">
+                    <label>Principal</label>
+                </div>
+
+                <div style="padding: 10px;">
+                    <input name="principal" id="principal" type="text"/>
+                </div>
+
+
+                <p id="message">
+                </p>
+
+                </p>
+
+            </form>
+
+
+        </main>
+
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script>
+
+        function checkSession(){
+            var request = $.ajax({
+            url: "/jwt/id",
+            method: "GET",
+          });
+
+          request.done(function( data, textStatus, jqXHR ) {
+
+            $("#principal").val( data);
+
+          });
+
+          request.fail(function( jqXHR, textStatus, x ) {
+
+          if (jqXHR.status  == 401){
+              $("#status").text("User not logged.");
+            }
+          });
+
+        }
+
+
+
+       // js init
+      $(document).ready(function(){
+         checkSession();
+      });
+
+
+    </script>
+
+</section>
+</body>
+
+</html>

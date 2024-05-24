@@ -14,8 +14,9 @@ public class MvcConfig implements WebMvcConfigurer {
         registry.addViewController("/access-denied").setViewName("access-denied");
 
         //jwt
-        registry.addViewController("/login-jwt").setViewName("login-jwt");
-        registry.addViewController("/rest-userinfo").setViewName("rest-userinfo");
+        registry.addViewController("/rest/login").setViewName("rest/login");
+        registry.addViewController("/rest/userinfo").setViewName("rest/userinfo");
+        registry.addViewController("/rest/public").setViewName("rest/public");
     }
 
 }

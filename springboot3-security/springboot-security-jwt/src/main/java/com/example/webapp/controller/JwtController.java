@@ -5,12 +5,13 @@ import com.example.webapp.model.AuthUserDetails;
 import com.example.webapp.repository.AuthUserDetailsRepository;
 import com.example.webapp.service.SecurityService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.security.Principal;
-import java.util.List;
 
 @RestController
 @RequestMapping("/jwt/")
@@ -27,28 +28,49 @@ public class JwtController {
         this.authUserDetailsRepository = authUserDetailsRepository;
     }
 
-    @GetMapping("token")
-    public String getToken() {
-        var optionalAuthUserDetails = securityService.getAuthUserDetails();
-
-
-        return "xxx";
-
-    }
 
     @GetMapping("id")
-    public String getId(Principal principal) {
-        var optionalAuthUserDetails = securityService.getAuthUserDetails();
+    public ResponseEntity<String> getId() {
 
-        if (optionalAuthUserDetails.isPresent()) {
-            return optionalAuthUserDetails.get().getName();
+        String principal = "";
+        //token is set in header by filter
+        var object = securityService.getAuthentication().getPrincipal();
+
+        if (object instanceof String){
+            principal = (String) object;
+
+        } else if (object instanceof AuthUserDetails) {
+            principal = ((AuthUserDetails) object).getUsername();
+
+        }else {
+            principal = object.toString();
         }
 
-        var auth = securityService.getAuthentication();
 
-        return auth.getName();
 
+        return ResponseEntity.ok(principal);
     }
 
+    @GetMapping("token")
+    public ResponseEntity<Void> getToken() {
+        //token is set in header by filter
+
+        Authentication authentication = securityService.getAuthentication();
+
+
+
+        if (authentication.getPrincipal().equals("anonymousUser")) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
+
+        return ResponseEntity.noContent().build();
+    }
+
+   // @Secured("ROLE_USER")
+    @GetMapping("info")
+    public ResponseEntity<AuthUserDetails> getUserDetails() {
+        var optionalAuthUserDetails = securityService.getAuthUserDetails();
+        return ResponseEntity.of(optionalAuthUserDetails);
+    }
 
 }

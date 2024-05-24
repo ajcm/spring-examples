@@ -43,42 +43,33 @@ public class SecurityConfig {
 
         http.csrf(AbstractHttpConfigurer::disable);
 
-        http.addFilterAfter(new JwtGeneratorFilter(), BasicAuthenticationFilter.class)
-                .addFilterBefore(new JwtValidationFilter(), BasicAuthenticationFilter.class);
+//        http.addFilterAfter(new JwtGeneratorFilter(), BasicAuthenticationFilter.class)
+        http.addFilterBefore(new JwtValidationFilter(), BasicAuthenticationFilter.class);
 
-        http.addFilterAfter((request, response, filterChain) -> {
-
-            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-            if (null != authentication) {
-                LOG.info("User " + authentication.getName() + " is successfully authenticated and "
-                        + "has the authorities " + authentication.getAuthorities().toString());
-            }
-
-            filterChain.doFilter(request, response);
-        }, BasicAuthenticationFilter.class).headers(headersConfigurer ->
-                headersConfigurer.frameOptions(HeadersConfigurer.FrameOptionsConfig::sameOrigin));
+//        http.addFilterAfter((request, response, filterChain) -> {
+//
+//            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+//            if (null != authentication) {
+//                LOG.info("User " + authentication.getName() + " is successfully authenticated and "
+//                        + "has the authorities " + authentication.getAuthorities().toString());
+//            }
+//
+//            filterChain.doFilter(request, response);
+//        }, BasicAuthenticationFilter.class).headers(headersConfigurer ->
+//                headersConfigurer.frameOptions(HeadersConfigurer.FrameOptionsConfig::sameOrigin));
 
         http.authorizeHttpRequests(auth ->
                 auth
-                        .requestMatchers(mvcMatcherBuilder.pattern("/users/**")).hasRole("ADMIN")
-                        .requestMatchers(mvcMatcherBuilder.pattern("/register")).permitAll()
                         .requestMatchers(mvcMatcherBuilder.pattern("/user")).hasRole("USER")
                         .requestMatchers(mvcMatcherBuilder.pattern("/admin")).hasRole("ADMIN")
                         .requestMatchers(mvcMatcherBuilder.pattern("/nonauth")).permitAll()
-                        .requestMatchers(mvcMatcherBuilder.pattern("/messages/**")).permitAll()
-
                         .requestMatchers(mvcMatcherBuilder.pattern("/login")).permitAll()
-                        .requestMatchers(mvcMatcherBuilder.pattern("/login-jwt")).permitAll()
-
-                        //fine grained authentication
+                        // mvc rest
                         .requestMatchers(mvcMatcherBuilder.pattern("/rest/**")).permitAll()
 
+                        //JWT + REST
+                        .requestMatchers(mvcMatcherBuilder.pattern("/jwt/**")).permitAll()
 
-                        //H2 Console
-                        //This line is optional in .authenticated() case as .anyRequest().authenticated()
-                        //would be applied for H2 path anyway
-                        .requestMatchers(PathRequest.toH2Console()).permitAll()
-                        //.requestMatchers(antPathRequestMatcher).permitAll()
                         .anyRequest().authenticated()
         );
 
