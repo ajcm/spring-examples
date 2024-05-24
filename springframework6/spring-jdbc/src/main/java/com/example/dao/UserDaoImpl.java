@@ -21,7 +21,7 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public User findByEmail(String email) {
-      return   jdbcTemplate.queryForObject("select * from users where email like ?",
+        return jdbcTemplate.queryForObject("select * from users where email like ?",
                 (rs, rowNum) -> {
                     Long id = rs.getLong("ID");
                     String name = rs.getString("NAME");

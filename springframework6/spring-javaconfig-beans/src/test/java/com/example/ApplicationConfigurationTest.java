@@ -38,7 +38,6 @@ public class ApplicationConfigurationTest {
     MyBean mySecondBean;
 
 
-
     @Test
     public void testApplicationContext() {
         Assertions.assertNotNull(applicationContext);

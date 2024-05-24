@@ -1,9 +1,9 @@
 package com.example;
 
-import com.github.javafaker.Faker;
 import com.example.dao.UserDao;
 import com.example.dao.UserDaoImpl;
 import com.example.model.User;
+import com.github.javafaker.Faker;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;

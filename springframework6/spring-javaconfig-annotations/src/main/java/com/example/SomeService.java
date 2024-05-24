@@ -17,7 +17,7 @@ public class SomeService {
      * autowired beans are always called after bean creation
      */
     @Autowired
-    public void whatever(){
+    public void whatever() {
         System.out.println("whatever called *****");
     }
 

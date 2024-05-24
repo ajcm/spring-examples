@@ -13,10 +13,11 @@ public class ItemController {
 
     @Autowired
     ItemRepository itemRepository;
-    @GetMapping("/item/{id}")
-    public ResponseEntity<Item> getItem(@PathVariable Long id){
 
-        var optionalItem  = itemRepository.findById(id);
+    @GetMapping("/item/{id}")
+    public ResponseEntity<Item> getItem(@PathVariable Long id) {
+
+        var optionalItem = itemRepository.findById(id);
 
         return optionalItem.map(ResponseEntity::ok)
                 .orElseGet(() -> ResponseEntity.notFound().build());
@@ -24,24 +25,16 @@ public class ItemController {
     }
 
     @PutMapping("/item")
-    public ResponseEntity<Item> putItem(@RequestBody Item item){
-//
-//        var itemExists  = itemRepository.existsById(item.id());
-//
-//        if (itemExists){
-//            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"Item already exists");
-//        }
+    public ResponseEntity<Item> putItem(@RequestBody Item item) {
 
         var newItem = itemRepository.save(item);
-
         return ResponseEntity.ok(newItem);
 
-         //return null;
     }
 
 
     @GetMapping("/details/{id}")
-    public ResponseEntity<Item> getDetails(@PathVariable Long id){
+    public ResponseEntity<Item> getDetails(@PathVariable Long id) {
 
 
         try {
@@ -50,15 +43,14 @@ public class ItemController {
             return optionalItem.map(ResponseEntity::ok)
                     .orElseThrow();
 
-        }catch (Exception ex){
-           // throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"something bad occured",ex);
-            return new  ResponseEntity<Item>(new Item(1L,"Bad item"),HttpStatus.BAD_REQUEST);
+        } catch (Exception ex) {
+
+            return new ResponseEntity<Item>(new Item(1L, "Bad item"), HttpStatus.BAD_REQUEST);
 
         }
 
 
     }
-
 
 
 }

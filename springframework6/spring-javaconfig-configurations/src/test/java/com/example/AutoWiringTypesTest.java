@@ -30,15 +30,15 @@ public class AutoWiringTypesTest {
     @Test
     public void fruitSaladConstructor() {
         Assertions.assertNotNull(fruitSaladConstructor);
-        Assertions.assertEquals("fruitSaladConstructor",fruitSaladConstructor.getMessage());
+        Assertions.assertEquals("fruitSaladConstructor", fruitSaladConstructor.getMessage());
 
         Assertions.assertNotNull(fruitSaladConstructor.getTomato());
         Assertions.assertNotNull(fruitSaladConstructor.getLettuce());
         Assertions.assertNotNull(fruitSaladConstructor.getDressing());
 
-        Assertions.assertEquals("tomato",fruitSaladConstructor.getTomato().getMessage());
-        Assertions.assertEquals("lettuce",fruitSaladConstructor.getLettuce().getMessage());
-        Assertions.assertEquals("dressing",fruitSaladConstructor.getDressing().getMessage());
+        Assertions.assertEquals("tomato", fruitSaladConstructor.getTomato().getMessage());
+        Assertions.assertEquals("lettuce", fruitSaladConstructor.getLettuce().getMessage());
+        Assertions.assertEquals("dressing", fruitSaladConstructor.getDressing().getMessage());
 
     }
 
@@ -46,30 +46,30 @@ public class AutoWiringTypesTest {
     @Test
     public void fruitSaladFieldInject() {
         Assertions.assertNotNull(fruitSaladFieldInject);
-        Assertions.assertEquals("fruitSaladFieldInject",fruitSaladFieldInject.getMessage());
+        Assertions.assertEquals("fruitSaladFieldInject", fruitSaladFieldInject.getMessage());
 
         Assertions.assertNotNull(fruitSaladFieldInject.getTomato());
         Assertions.assertNotNull(fruitSaladFieldInject.getLettuce());
         Assertions.assertNotNull(fruitSaladFieldInject.getDressing());
 
-        Assertions.assertEquals("tomato",fruitSaladFieldInject.getTomato().getMessage());
-        Assertions.assertEquals("lettuce",fruitSaladFieldInject.getLettuce().getMessage());
-        Assertions.assertEquals("dressing",fruitSaladFieldInject.getDressing().getMessage());
+        Assertions.assertEquals("tomato", fruitSaladFieldInject.getTomato().getMessage());
+        Assertions.assertEquals("lettuce", fruitSaladFieldInject.getLettuce().getMessage());
+        Assertions.assertEquals("dressing", fruitSaladFieldInject.getDressing().getMessage());
 
     }
 
     @Test
     public void fruitSaladSetters() {
         Assertions.assertNotNull(fruitSaladSetters);
-        Assertions.assertEquals("fruitSaladSetters",fruitSaladSetters.getMessage());
+        Assertions.assertEquals("fruitSaladSetters", fruitSaladSetters.getMessage());
 
         Assertions.assertNotNull(fruitSaladSetters.getTomato());
         Assertions.assertNotNull(fruitSaladSetters.getLettuce());
         Assertions.assertNotNull(fruitSaladSetters.getDressing());
 
-        Assertions.assertEquals("tomato",fruitSaladSetters.getTomato().getMessage());
-        Assertions.assertEquals("lettuce",fruitSaladSetters.getLettuce().getMessage());
-        Assertions.assertEquals("dressing",fruitSaladSetters.getDressing().getMessage());
+        Assertions.assertEquals("tomato", fruitSaladSetters.getTomato().getMessage());
+        Assertions.assertEquals("lettuce", fruitSaladSetters.getLettuce().getMessage());
+        Assertions.assertEquals("dressing", fruitSaladSetters.getDressing().getMessage());
 
     }
 

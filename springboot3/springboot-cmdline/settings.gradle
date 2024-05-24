@@ -5,4 +5,4 @@ pluginManagement {
         gradlePluginPortal()
     }
 }
-rootProject.name = 'data-jdbc'
+rootProject.name = 'cmdline-hello'

@@ -4,7 +4,10 @@ import com.github.javafaker.Faker;
 import org.example.dao.UserDao;
 import org.example.dao.UserDaoImpl;
 import org.example.model.User;
-import org.springframework.context.annotation.*;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
+import org.springframework.context.annotation.Scope;
 
 @Configuration
 @Import(JpaConfiguration.class)

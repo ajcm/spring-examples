@@ -1,3 +1,4 @@
-### spring6-data-jpa
+### spring-data-jpa
+
 - Spring Data Jpa with hibernate.
 

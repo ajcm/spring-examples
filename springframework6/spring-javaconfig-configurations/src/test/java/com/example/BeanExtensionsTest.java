@@ -37,15 +37,15 @@ public class BeanExtensionsTest {
     public void beanContextAware() {
         Assertions.assertEquals("beanContextAware", beanContextAware.name);
 
-        var configurableApplicationContext =  (ConfigurableApplicationContext )beanContextAware.contex;
+        var configurableApplicationContext = (ConfigurableApplicationContext) beanContextAware.contex;
         var scope = configurableApplicationContext.getBeanFactory().getBeanDefinition(beanContextAware.name).getScope();
 
-        Assertions.assertEquals("prototype",scope);
+        Assertions.assertEquals("prototype", scope);
     }
 
 
     @Test
-    public void testMethods(){
+    public void testMethods() {
         Assertions.assertEquals("[setBeanName, setApplicationContext]", beanContextAware.getMethods());
 
         Assertions.assertEquals("[init]", beanLifecycleAnnotations.getMethods());

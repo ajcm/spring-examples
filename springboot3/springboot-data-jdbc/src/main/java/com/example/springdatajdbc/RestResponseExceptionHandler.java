@@ -23,8 +23,8 @@ public class RestResponseExceptionHandler extends ResponseEntityExceptionHandler
     public ResponseEntity<Object> handleSqlExceptions(
             RuntimeException ex, WebRequest request) {
 
-        logger.error("Catch Exception",ex);
-        return handleExceptionInternal(ex,"System not available",new HttpHeaders(), HttpStatus.SERVICE_UNAVAILABLE,request);
+        logger.error("Catch Exception", ex);
+        return handleExceptionInternal(ex, "System not available", new HttpHeaders(), HttpStatus.SERVICE_UNAVAILABLE, request);
     }
 
 
@@ -32,13 +32,9 @@ public class RestResponseExceptionHandler extends ResponseEntityExceptionHandler
     public ResponseEntity<Object> handleDataAccessExceptions(
             RuntimeException ex, WebRequest request) {
 
-        logger.error("Catch Exception",ex);
-        return handleExceptionInternal(ex,"Bad request",new HttpHeaders(), HttpStatus.BAD_REQUEST,request);
+        logger.error("Catch Exception", ex);
+        return handleExceptionInternal(ex, "Bad request", new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
     }
-
-
-
-
 
 
 }

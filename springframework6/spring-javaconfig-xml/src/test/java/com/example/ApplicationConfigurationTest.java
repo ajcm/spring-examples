@@ -2,7 +2,7 @@ package com.example;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.springframework.context.*;
+import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 public class ApplicationConfigurationTest {
@@ -17,7 +17,7 @@ public class ApplicationConfigurationTest {
 
         MessageBean messageBean = context.getBean(MessageBean.class);
 
-        Assertions.assertEquals("this is my message",messageBean.getMessage());
+        Assertions.assertEquals("this is my message", messageBean.getMessage());
 
     }
 
