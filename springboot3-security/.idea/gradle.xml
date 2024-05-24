@@ -5,7 +5,6 @@
     <option name="linkedExternalProjectsSettings">
       <GradleProjectSettings>
         <option name="externalProjectPath" value="$PROJECT_DIR$/springboot-security-jdbc" />
-        <option name="gradleJvm" value="corretto-20" />
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$/springboot-security-jdbc" />
@@ -17,22 +16,6 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$/springboot-security-jpa" />
-          </set>
-        </option>
-      </GradleProjectSettings>
-      <GradleProjectSettings>
-        <option name="externalProjectPath" value="$PROJECT_DIR$/springboot-security-jwt-rest" />
-        <option name="modules">
-          <set>
-            <option value="$PROJECT_DIR$/springboot-security-jwt-rest" />
-          </set>
-        </option>
-      </GradleProjectSettings>
-      <GradleProjectSettings>
-        <option name="externalProjectPath" value="$PROJECT_DIR$/springboot-security-mvc" />
-        <option name="modules">
-          <set>
-            <option value="$PROJECT_DIR$/springboot-security-mvc" />
           </set>
         </option>
       </GradleProjectSettings>

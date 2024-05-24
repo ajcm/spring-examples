@@ -41,6 +41,10 @@ public class MessageController {
             message.setSender("-");
         }
 
+        if ("".equalsIgnoreCase(message.getSubject())) {
+            message.setSubject("undefined");
+        }
+
         if (message.getBody() != null) {
             messageService.add(message);
         }

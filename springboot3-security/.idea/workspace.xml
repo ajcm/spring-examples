@@ -30,14 +30,58 @@
   <component name="ExternalProjectsManager">
     <system id="GRADLE">
       <state>
+        <task path="$PROJECT_DIR$/springboot-security-jdbc">
+          <activation />
+        </task>
+        <task path="$PROJECT_DIR$/springboot-security-jpa">
+          <activation />
+        </task>
         <projects_view>
           <tree_state>
-            <expand />
+            <expand>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="SpringSecurityMvcJdbc" type="f1a62948:ProjectNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="SpringSecurityMvcJdbc" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="SpringSecurityMvcJdbc" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+                <item name="build" type="c8890929:TasksNode$1" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="SpringSecurityMvcJpaJwt" type="f1a62948:ProjectNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="SpringSecurityMvcJpaJwt" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="SpringSecurityMvcJpaJwt" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+                <item name="build" type="c8890929:TasksNode$1" />
+              </path>
+            </expand>
             <select />
           </tree_state>
         </projects_view>
       </state>
     </system>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
@@ -55,13 +99,19 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Gradle.Build springboot-security-jdbc.executor": "Run",
+    "Gradle.Tests in 'SpringSecurityMvcJdbc'.executor": "Debug",
     "Gradle.Upgrade Gradle wrapper.executor": "Run",
+    "Gradle.springboot-security-jdbc [:SpringWebApplication.main()].executor": "Run",
+    "Gradle.springboot-security-jdbc [build].executor": "Run",
+    "Gradle.springboot-security-jpa [:SpringWebApplication.main()].executor": "Debug",
+    "Gradle.springboot-security-jpa [build].executor": "Run",
     "Gradle.springboot-security-mvc [:SpringWebApplication.main()].executor": "Debug",
     "Gradle.springboot-security-mvc-basic [:SpringWebApplication.main()].executor": "Debug",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "main",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/github/spring-examples/springboot3-security/springboot-security-mvc/src/main/resources/templates/fragments",
+    "last_opened_file_path": "C:/github/spring-examples/springboot3-security/springboot-security-jdbc",
     "project.structure.last.edited": "Project",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.0",
@@ -70,6 +120,7 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\github\spring-examples\springboot3-security\springboot-security-jdbc" />
       <recent name="C:\github\spring-examples\springboot3-security\springboot-security-mvc\src\main\resources\templates\fragments" />
       <recent name="C:\github\spring-examples\springboot3-security\springboot-security-mvc" />
     </key>
@@ -77,10 +128,10 @@
       <recent name="C:\github\spring-examples\springboot3-security\springboot-security-mvc\src\main\resources\templates" />
     </key>
   </component>
-  <component name="RunManager">
-    <configuration name="SpringWebApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="Application.SpringWebApplication (1)">
+    <configuration name="SpringWebApplication (1)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.example.webapp.SpringWebApplication" />
-      <module name="SpringMvcSecurity.main" />
+      <module name="SpringSecurityMvcJdbc.main" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="com.example.webapp.*" />
@@ -91,9 +142,92 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="SpringWebApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.example.webapp.SpringWebApplication" />
+      <module name="SpringSecurityMvcJpaJwt.main" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.example.webapp.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Tests in 'SpringSecurityMvcJdbc'" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/springboot-security-jdbc" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":test" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>true</RunAsTest>
+      <method v="2" />
+    </configuration>
+    <configuration name="springboot-security-jdbc [build]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/springboot-security-jdbc" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="build" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>false</RunAsTest>
+      <method v="2" />
+    </configuration>
+    <configuration name="springboot-security-jpa [build]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/springboot-security-jpa" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="build" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>false</RunAsTest>
+      <method v="2" />
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.SpringWebApplication (1)" />
+        <item itemvalue="Gradle.springboot-security-jdbc [build]" />
         <item itemvalue="Application.SpringWebApplication" />
+        <item itemvalue="Gradle.springboot-security-jpa [build]" />
+        <item itemvalue="Gradle.Tests in 'SpringSecurityMvcJdbc'" />
       </list>
     </recent_temporary>
   </component>
