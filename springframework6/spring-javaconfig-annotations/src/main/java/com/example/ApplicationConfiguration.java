@@ -23,15 +23,15 @@ public class ApplicationConfiguration {
     }
 
     @Bean
-    public Writer myWriter(MessageBean messageBean){ //no need for @Autowired
-        return  new MyWriter(messageBean);
+    public Writer myWriter(MessageBean messageBean) { //no need for @Autowired
+        return new MyWriter(messageBean);
     }
 
     /**
      * autowired beans are always called after bean creation
      */
     @Autowired
-    public void whatever(){
+    public void whatever() {
         System.out.println("whatever called x2 *****");
     }
 

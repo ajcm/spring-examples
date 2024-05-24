@@ -22,14 +22,14 @@ public class PropertiesTest {
 
 
     @Test
-    public void appProperties(){
+    public void appProperties() {
         Assertions.assertNotNull(appProperties);
         Assertions.assertEquals("app name example app v1", appProperties.getMessage());
     }
 
 
     @Test
-    public void appPropertiesOther(){
+    public void appPropertiesOther() {
         Assertions.assertNotNull(appPropertiesOther);
         Assertions.assertEquals("app name example app v1", appPropertiesOther.getMessage());
     }

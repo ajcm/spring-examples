@@ -18,7 +18,7 @@ public class ApplicationConfiguration {
     }
 
     @Bean(name = "message")
-    public String getMessage( @Value("${bean.message}") String message) {
+    public String getMessage(@Value("${bean.message}") String message) {
         return message;
     }
 
