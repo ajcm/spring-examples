@@ -2,7 +2,6 @@ package com.example.webapp.controller;
 
 
 import com.example.webapp.model.AuthUserDetails;
-import com.example.webapp.repository.AuthUserDetailsRepository;
 import com.example.webapp.service.SecurityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -29,13 +28,13 @@ public class JwtController {
         //token is set in header by filter
         var object = securityService.getAuthentication().getPrincipal();
 
-        if (object instanceof String){
+        if (object instanceof String) {
             principal = (String) object;
 
         } else if (object instanceof AuthUserDetails) {
             principal = ((AuthUserDetails) object).getUsername();
 
-        }else {
+        } else {
             principal = object.toString();
         }
 
@@ -55,9 +54,8 @@ public class JwtController {
     }
 
 
-   @Secured("ROLE_USER")
+    @Secured("ROLE_USER")
     @GetMapping("info")
-    @ResponseBody
     public ResponseEntity<AuthUserDetails> getUserDetails() {
         var optionalAuthUserDetails = securityService.getAuthUserDetails();
 

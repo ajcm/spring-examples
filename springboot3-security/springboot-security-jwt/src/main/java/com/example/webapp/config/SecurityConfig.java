@@ -5,7 +5,6 @@ import com.example.webapp.filter.JwtValidationFilter;
 import com.example.webapp.service.JpaUserDetailsManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
@@ -86,7 +85,7 @@ public class SecurityConfig {
         http.httpBasic(Customizer.withDefaults());
 
         http
-                // ...
+
                 .sessionManagement((session) -> session
                         .sessionCreationPolicy(SessionCreationPolicy.ALWAYS)
                 );

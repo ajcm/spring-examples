@@ -14,33 +14,22 @@ JWT Token: (Authorization: Bearer token)
 ### /jwt/login
 Creates a login by sending a Http Basic Authentication request.
 Handled by JwtGeneratorFilter.
-
+Creates a new session
 
 ### /jwt/token
-Void method to check jwt credentials
+Void method to check jwt credentials. 
 
 ### /jwt/info
-Retrieves user session
+Retrieves user  details.
 
-## Login with HTTP Basic Authorization
+## JWT Generations
 
-Header Basic
-username + password
+Uses a BasicAuthentication request to perform auth with
+username and password.
+Header: Authorization: Basic xxxxx
 
-Authorization: Basic xxxxx
 
-Response example:
-Authorization Bearer eyJhbGciOiJI.....
+## JWT
+Paths: /jwt/**
+Header: Authorization: Bearer Token
 
-Requires:
-
-    http.httpBasic(Customizer.withDefaults());
-
-## Login with JWT
-
-Bearer Token
-jwt
-
-Authorization: Bearer xxxxx
-
-#
