@@ -30,6 +30,7 @@ public class JwtGeneratorFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
         if (null != authentication) {
             LOG.info("Generating JWT: " + authentication.getName() + " is successfully authenticated and "
                     + "has the authorities " + authentication.getAuthorities().toString());

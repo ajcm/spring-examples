@@ -42,6 +42,18 @@ public class JwtController {
         return ResponseEntity.ok(principal);
     }
 
+    @GetMapping("token")
+    public ResponseEntity<Void> getToken() {
+        //token is set in header by filter
+        Authentication authentication = securityService.getAuthentication();
+
+        if (authentication.getPrincipal().equals("anonymousUser")) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
+
+        return ResponseEntity.noContent().build();
+    }
+
 
    @Secured("ROLE_USER")
     @GetMapping("info")
