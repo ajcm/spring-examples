@@ -11,6 +11,7 @@ import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -18,15 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class JwtController {
 
     @Autowired
-    private final AuthUserDetailsRepository authUserDetailsRepository;
-
-    @Autowired
     private SecurityService securityService;
-
-    //getters setters
-    public JwtController(AuthUserDetailsRepository authUserDetailsRepository) {
-        this.authUserDetailsRepository = authUserDetailsRepository;
-    }
 
 
     @GetMapping("id")
@@ -49,25 +42,13 @@ public class JwtController {
         return ResponseEntity.ok(principal);
     }
 
-    @GetMapping("token")
-    public ResponseEntity<Void> getToken() {
-        //token is set in header by filter
 
-        Authentication authentication = securityService.getAuthentication();
-
-
-
-        if (authentication.getPrincipal().equals("anonymousUser")) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
-        }
-
-        return ResponseEntity.noContent().build();
-    }
-
-   // @Secured("ROLE_USER")
+   @Secured("ROLE_USER")
     @GetMapping("info")
+    @ResponseBody
     public ResponseEntity<AuthUserDetails> getUserDetails() {
         var optionalAuthUserDetails = securityService.getAuthUserDetails();
+
         return ResponseEntity.of(optionalAuthUserDetails);
     }
 

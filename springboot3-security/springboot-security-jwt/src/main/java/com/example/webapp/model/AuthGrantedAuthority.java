@@ -1,5 +1,6 @@
 package com.example.webapp.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import org.springframework.security.core.GrantedAuthority;
 
@@ -12,6 +13,7 @@ public class AuthGrantedAuthority implements GrantedAuthority {
 
     private String authority;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "auth_user_detail_id")
     private AuthUserDetails authUserDetails;

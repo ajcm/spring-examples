@@ -10,25 +10,24 @@
 
         <div class="col-lg-6 col-md-8 mx-auto">
             <h1 class="fw-light">User Info </h1>
-            <h3 class="fw-light">REST + JWT </h3>
         </div>
 
         <main class="form-signin w-100 m-auto">
-            <form method="post" th:action="@{/login}">
-
 
                 <p> using JWT Token</p>
                 <p id="jwttoken">
                 </p>
 
+                <div style="padding: 15px;">
+                    <input id="token" name="token" type="text"/>
+                </div>
 
                 <p id="message">
                 </p>
 
-                </p>
-
-
-            </form>
+                <div style="padding: 10px;">
+                    <input type="button" id="submit" value="Get profile"/>
+                </div>
 
 
         </main>
@@ -37,28 +36,39 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script>
 
-
-         function clear(){
-             var jwttoken = localStorage.removeItem("JWT-TOKEN");
-         }
-
         // js init
         $(document).ready(function(){
 
-          var jwttoken = localStorage.getItem("JWT-TOKEN");
+          var jwttoken = sessionStorage.getItem("JWT-TOKEN");
 
-          checkToken();
+           console.log("got token" + jwttoken);
 
-          function checkToken(){
+          if (jwttoken !== null){
+                 $("#token" ).val(jwttoken);
+          }
 
-              console.log("refresh token" + jwttoken);
 
-             if (jwttoken !== null){
-                 $("#tokenv").html(""+jwttoken);
-             }
-         }
 
+        $("#submit").click(function(e){
+
+          var jwttoken = sessionStorage.getItem("JWT-TOKEN");
+
+            var request = $.ajax({
+                url: "/jwt/info",
+                method: "GET",
+
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader ("Authorization", jwttoken);
+                }
+              });
+
+              request.done(function(data, textStatus, jqXHR ) {
+               $("#message").html("name: " + name + " username: "+data.username);
+            });
         });
+
+    });
+
 
 
     </script>

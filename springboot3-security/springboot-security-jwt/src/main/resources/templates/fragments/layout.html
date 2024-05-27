@@ -73,8 +73,7 @@
 <script>
 
     function checkToken(){
-        var jwttoken = localStorage.getItem("JWT-TOKEN");
-         console.log("refresh token" + jwttoken);
+        var jwttoken = sessionStorage.getItem("JWT-TOKEN");
 
         if (jwttoken !== null){
             $("#tokenv").html(""+jwttoken);
@@ -82,7 +81,7 @@
     }
 
     function clear(){
-        var jwttoken = localStorage.removeItem("JWT-TOKEN");
+        var jwttoken = sessionStorage.removeItem("JWT-TOKEN");
     }
 
    // js init
@@ -90,14 +89,12 @@
      checkToken();
 
        $("#reload").click(function(e){
-            console.log("refresh token")
             checkToken();
          });
 
            $("#clear").click(function(e){
-            console.log("clear token")
             clear();
-             checkToken();
+            checkToken();
          });
 
   });

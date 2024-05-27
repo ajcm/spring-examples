@@ -46,17 +46,17 @@ public class SecurityConfig {
         http.addFilterAfter(new JwtGeneratorFilter(), BasicAuthenticationFilter.class);
         http.addFilterBefore(new JwtValidationFilter(), BasicAuthenticationFilter.class);
 
-//        http.addFilterAfter((request, response, filterChain) -> {
-//
-//            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-//            if (null != authentication) {
-//                LOG.info("User " + authentication.getName() + " is successfully authenticated and "
-//                        + "has the authorities " + authentication.getAuthorities().toString());
-//            }
-//
-//            filterChain.doFilter(request, response);
-//        }, BasicAuthenticationFilter.class).headers(headersConfigurer ->
-//                headersConfigurer.frameOptions(HeadersConfigurer.FrameOptionsConfig::sameOrigin));
+        http.addFilterAfter((request, response, filterChain) -> {
+
+            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+            if (null != authentication) {
+                LOG.info("User " + authentication.getName() + " is successfully authenticated and "
+                        + "has the authorities " + authentication.getAuthorities().toString());
+            }
+
+            filterChain.doFilter(request, response);
+        }, BasicAuthenticationFilter.class).headers(headersConfigurer ->
+                headersConfigurer.frameOptions(HeadersConfigurer.FrameOptionsConfig::sameOrigin));
 
         http.authorizeHttpRequests(auth ->
                 auth

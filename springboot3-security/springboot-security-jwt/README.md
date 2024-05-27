@@ -6,11 +6,21 @@
 - MessageJdbcService with JDBC Template
 - H2 Console
 
-### Rest interface
+## Rest interface
+User two filters JwtGeneratorFilter to generate token.
+JwtValidationFilter validated JWT Token if present.
+JWT Token: (Authorization: Bearer token)
 
-Test with rest
-ex:
-http://localhost:8080/rest/auth/id
+### /jwt/login
+Creates a login by sending a Http Basic Authentication request.
+Handled by JwtGeneratorFilter.
+
+
+### /jwt/token
+Void method to check jwt credentials
+
+### /jwt/info
+Retrieves user session
 
 ## Login with HTTP Basic Authorization
 
