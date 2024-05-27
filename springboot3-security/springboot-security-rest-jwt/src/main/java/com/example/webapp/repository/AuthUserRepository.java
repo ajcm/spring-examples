@@ -9,8 +9,9 @@ import java.util.Optional;
 
 public interface AuthUserRepository extends JpaRepository<AuthUserDetails, Long> {
     Optional<AuthUserDetails> findByEmail(String email);
+
     int deleteByEmail(String email);
 
-   // Page<AuthUserDetails> findAll(Pageable pageable);
+    // Page<AuthUserDetails> findAll(Pageable pageable);
 
 }

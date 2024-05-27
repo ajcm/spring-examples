@@ -65,7 +65,7 @@ public class TokenService {
                 userDetails.getEmail(),
                 List.of());
 
-        if (!userDetails.getAuthorities().isEmpty()){
+        if (!userDetails.getAuthorities().isEmpty()) {
 
             var auth = userDetails.getAuthorities().stream().map(GrantedAuthority::getAuthority).toList();
             response.setAuthorities(auth);

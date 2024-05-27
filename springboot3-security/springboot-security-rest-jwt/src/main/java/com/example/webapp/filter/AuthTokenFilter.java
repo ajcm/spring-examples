@@ -35,7 +35,7 @@ public class AuthTokenFilter extends OncePerRequestFilter {
             throws ServletException, IOException {
         try {
             String jwt = parseJwt(request);
-            if (org.apache.commons.lang3.StringUtils.isNotBlank(jwt) ) {
+            if (org.apache.commons.lang3.StringUtils.isNotBlank(jwt)) {
 
                 tokenService.validateJwtToken(jwt);
 

@@ -47,13 +47,13 @@ public class AuthUserDetails implements UserDetails {
         return this.password;
     }
 
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
     @Override
     public String getUsername() {
         return this.email;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     @Override

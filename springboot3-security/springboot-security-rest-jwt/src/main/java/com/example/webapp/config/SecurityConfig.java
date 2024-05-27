@@ -86,7 +86,7 @@ public class SecurityConfig {
 //                        .requestMatchers(mvcMatcherBuilder.pattern("/admin")).hasRole("ADMIN")
 //                        .requestMatchers(mvcMatcherBuilder.pattern("/nonauth")).permitAll()
 //                        .requestMatchers(mvcMatcherBuilder.pattern("/messages/**")).permitAll()
-                               // .requestMatchers(mvcMatcherBuilder.pattern("/")).permitAll()
+                                // .requestMatchers(mvcMatcherBuilder.pattern("/")).permitAll()
                                 .requestMatchers(mvcMatcherBuilder.pattern("/demo/**")).permitAll()
                                 .requestMatchers(mvcMatcherBuilder.pattern("/api/admin/users")).permitAll()
                                 .requestMatchers(new AntPathRequestMatcher("/api/auth/**", "POST")).permitAll()

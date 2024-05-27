@@ -41,16 +41,12 @@ public class AuthorizationController {
 
     @Autowired
     AuthUserRepository userRepository;
-
-    @Autowired
-    private SecurityService securityService;
-
     @Autowired
     TokenService tokenService;
-
     @Autowired
     AuthenticationManager authenticationManager;
-
+    @Autowired
+    private SecurityService securityService;
     @Autowired
     private AuthUserRepository authUserRepository;
 
@@ -86,7 +82,7 @@ public class AuthorizationController {
     }
 
     @GetMapping("/identity")
-    public ResponseEntity<JwtResponse> identity( HttpServletRequest request, HttpServletResponse response) {
+    public ResponseEntity<JwtResponse> identity(HttpServletRequest request, HttpServletResponse response) {
 
         try {
 //            Authentication authentication = authenticationManager.authenticate(
@@ -109,9 +105,8 @@ public class AuthorizationController {
     }
 
 
-
     @PostMapping("/signup")
-    public ResponseEntity<Void> registerUser( @RequestBody SignupRequest request) {
+    public ResponseEntity<Void> registerUser(@RequestBody SignupRequest request) {
 
 
         //

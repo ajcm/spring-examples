@@ -74,7 +74,7 @@ public class JpaUserDetailsManager implements UserDetailsManager {
 
     @Transactional
     public String encryptPassword(String rawPassword) {
-      return  passwordEncoder.encode(rawPassword);
+        return passwordEncoder.encode(rawPassword);
     }
 
     @Override

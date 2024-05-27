@@ -15,25 +15,25 @@ import javax.sql.DataSource;
 class SpringWebApplicationTests {
 
 
-	@Autowired
-	ApplicationContext applicationContext;
+    @Autowired
+    ApplicationContext applicationContext;
 
-	@Autowired
-	JdbcTemplate jdbcTemplate;
+    @Autowired
+    JdbcTemplate jdbcTemplate;
 
-	@Test
-	void contextLoads() {
+    @Test
+    void contextLoads() {
 
-	}
+    }
 
-	@Test
-	void contextLoads(	@Autowired DataSource dataSource) {
+    @Test
+    void contextLoads(@Autowired DataSource dataSource) {
 
-	}
+    }
 
-	@Test
-	void testJdbcTemplate() {
-		jdbcTemplate.getDataSource();
-	}
+    @Test
+    void testJdbcTemplate() {
+        jdbcTemplate.getDataSource();
+    }
 
 }
