@@ -8,15 +8,11 @@ public class CarStand {
 
     public CarService carService;
 
-    // auto wired
-    public CarStand(CarService carService) {
-        this.carService = carService;
-    }
-
     public CarService getCarService() {
         return carService;
     }
 
+    @Autowired
     public void setCarService(CarService carService) {
         this.carService = carService;
     }
