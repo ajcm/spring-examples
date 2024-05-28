@@ -1,5 +1,8 @@
 package com.example;
 
+import com.example.beans.MessageBean;
+import com.example.beans.SomeService;
+import com.example.beans.Writer;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -25,6 +28,8 @@ public class ApplicationConfigurationTest {
 
     @Autowired
     Writer writer;
+    @Autowired
+    SomeService someService;
 
     @Test
     public void testApplicationContext() {
@@ -33,16 +38,20 @@ public class ApplicationConfigurationTest {
         Assertions.assertEquals(MESSAGE, messageBean.getMessage());
     }
 
-
     @Test
     public void testMessageBean() {
         Assertions.assertEquals(MESSAGE, messageBean.getMessage());
     }
 
-
     @Test
     public void testWriter() {
         Assertions.assertEquals("this is a bean", writer.write());
     }
+
+    @Test
+    public void testService() {
+        Assertions.assertEquals("this is a stereotype", someService.getMessage());
+    }
+
 
 }

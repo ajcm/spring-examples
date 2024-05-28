@@ -22,7 +22,6 @@ import java.util.Properties;
 @PropertySource("classpath:datasource.properties")
 public class JpaConfiguration {
 
-
     @Bean
     public DataSource dataSource(@Value("${datasource.driverClassName}") String driver,
                                  @Value("${datasource.url}") String url,

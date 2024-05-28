@@ -1,5 +1,6 @@
 package com.example;
 
+import com.example.beans.MessageBean;
 import com.example.qualifier.MyBean;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -26,8 +27,7 @@ public class ApplicationConfigurationTest {
 
     @Autowired
     MessageBean messageBean;
-
-
+    
     //Test Qualifiers with bean
     @Autowired
     @Qualifier("firstBean")

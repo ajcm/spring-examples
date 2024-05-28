@@ -1,7 +1,5 @@
 ### spring-configurations
 
-- Spring 6.0.13
-- Examples using Annotation config and Components
-- Different autowiring types (Constructor and method)
-- Bean processors
-- Properties injection
+- Examples using Annotations
+- Different autowiring types: constructor, fields and methods
+- Bean processors, lifecycle and extensions

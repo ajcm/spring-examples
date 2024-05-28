@@ -1,4 +1,4 @@
-package com.example;
+package com.example.beans;
 
 
 public class WelcomeBean implements MessageBean {

@@ -1,4 +1,4 @@
 ### spring-data-jpa
 
-- Spring Data Jpa with hibernate.
+- Spring Data JPA and hibernate.
 

@@ -1,5 +1,5 @@
-### spring-properties
+### spring-javaconfig-properties
 
-- Examples using Java configuration and different types of injection types
-- Profiles
+- Examples with properties files
+- Profiles management
 

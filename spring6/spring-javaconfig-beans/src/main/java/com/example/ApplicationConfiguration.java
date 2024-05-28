@@ -1,5 +1,7 @@
 package com.example;
 
+import com.example.beans.HelloWorldBean;
+import com.example.beans.MessageBean;
 import com.example.qualifier.FirstMyBean;
 import com.example.qualifier.MyBean;
 import com.example.qualifier.SecondMyBean;

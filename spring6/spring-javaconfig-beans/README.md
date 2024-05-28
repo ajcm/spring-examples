@@ -1,4 +1,5 @@
 ### spring-javaconfig-beans
 
-- Example how to use Application Context with Java config (@Bean)
-- Added tests with Junit
+- Examples with Beans and qualifiers
+- Configure Beans and names
+- Resourcee Properties

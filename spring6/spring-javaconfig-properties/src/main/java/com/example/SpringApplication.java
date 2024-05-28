@@ -1,5 +1,6 @@
 package com.example;
 
+import com.example.beans.MessageBean;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 

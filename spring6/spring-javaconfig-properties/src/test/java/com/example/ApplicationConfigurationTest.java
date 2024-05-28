@@ -1,5 +1,6 @@
 package com.example;
 
+import com.example.beans.MessageBean;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

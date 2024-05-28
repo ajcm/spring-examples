@@ -1,11 +1,11 @@
 package com.example;
 
+import com.example.beans.MessageBean;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
-
 
 @SpringJUnitConfig(classes = ApplicationConfiguration.class)
 public class ApplicationConfigurationManualTest {

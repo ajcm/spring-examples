@@ -1,5 +1,9 @@
 package com.example;
 
+import com.example.beans.HelloWorldBean;
+import com.example.beans.KeyGenerator;
+import com.example.beans.MessageBean;
+import com.example.beans.WelcomeBean;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.*;
 
