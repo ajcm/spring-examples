@@ -1,4 +1,4 @@
-### spring-javaconfig-beans
+### spring-javaconfig-beans2
 
-- Example how to use Application Context with Java config (@Bean)
-- Added tests with Junit
+- Extra examples mixing beans and autowiring
+- Implementation of factory beans
