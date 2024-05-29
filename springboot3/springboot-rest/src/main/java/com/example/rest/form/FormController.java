@@ -4,8 +4,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.concurrent.atomic.AtomicLong;
-
 
 @RestController
 @RequestMapping("form")
@@ -22,6 +20,22 @@ public class FormController {
     @RequestMapping("/{path}")
     public String echo(@RequestParam(defaultValue = "no message") String message, @PathVariable(required = true) String path) {
         return path + " " + message;
+    }
+
+    @RequestMapping(
+            value = "/header",
+            headers = {"header=h1"},
+            method = RequestMethod.GET)
+    public String h1(@RequestParam(defaultValue = "no message") String message) {
+        return "h1";
+    }
+
+    @RequestMapping(
+            value = "/header",
+            headers = {"header=h2"},
+            method = RequestMethod.GET)
+    public String h2(@RequestParam(defaultValue = "no message") String message) {
+        return "h2";
     }
 
 }
