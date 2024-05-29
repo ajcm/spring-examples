@@ -36,6 +36,7 @@ public class OrderController {
 
         return "redirect:/";
     }
+
 //end::handlePostWithValidation[]
 
 //tag::baseClass[]

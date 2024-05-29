@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Orders</title>
+</head>
+
+<body>
+<h1>Orders</h1>
+
+<table class="table table-bordered table-striped">
+    <thead>
+    <tr>
+        <td>Name</td>
+        <td>Street</td>
+        <td>City</td>
+
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr th:if="${orders.empty}">
+        <td colspan="3">No orders</td>
+    </tr>
+
+    <tr th:each="order : ${orders}">
+        <td th:text="${order.name}"> name</td>
+        <td th:text="${order.street}"> street</td>
+        <td th:text="${order.city}"> city</td>
+    </tr>
+    </tbody>
+</table>
+
+<p>
+    <a href="/">go home</a>
+</p>
+
+
+</body>
+</html>

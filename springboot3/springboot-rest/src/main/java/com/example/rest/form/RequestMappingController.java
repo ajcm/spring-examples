@@ -37,9 +37,15 @@ public class RequestMappingController {
 
 
     @GetMapping(path = "/param", params = "id")
-    public String param3(@RequestParam String id, @RequestHeader String header) {
+    public String param2(@RequestParam String id, @RequestHeader String header) {
         return "id param: " + id + " " + "header " + header;
     }
+
+    @GetMapping(path = "/param3")
+    public String param3(@RequestParam(value = "param",required = false,defaultValue = "banana") String fruit) {
+        return "param: " + fruit;
+    }
+
 
 
     @RequestMapping(value = "/path/{fooid}/and/{longId}", method = {RequestMethod.POST, RequestMethod.GET})
