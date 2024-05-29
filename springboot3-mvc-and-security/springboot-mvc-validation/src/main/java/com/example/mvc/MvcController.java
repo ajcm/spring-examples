@@ -11,6 +11,8 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.List;
+
 
 @Controller
 @RequestMapping("/")
@@ -21,12 +23,13 @@ public class MvcController {
 
     /**
      * names ordergg and orderx used to avoid binding by name.
-     *
      */
 
     @ModelAttribute
     public void addAttributes(Model model) {
         model.addAttribute("ordergg", new Order());
+
+        model.addAttribute("types", List.of(Order.Type.FAST, Order.Type.SUPERFAST, Order.Type.SLOW));
     }
 
 
@@ -44,8 +47,8 @@ public class MvcController {
     @GetMapping("/orders")
     public ModelAndView orders() {
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.addObject("orders",orders.getOrders());
-        modelAndView.setViewName( "orders");
+        modelAndView.addObject("orders", orders.getOrders());
+        modelAndView.setViewName("orders");
 
         return modelAndView;
     }
@@ -67,12 +70,11 @@ public class MvcController {
     public ModelAndView orderForm(@RequestParam String id) {
 
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.addObject("id",id);
-        modelAndView.setViewName( "form-done");
+        modelAndView.addObject("id", id);
+        modelAndView.setViewName("form-done");
 
         return modelAndView;
     }
-
 
 
 }

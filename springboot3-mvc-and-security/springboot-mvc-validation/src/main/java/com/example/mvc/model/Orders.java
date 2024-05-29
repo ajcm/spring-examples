@@ -1,5 +1,6 @@
 package com.example.mvc.model;
 
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
@@ -9,6 +10,7 @@ import java.util.UUID;
 
 @Scope("singleton")
 @Component
+@ComponentScan
 public class Orders {
     private final List<Order> orders = new LinkedList<>();
 

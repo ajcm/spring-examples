@@ -2,69 +2,55 @@
 //tag::allButValidation[]
 package com.example.mvc.model;
 
-import jakarta.validation.constraints.*;
-import org.hibernate.validator.constraints.CreditCardNumber;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 
 public class Order {
 
-    public static enum Type {
-        FAST, SLOW, VERYSLOW, SUPERFAST, JUSTNOW
-    }
-
     String id;
-
     //end::allButValidation[]
     @NotBlank(message = "Name is required")
     //tag::allButValidation[]
     private String name;
-    //end::allButValidation[]
-
     @NotNull(message = "Choose type of deliverey")
     //tag::allButValidation[]
     private Type type = null;
-
+    //end::allButValidation[]
     @NotBlank(message = "Street is required")
     //tag::allButValidation[]
     private String street;
-    //end::allButValidation[]
-
     @NotBlank(message = "City is required")
     //tag::allButValidation[]
     private String city;
     //end::allButValidation[]
-
     @NotBlank(message = "State is required")
     //tag::allButValidation[]
     private String state;
     //end::allButValidation[]
-
     @NotBlank(message = "Zip code is required")
     //tag::allButValidation[]
     private String zip;
     //end::allButValidation[]
-
-  //  @CreditCardNumber(message = "Not a valid credit card number")
+    //  @CreditCardNumber(message = "Not a valid credit card number")
     //tag::allButValidation[]
     private String ccNumber;
     //end::allButValidation[]
-
-  //  @Pattern(regexp = "^(0[1-9]|1[0-2])([\\/])([1-9][0-9])$",
- //           message = "Must be formatted MM/YY")
+    //  @Pattern(regexp = "^(0[1-9]|1[0-2])([\\/])([1-9][0-9])$",
+    //           message = "Must be formatted MM/YY")
     //tag::allButValidation[]
     private String ccExpiration;
     //end::allButValidation[]
-
-  //  @Digits(integer = 3, fraction = 0, message = "Invalid CVV")
+    //  @Digits(integer = 3, fraction = 0, message = "Invalid CVV")
     //tag::allButValidation[]
     private String ccCVV;
-
-    // -----------------------
-
+    //end::allButValidation[]
 
     public String getId() {
         return id;
     }
+
+    // -----------------------
 
     public void setId(String id) {
         this.id = id;
@@ -132,6 +118,18 @@ public class Order {
 
     public void setCcCVV(String ccCVV) {
         this.ccCVV = ccCVV;
+    }
+
+    public @NotNull(message = "Choose type of deliverey") Type getType() {
+        return type;
+    }
+
+    public void setType(@NotNull(message = "Choose type of deliverey") Type type) {
+        this.type = type;
+    }
+
+    public static enum Type {
+        FAST, SLOW, VERYSLOW, SUPERFAST, JUSTNOW
     }
 }
 //end::allButValidation[]

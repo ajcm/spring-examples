@@ -66,12 +66,17 @@
     <br/>
 
     <label for="type">Type: </label>
-    <input th:field="*{type}" type="text"/>
+    <select th:field="*{type}">
+        <option th:each="i : ${types}" th:text="${i}" th:value="${i}">
+        </option>
+    </select>
     <!-- end::allButValidation[] -->
     <span class="validationError"
           th:errors="*{type}"
           th:if="${#fields.hasErrors('type')}">Type Error</span>
     <!-- tag::allButValidation[] -->
+
+
     <br/>
 
     <h3>Here's how I'll pay...</h3>
