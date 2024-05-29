@@ -43,7 +43,7 @@ public class Order {
     //end::allButValidation[]
     //  @Digits(integer = 3, fraction = 0, message = "Invalid CVV")
     //tag::allButValidation[]
-    private String ccCVV;
+    private int ccCVV;
     //end::allButValidation[]
 
     public String getId() {
@@ -112,11 +112,11 @@ public class Order {
         this.ccExpiration = ccExpiration;
     }
 
-    public String getCcCVV() {
+    public int getCcCVV() {
         return ccCVV;
     }
 
-    public void setCcCVV(String ccCVV) {
+    public void setCcCVV(int ccCVV) {
         this.ccCVV = ccCVV;
     }
 
