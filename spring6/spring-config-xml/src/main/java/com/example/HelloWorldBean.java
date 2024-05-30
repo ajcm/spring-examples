@@ -1,11 +1,8 @@
-package com.example.beans;
+package com.example;
 
-
-import org.springframework.beans.factory.annotation.Value;
 
 public class HelloWorldBean implements MessageBean {
 
-    @Value("${bean.message}")
     private String message;
 
     @Override
@@ -17,4 +14,11 @@ public class HelloWorldBean implements MessageBean {
         this.message = message;
     }
 
+    public void init() {
+        System.out.println("Bean is created");
+    }
+
+    public void destroy() {
+        System.out.println("Bean is destroyed");
+    }
 }

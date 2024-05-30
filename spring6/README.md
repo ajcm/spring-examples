@@ -1,12 +1,18 @@
 ## Spring Framework Examples
-### Spring 6.0.13
+#### Spring without Spring Boot
 <br/>
-Using Spring without Spring Boot
 
-- javaconfig: spring core, dependecy injection aand configurations
+- spring-config-xml: ClassPathXmlApplicationContext example.
 
-- persistence: jdbc template, jpa-hibernate and data-jpa
+- spring-javaconfig-beans: Java configurations, beans and autowire
 
-- aop
+- spring-javaconfig-beans2: Beans, qualifiers and factories.
+
+- spring-javaconfig-configurations: Beans lifecycle, post/pre processors.
+
+- spring-javaconfig-properties: Properties and profiles
+
+
+
 <br/>
 
