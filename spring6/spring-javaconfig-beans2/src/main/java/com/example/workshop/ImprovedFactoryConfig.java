@@ -1,5 +1,6 @@
 package com.example.workshop;
 
+import com.example.workshop.factories.ImprovedToolFactory;
 import com.example.workshop.tools.ITool;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

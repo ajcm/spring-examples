@@ -1,7 +1,7 @@
 package com.example.workshop;
 
 import com.example.workshop.tools.ITool;
-import com.example.workshop.tools.ToolFactory;
+import com.example.workshop.factories.ToolFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;

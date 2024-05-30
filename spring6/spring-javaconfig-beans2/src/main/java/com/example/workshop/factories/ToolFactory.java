@@ -1,5 +1,6 @@
-package com.example.workshop.tools;
+package com.example.workshop.factories;
 
+import com.example.workshop.tools.ITool;
 import org.springframework.beans.factory.FactoryBean;
 import org.springframework.beans.factory.annotation.Autowired;
 
