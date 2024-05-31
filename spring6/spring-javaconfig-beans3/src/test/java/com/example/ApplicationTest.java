@@ -47,6 +47,8 @@ public class ApplicationTest {
         Assertions.assertNotNull(truck);
         Assertions.assertNotNull(truck.getEngine());
         Assertions.assertNotNull(truck.getEngine2());
+        Assertions.assertNotNull(truck.getWheels());
+        Assertions.assertNull(truck.getDriver());
     }
 
 

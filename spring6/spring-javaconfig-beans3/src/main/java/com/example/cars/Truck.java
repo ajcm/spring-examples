@@ -14,11 +14,13 @@ public class Truck {
     private Driver driver;
 
 
-    @Autowired
-    public void set(Engine engine, Engine engine2, Driver driver, Wheels wheels) {
+    public Truck(Engine engine, Engine engine2) {
         this.engine = engine;
         this.engine2 = engine2;
-        this.driver = driver;
+    }
+
+    @Autowired
+    public void set(Wheels wheels) {
         this.wheels = wheels;
     }
 
