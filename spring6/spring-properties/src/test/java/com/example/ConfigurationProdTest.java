@@ -13,31 +13,30 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 @ExtendWith(SpringExtension.class)
 @ContextConfiguration(classes = ApplicationConfiguration.class)
-@ActiveProfiles(profiles = "dev")
-public class ApplicationConfigurationTest {
+@ActiveProfiles(profiles = "prod")
+public class ConfigurationProdTest {
 
-    public static final String MESSAGE = "i think this is dev";
-    /**
-     * Complex example with the use of annotations and autowire
-     */
     @Autowired
     ApplicationContext applicationContext;
 
     @Autowired
-    MessageBean messageBean;
+    MessageBean messageBeanWireByClass;
 
+    @Autowired
+    MessageBean welcomeBean;
+
+    @Autowired
+    String welcome;
 
     @Test
-    public void testApplicationContext() {
-        Assertions.assertNotNull(applicationContext);
-        MessageBean messageBean = applicationContext.getBean(MessageBean.class);
-        Assertions.assertEquals(MESSAGE, messageBean.getMessage());
+    public void test() {
+        Assertions.assertEquals("this is not dev", welcome);
     }
 
-
     @Test
-    public void testMessageBean() {
-        Assertions.assertEquals(MESSAGE, messageBean.getMessage());
+    public void test2() {
+        Assertions.assertEquals("this is prod", messageBeanWireByClass.getMessage());
+        Assertions.assertEquals("this is prod", welcomeBean.getMessage());
     }
 
 }

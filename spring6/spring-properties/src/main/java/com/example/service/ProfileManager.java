@@ -1,9 +1,11 @@
-package com.example;
+package com.example.service;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 
+@Component
 public class ProfileManager {
-    @Value("${spring.profiles.active:}")
+    @Value("${spring.profiles.active}")
     private String activeProfiles;
 
     public String getActiveProfiles() {

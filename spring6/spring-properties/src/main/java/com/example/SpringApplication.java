@@ -1,6 +1,6 @@
 package com.example;
 
-import com.example.beans.MessageBean;
+import com.example.service.ProfileManager;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
@@ -12,23 +12,21 @@ public class SpringApplication {
      */
 
     public static void main(String[] args) {
+        System.setProperty("spring.profiles.active", "dev");
+
         ApplicationContext applicationContext = new AnnotationConfigApplicationContext(ApplicationConfiguration.class);
 
         String profile = (String) applicationContext.getBean("activeProfile");
         System.out.println("profile ->" + profile);
 
-
-        MessageBean messageBean = (MessageBean) applicationContext.getBean("messageBean");
-        System.out.println("message ->" + messageBean.getMessage());
-
-        String message = (String) applicationContext.getBean("message");
-        System.out.println("message ->" + message);
+        String messageBean = (String) applicationContext.getBean("welcome");
+        System.out.println("message ->" + messageBean);
 
         String key = (String) applicationContext.getBean("key");
         System.out.println("key ->" + key);
 
-        String javahome = (String) applicationContext.getBean("javahome");
-        System.out.println("javahome ->" + javahome);
+        ProfileManager profileManager = applicationContext.getBean("profileManager", ProfileManager.class);
+        System.out.println("profileManager ->" + profileManager.getActiveProfiles());
 
     }
 }
