@@ -15,7 +15,7 @@ public class MailConfiguration {
     //get executed after bean initialization
     @Autowired
     private void setUp() {
-        configMail = new Mail("to", "from", "subject");
+        configMail = new Mail("To me", "From to", "Subject");
     }
 
     @Bean

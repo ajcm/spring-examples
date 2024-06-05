@@ -1,0 +1,1 @@
+INSERT INTO item (description) VALUES ('Item 1');
