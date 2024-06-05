@@ -8,11 +8,11 @@ import org.springframework.context.annotation.Configuration;
 public class ApplicationConfiguration {
 
     @Bean
-    public Item create(){
+    public Item create() {
 
         var i = new Item();
         i.setId(1L);
-        i.setDescription("descripton");
+        i.setDescription("description");
         return i;
     }
 

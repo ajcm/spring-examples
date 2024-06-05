@@ -12,7 +12,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 @ExtendWith(SpringExtension.class)
 @ContextConfiguration(classes = {ApplicationConfiguration.class})
-public class TestItem {
+public class DataTest {
 
     @Mock
     Item testItem;
@@ -23,13 +23,13 @@ public class TestItem {
     @Test
     public void test() {
         Mockito.when(testItem.getDescription()).thenReturn("banana");
-        Assertions.assertEquals(testItem.getDescription(),"banana");
+        Assertions.assertEquals(testItem.getDescription(), "banana");
     }
 
 
     @Test
     public void test2() {
-        Assertions.assertEquals(autowired.getDescription(),"descripton");
+        Assertions.assertEquals(autowired.getDescription(), "description");
     }
 
 }
