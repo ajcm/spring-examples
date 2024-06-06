@@ -31,5 +31,15 @@ public class ConfigurationTest {
         Assertions.assertTrue(javahome.length() > 1);
     }
 
+    @Test
+    public void test3(@Autowired String javahome2) {
+        Assertions.assertTrue(javahome2.length() > 1);
+    }
+
+    @Test
+    public void test4(@Autowired String message) {
+        Assertions.assertEquals(message,"this is a message");
+    }
+
 
 }
