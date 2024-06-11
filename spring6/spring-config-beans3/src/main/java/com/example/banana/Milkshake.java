@@ -7,10 +7,10 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class Milkshake {
-
     Banana banana;
     Strawberry strawberry;
     Apple apple;
+
 
     public Milkshake(Banana banana) {
         this.banana = banana;
@@ -43,4 +43,5 @@ public class Milkshake {
     private void setApple(Apple apple) {
         this.apple = apple;
     }
+
 }
