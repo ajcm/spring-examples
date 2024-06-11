@@ -29,7 +29,7 @@ public class BeanTest {
     private MyBean bean3;
 
 
- //   @Test org.junit.jupiter.api.extension.ParameterResolutionException
+    //   @Test org.junit.jupiter.api.extension.ParameterResolutionException
 //    public void test(@Autowired MyBean bean) {
 //
 //    }
@@ -43,7 +43,6 @@ public class BeanTest {
     void test1(@Qualifier("bean2") @Autowired MyBean bean1) {
         Assertions.assertEquals(bean1.getName(), "bean2");
     }
-
 
 
     @Test

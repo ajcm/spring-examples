@@ -3,13 +3,9 @@ package com.example;
 import com.example.accounts.AccountConfiguration;
 import com.example.accounts.AccountService;
 import com.example.accounts.TransferService;
-import com.example.foo.BeanConfiguration;
-import com.example.foo.MyBean;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.ApplicationContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
@@ -23,9 +19,11 @@ public class AccountTest {
     ApplicationContext applicationContext;
 
 
-    @Autowired TransferService transferService;
+    @Autowired
+    TransferService transferService;
 
-    @Autowired AccountService accountService;
+    @Autowired
+    AccountService accountService;
 
     @Test
     void test(@Autowired TransferService transferService, @Autowired AccountService accountService) {
@@ -34,9 +32,6 @@ public class AccountTest {
         System.out.println(transferService.getAccountRepository());
 
     }
-
-
-
 
 
 }

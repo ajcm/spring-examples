@@ -1,6 +1,6 @@
 package com.example.foo;
 
-public class MyBeanImpl implements MyBean{
+public class MyBeanImpl implements MyBean {
 
     private String name;
 
