@@ -1,5 +1,7 @@
 package com.example.dao;
 
+import com.example.User;
+
 import java.util.List;
 
 public interface UserDao {

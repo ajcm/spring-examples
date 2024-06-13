@@ -1,10 +1,13 @@
 package com.example.dao;
 
+import com.example.User;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+@Component
 public class UserDaoImpl implements UserDao {
 
     private final JdbcTemplate jdbcTemplate;
@@ -22,15 +25,15 @@ public class UserDaoImpl implements UserDao {
     public User findByEmail(String email) {
         return jdbcTemplate.queryForObject("select * from users where email like ?",
                 (rs, rowNum) -> {
-                    Long id = rs.getLong("ID");
+                    String id = rs.getString("ID");
                     String name = rs.getString("NAME");
-                    String uemail = rs.getString("EMAIL");
+                    String xemail = rs.getString("EMAIL");
 
 
                     User user = new User();
                     user.setId(id);
                     user.setName(name);
-                    user.setEmail(uemail);
+                    user.setEmail(xemail);
 
                     return user;
                 },
@@ -40,7 +43,7 @@ public class UserDaoImpl implements UserDao {
     @Override
     public List<User> list() {
         return jdbcTemplate.query("select * from users", (RowMapper<User>) (rs, row) -> {
-            Long id = rs.getLong("ID");
+            String id = rs.getString("ID");
             String name = rs.getString("NAME");
             String email = rs.getString("EMAIL");
 

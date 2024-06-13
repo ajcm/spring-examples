@@ -1,6 +1,5 @@
 package com.example;
 
-import com.example.dao.User;
 import com.example.dao.UserDao;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;

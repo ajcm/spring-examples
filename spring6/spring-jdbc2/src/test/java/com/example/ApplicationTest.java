@@ -1,7 +1,6 @@
 package com.example;
 
-import com.example.dao.User;
-import com.example.dao.UserDao;
+import com.example.repo.JdbcUserRepositoryImpl;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -16,18 +15,19 @@ import java.util.UUID;
 public class ApplicationTest {
 
     @Test
-    public void test(@Autowired UserDao userDao) {
+    public void test(@Autowired JdbcUserRepositoryImpl repository) {
+        User user = new User(UUID.randomUUID().toString(), "John doe", "fake@email.com");
+        repository.save(user);
 
-        User user = new User(UUID.randomUUID().toString(),"John doe","fake@email.com");
+        var name = repository.findNameByEmail("fake@email.com");
+        Assertions.assertEquals("John doe", name);
 
-        userDao.save(user);
+        var xuser = repository.findByEmail("fake@email.com");
+        Assertions.assertNotNull(xuser);
+        Assertions.assertEquals("John doe", xuser.getName());
 
-        var user2 = userDao.findByEmail(user.getEmail());
-        Assertions.assertEquals(user.getEmail(), user2.getEmail());
-
-        var list = userDao.list();
-
-        Assertions.assertEquals(list.size(), 1);
+        var l = repository.list();
+        Assertions.assertEquals(l.size(), 1);
     }
 
 
