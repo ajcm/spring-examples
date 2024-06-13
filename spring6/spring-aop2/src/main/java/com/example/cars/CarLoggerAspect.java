@@ -19,24 +19,16 @@ public class CarLoggerAspect {
         return sb;
     }
 
-
-//    @Before("execution(public * com.example.beans.*.getMessage(..))")
-//    public void logMessage(JoinPoint joinPoint) {
-//        var info = createJoinPointTraceName(joinPoint);
-//        System.out.println("before: " + info + ", " + joinPoint.getThis().getClass().getSimpleName());
-//    }
-//
-//    @Before("execution(* set(..))")
-//    public void logSetter(JoinPoint jp){
-//        var info = createJoinPointTraceName(jp);
-//        System.out.println("setter: " + info + ", " + jp.getThis().getClass().getSimpleName());
-//
-//    }
-
     @Before("within(com.example.cars.*)")
     public void logCars(JoinPoint joinPoint) {
         var info = createJoinPointTraceName(joinPoint);
         System.out.println("before: " + info + ", " + joinPoint.getThis().getClass().getSimpleName());
+    }
+
+    @Before("within(com..*.*)")
+    public void logCars2(JoinPoint joinPoint) {
+        var info = createJoinPointTraceName(joinPoint);
+        System.out.println("before2: " + info + ", " + joinPoint.getThis().getClass().getSimpleName());
     }
 
 }

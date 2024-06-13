@@ -18,8 +18,19 @@ public class CarTest {
     @Qualifier("ferrari")
     ICar car;
 
+
     @Test
-    public void test() {
+    public void test(@Autowired  @Qualifier("opel") ICar o) {
+        Assertions.assertNotNull(o);
+        o.setName("opel");
+        var name = o.getName();
+
+    }
+
+
+
+    @Test
+    public void test2() {
         Assertions.assertNotNull(car);
         car.setName("mycar");
         var name = car.getName();
