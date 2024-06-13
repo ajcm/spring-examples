@@ -33,5 +33,14 @@ public class BananaTest {
         Assertions.assertNotNull(milkshake.getApple().getName());
     }
 
+    @Test
+    public void test4(@Autowired Whatever whatever) {
+        Assertions.assertNotNull(whatever);
+        Assertions.assertNotNull(whatever.getBanana());
+        Assertions.assertNotNull(whatever.getBanana().getHello());
+    }
+
+
+
 
 }

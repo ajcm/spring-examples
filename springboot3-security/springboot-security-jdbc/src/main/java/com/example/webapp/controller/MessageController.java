@@ -5,10 +5,7 @@ import com.example.webapp.service.MessageJdbcService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.security.Principal;
@@ -55,6 +52,18 @@ public class MessageController {
 
     @GetMapping("read/{id}")
     public ModelAndView getDetails(@PathVariable String id) {
+        Message message = messageService.get(id);
+
+        ModelAndView modelAndView = new ModelAndView();
+
+        modelAndView.addObject("message", message);
+        modelAndView.setViewName("messageDetail");
+
+        return modelAndView;
+    }
+
+    @GetMapping("read2/{id}")
+    public ModelAndView getDetails2(@PathVariable String id, @RequestParam Message m) {
         Message message = messageService.get(id);
 
         ModelAndView modelAndView = new ModelAndView();
