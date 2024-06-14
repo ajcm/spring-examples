@@ -1,6 +1,6 @@
-package com.example.repo;
+package com.example.callbacks;
 
-import com.example.User;
+import com.example.model.User;
 import org.springframework.jdbc.core.RowMapper;
 
 import java.sql.ResultSet;

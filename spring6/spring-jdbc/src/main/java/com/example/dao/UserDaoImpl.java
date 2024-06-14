@@ -27,15 +27,13 @@ public class UserDaoImpl implements UserDao {
                     String name = rs.getString("NAME");
                     String uemail = rs.getString("EMAIL");
 
-
                     User user = new User();
                     user.setId(id);
                     user.setName(name);
                     user.setEmail(uemail);
 
                     return user;
-                },
-                email);
+                }, email);
     }
 
     @Override

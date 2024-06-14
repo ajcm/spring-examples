@@ -1,6 +1,6 @@
 package com.example.repo;
 
-import com.example.User;
+import com.example.model.User;
 
 import java.util.List;
 

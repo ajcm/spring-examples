@@ -1,5 +1,6 @@
 package com.example;
 
+import com.example.model.User;
 import com.example.repo.JdbcUserRepositoryImpl;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
