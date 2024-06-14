@@ -27,12 +27,6 @@ public class SecurityConfig {
 
 
     @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
-
-
-    @Bean
     public SecurityFilterChain filterChain(HttpSecurity http,
                                            HandlerMappingIntrospector introspector) throws Exception {
 
@@ -89,6 +83,12 @@ public class SecurityConfig {
         jdbcUserDetailsManager.createUser(user);
         jdbcUserDetailsManager.createUser(admin);
         return jdbcUserDetailsManager;
+    }
+
+
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
     }
 
 
