@@ -25,11 +25,10 @@ public class PropsApplication2Test {
 
 
     @Test
-    public void test1(@Autowired  MessageBean message) {
+    public void test1(@Autowired MessageBean message) {
         Assertions.assertNotNull(message);
-     //   Assertions.assertEquals(message.getMessage(),"");
+        //   Assertions.assertEquals(message.getMessage(),"");
     }
-
 
 
 }

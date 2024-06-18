@@ -1,23 +1,25 @@
 package com.example;
 
-import com.example.beans.HelloWorldBean;
-import com.example.beans.MessageBean;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.SpringBootConfiguration;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.PropertySource;
 
 import java.util.Arrays;
 
 @ComponentScan
 @SpringBootConfiguration
+@EnableConfigurationProperties(DbConfig.class) // or Configuration in class
+@PropertySource("classpath:application.properties")
 public class HelloWordApplication {
 
-
-
+    @Value("${bean.message}")
+    private String message;
 
     public static void main(String[] args) {
         SpringApplication.run(HelloWordApplication.class, args);

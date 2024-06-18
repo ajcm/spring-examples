@@ -1,17 +1,14 @@
 package com.example;
 
-import com.example.beans.MessageBean;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.ApplicationContext;
-import org.springframework.test.context.ActiveProfiles;
 
 
 @SpringBootTest
-@ActiveProfiles("prod")
-public class PropsApplicationTest {
+public class ConfigApplicationTest {
 
     @Autowired
     ApplicationContext applicationContext;
@@ -24,9 +21,11 @@ public class PropsApplicationTest {
 
 
     @Test
-    public void test1(@Autowired MessageBean message) {
-        Assertions.assertNotNull(message);
-        Assertions.assertEquals(message.getMessage(), "hello world from local path prod");
+    public void test1(@Autowired DbConfig dbConfig) {
+        Assertions.assertNotNull(dbConfig);
+        Assertions.assertEquals(dbConfig.getName(), "mydatabase");
+        Assertions.assertEquals(dbConfig.getUser(), "admin");
+
     }
 
 

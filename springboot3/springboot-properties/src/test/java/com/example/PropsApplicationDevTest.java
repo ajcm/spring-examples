@@ -26,7 +26,7 @@ public class PropsApplicationDevTest {
     @Test
     public void test1(@Autowired MessageBean message) {
         Assertions.assertNotNull(message);
-          Assertions.assertEquals(message.getMessage(),"hello world from local path");
+        Assertions.assertEquals(message.getMessage(), "hello world from local path");
 
         System.out.println("Working Directory = " + System.getProperty("user.dir"));
     }
