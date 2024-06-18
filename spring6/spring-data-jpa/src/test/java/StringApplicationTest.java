@@ -42,8 +42,14 @@ public class StringApplicationTest {
         userRepository.save(user2);
 
         var user3 = userRepository.findByEmail(user.getEmail());
-
         Assertions.assertEquals(user3.getRoles().size(), 2);
+
+        var user4 = userRepository.findByEmail(user.getEmail());
+        Assertions.assertEquals(user3.getEmail(), user4.getEmail());
+
+        var user5 = userRepository.searchStarting3ByEmail(user.getEmail());
+        Assertions.assertEquals(user3.getEmail(), user5.getEmail());
+
     }
 
 
