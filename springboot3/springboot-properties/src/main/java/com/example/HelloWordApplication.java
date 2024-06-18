@@ -21,6 +21,14 @@ public class HelloWordApplication {
     @Value("${bean.message}")
     private String message;
 
+    @Value("#{systemProperties['java.vm.vendor']}")
+    private String prop;
+
+    public String getProp() {
+        return prop;
+
+    }
+
     public static void main(String[] args) {
         SpringApplication.run(HelloWordApplication.class, args);
     }
