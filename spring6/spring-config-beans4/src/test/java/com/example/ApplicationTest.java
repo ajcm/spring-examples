@@ -22,6 +22,7 @@ public class ApplicationTest {
     }
 
 // qualifier cannot be user by superbean
+// Qualifier doesn't match by field name
 //    @Test
 //    void testA(@Autowired MyBean superbean) {
 //        Assertions.assertNotNull(superbean);

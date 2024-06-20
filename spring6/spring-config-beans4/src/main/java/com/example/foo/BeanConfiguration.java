@@ -34,6 +34,11 @@ public class BeanConfiguration {
         return new MyBeanImpl("beanX");
     }
 
+    @Qualifier("banana")
+    public MyBean bean5() {
+        return new MyBeanImpl("bean5");
+    }
+
 
     @Bean
     public ComposeBean composeBean() {
