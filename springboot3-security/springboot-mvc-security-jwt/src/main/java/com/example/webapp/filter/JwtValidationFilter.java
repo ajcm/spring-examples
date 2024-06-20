@@ -29,6 +29,7 @@ public class JwtValidationFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
 
+        var uri = request.getRequestURI();
         String jwt = getJwtHeader(request);
 
         if (StringUtils.isNotBlank(jwt)) {
@@ -55,6 +56,8 @@ public class JwtValidationFilter extends OncePerRequestFilter {
                 throw new BadCredentialsException("Invalid Token received!");
             }
         }
+
+        response.setStatus(200);
 
         filterChain.doFilter(request, response);
     }
