@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html th:replace="~{fragments/layout :: layout(~{::title}, ~{::section})}">
+<head>
+    <title>Users</title>
+</head>
+<body>
+<section class="py-3 container">
+    <div class="row py-lg-5">
+
+        <main class="form-signin w-75 m-auto">
+
+            <p class="lead text-body-secondary">New User</p>
+
+            <div class="container-sm">
+                <form method="post" th:action="@{/register}">
+
+                    <div class="mb-4 " style="width: 50%;">
+                        <label class="form-label" for="exampleFormControlInput1">Username</label>
+                        <input class="form-control" id="exampleFormControlInput1" name="username"
+                               placeholder="Username">
+                    </div>
+
+                    <div class="mb-3" style="width: 75%;">
+                        <label class="form-label" for="exampleFormControlInput2">Fullname</label>
+                        <input class="form-control" id="exampleFormControlInput2" name="name"
+                               placeholder="Fullname">
+                    </div>
+
+
+                    <div class="mb-3" style="width: 50%;">
+                        <label class="form-label" for="exampleFormControlInput3">Email</label>
+                        <input class="form-control" id="exampleFormControlInput3" name="email"
+                               placeholder="Email">
+                    </div>
+
+
+                    <div class="mb-3" style="width: 50%;">
+                        <label class="form-label" for="exampleFormControlInput4">Password</label>
+                        <input class="form-control" id="exampleFormControlInput4" name="password"
+                               placeholder="Password">
+                    </div>
+
+                    <div class="mb-3">
+                        <input type="submit" value="Submit"/>
+                    </div>
+                </form>
+            </div>
+
+        </main>
+
+
+    </div>
+</section>
+</body>
+</html>

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html th:replace="~{fragments/layout :: layout(~{::title}, ~{::section})}" xmlns="http://www.w3.org/1999/html">
+<head>
+    <title>Page Title</title>
+
+</head>
+<body>
+<section class="py-5 text-center container">
+    <div class="row py-lg-5">
+
+        <div class="col-lg-6 col-md-8 mx-auto">
+            <h2 class="fw-light">Generate JWT Token</h2>
+        </div>
+
+        <main class="form-signin w-100 m-auto">
+
+                <h5> Login </h5>
+
+
+                <div style="padding: 15px;">
+                    <label> User Name</label>
+                </div>
+
+                <div style="padding: 15px;">
+                    <input id="username" name="username" type="text"/>
+                </div>
+
+                <div style="padding: 15px;">
+                    <label>Password</label>
+                </div>
+
+                <div style="padding: 10px;">
+                    <input id="password" name="password" type="password"/>
+                </div>
+
+                <div style="padding: 10px;">
+                    <button id="submit">Login</button>
+                </div>
+
+                <p id="message"></p>
+
+
+        </main>
+
+    </div>
+
+    <script>
+
+       // js init
+      $(document).ready(function(){
+
+          // check if user is logged
+      //    checkSession();
+
+        // generate token
+        $("#submit").click(function(e){
+
+            var username = $("#username").val();
+            var password = $("#password").val();
+
+
+            var request = $.ajax({
+            url: "/jwt/token",
+            method: "GET",
+
+            beforeSend: function (xhr) {
+             xhr.setRequestHeader ("Authorization", "Basic " + btoa(username+":"+password));
+            },
+
+          });
+
+          request.done(function(data, textStatus, request  ) {
+                var value = request.getResponseHeader('Authorization');
+                $("#message" ).html("Authorization successful");
+                sessionStorage.setItem("JWT-TOKEN",value);
+          });
+
+          request.fail(function( jqXHR, textStatus, x ) {
+               if (jqXHR.status  == 401){
+                  $("#message").html("Authorization failed");
+                }else{
+                $("#message").html("Request failed: " + textStatus + jqXHR.status );
+                }
+          });
+
+
+           e.preventDefault();
+        });
+
+
+
+      });
+
+
+    </script>
+
+</section>
+</body>
+
+</html>

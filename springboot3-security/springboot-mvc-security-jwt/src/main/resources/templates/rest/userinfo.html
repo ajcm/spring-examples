@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html th:replace="~{fragments/layout :: layout(~{::title}, ~{::section})}" xmlns="http://www.w3.org/1999/html">
+<head>
+    <title>Page Title</title>
+
+</head>
+<body>
+<section class="py-5 text-center container">
+    <div class="row py-lg-5">
+
+        <div class="col-lg-6 col-md-8 mx-auto">
+            <h1 class="fw-light">User Info </h1>
+        </div>
+
+        <main class="form-signin w-100 m-auto">
+
+                <p> using JWT Token</p>
+                <p id="jwttoken">
+                </p>
+
+                <div style="padding: 15px;">
+                    <input id="token" name="token" type="text"/>
+                </div>
+
+                <p id="message">
+                </p>
+
+                <div style="padding: 10px;">
+                    <input type="button" id="submit" value="Get profile"/>
+                </div>
+
+
+        </main>
+
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script>
+
+        // js init
+        $(document).ready(function(){
+
+          var jwttoken = sessionStorage.getItem("JWT-TOKEN");
+
+           console.log("got token" + jwttoken);
+
+          if (jwttoken !== null){
+                 $("#token" ).val(jwttoken);
+          }
+
+
+
+        $("#submit").click(function(e){
+
+          var jwttoken = sessionStorage.getItem("JWT-TOKEN");
+
+            var request = $.ajax({
+                url: "/jwt/info",
+                method: "GET",
+
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader ("Authorization", jwttoken);
+                }
+              });
+
+              request.done(function(data, textStatus, jqXHR ) {
+               $("#message").html("name: " + name + " username: "+data.username);
+            });
+        });
+
+    });
+
+
+
+    </script>
+
+</section>
+</body>
+
+</html>
