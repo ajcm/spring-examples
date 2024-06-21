@@ -38,6 +38,7 @@
             </div>
 
             <p id="message"></p>
+            <pre id="token"></pre>
 
 
         </main>
@@ -73,7 +74,7 @@
                  var value = request.getResponseHeader('Authorization');
                  $("#message" ).html("Authorization successful");
                  console.log("JWT: " + value);
-                 sessionStorage.setItem("JWT-TOKEN",value);
+                 $("#token" ).html(value);
            });
 
            request.fail(function( jqXHR, textStatus, x ) {

@@ -63,8 +63,18 @@
               });
 
               request.done(function(data, textStatus, jqXHR ) {
-               $("#message").html("name: " + name + " username: "+data.username);
+               $("#message").html("name: " + name +data.username);
             });
+
+              request.fail(function( jqXHR, textStatus, x ) {
+                if (jqXHR.status  == 401){
+                   $("#message").html("Authorization failed");
+                 }else{
+                 $("#message").html("Request failed: " + textStatus + jqXHR.status );
+                 }
+           });
+
+
         });
 
     });

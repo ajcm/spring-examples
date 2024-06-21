@@ -23,6 +23,8 @@ public class SecurityService {
 
     private final SecurityContextHolderStrategy securityContextHolderStrategy = SecurityContextHolder
             .getContextHolderStrategy();
+
+
     @Autowired
     private AuthUserDetailsRepository userRepository;
     @Autowired

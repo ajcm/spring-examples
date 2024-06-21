@@ -1,8 +1,6 @@
 package com.example.webapp.filter;
 
-import com.example.webapp.SecurityConstants;
-import io.jsonwebtoken.*;
-import io.jsonwebtoken.security.Keys;
+import com.example.webapp.JwtUtils;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -10,17 +8,11 @@ import jakarta.servlet.http.HttpServletResponse;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.security.authentication.BadCredentialsException;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.web.filter.OncePerRequestFilter;
 
-import javax.crypto.SecretKey;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 
 
 public class JwtValidationFilter extends OncePerRequestFilter {
@@ -29,35 +21,23 @@ public class JwtValidationFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
 
+
+        var sc = SecurityContextHolder
+                .getContextHolderStrategy();
+
         var uri = request.getRequestURI();
-        String jwt = getJwtHeader(request);
+        String jwt = JwtUtils.getJwtHeader(request);
 
         if (StringUtils.isNotBlank(jwt)) {
-
             LOG.info("Validate JWT: " + jwt);
+            JwtUtils.validateJwt(jwt);
 
-            try {
-                SecretKey key = Keys.hmacShaKeyFor(SecurityConstants.JWT_KEY.getBytes(StandardCharsets.UTF_8));
-
-                JwtParser jwtParser = Jwts.parserBuilder()
-                        .setSigningKey(key)
-                        .build();
-
-                Jwt<JwsHeader, Claims> token = jwtParser.parseClaimsJws(jwt);
-                Claims claims = token.getBody();
-                String username = String.valueOf(claims.get("username"));
-                String authorities = (String) claims.get("authorities");
-
-                Authentication auth = new UsernamePasswordAuthenticationToken(username, null,
-                        AuthorityUtils.commaSeparatedStringToAuthorityList(authorities));
-
-                SecurityContextHolder.getContext().setAuthentication(auth);
-            } catch (Exception e) {
-                throw new BadCredentialsException("Invalid Token received!");
-            }
+            //check for current auth
+        } else if (sc.getContext() != null && sc.getContext().getAuthentication() != null) {
+            LOG.info("Generate JWT: " + jwt);
+            var authentication = sc.getContext().getAuthentication();
+            JwtUtils.generateJwtToken(response, authentication);
         }
-
-        response.setStatus(200);
 
         filterChain.doFilter(request, response);
     }
@@ -66,19 +46,8 @@ public class JwtValidationFilter extends OncePerRequestFilter {
     @Override
     protected boolean shouldNotFilter(HttpServletRequest request) throws ServletException {
         var matcher = new AntPathRequestMatcher("/jwt/**");
-        return matcher.matcher(request).isMatch();
+        return !matcher.matcher(request).isMatch();
     }
 
-    private String getJwtHeader(HttpServletRequest request) {
-
-        var authorization = request.getHeader(SecurityConstants.AUTHORIZATION_HEADER);
-
-        if (StringUtils.isNotBlank(authorization) && StringUtils.startsWithIgnoreCase(authorization, SecurityConstants.AUTHORIZATION_BEARER_HEADER)) {
-            return StringUtils.stripToEmpty(StringUtils.removeStart(authorization, SecurityConstants.AUTHORIZATION_BEARER_HEADER));
-        }
-
-        return StringUtils.EMPTY;
-
-    }
 
 }

@@ -61,4 +61,9 @@ public class JwtController {
         return ResponseEntity.of(optionalAuthUserDetails);
     }
 
+    @GetMapping("ping")
+    public String ping() {
+        return "ping";
+    }
+
 }
