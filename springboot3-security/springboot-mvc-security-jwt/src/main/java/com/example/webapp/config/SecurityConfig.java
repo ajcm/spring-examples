@@ -14,7 +14,10 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
+import org.springframework.security.config.annotation.web.configurers.HeadersConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
@@ -43,17 +46,17 @@ public class SecurityConfig {
         http.addFilterAfter(new JwtGeneratorFilter(), BasicAuthenticationFilter.class);
         http.addFilterBefore(new JwtValidationFilter(), BasicAuthenticationFilter.class);
 
-//        http.addFilterAfter((request, response, filterChain) -> {
-//
-//            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-//            if (null != authentication) {
-//                LOG.info("User " + authentication.getName() + " is successfully authenticated and "
-//                        + "has the authorities " + authentication.getAuthorities().toString());
-//            }
-//
-//            filterChain.doFilter(request, response);
-//        }, BasicAuthenticationFilter.class).headers(headersConfigurer ->
-//                headersConfigurer.frameOptions(HeadersConfigurer.FrameOptionsConfig::sameOrigin));
+        http.addFilterAfter((request, response, filterChain) -> {
+
+            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+            if (null != authentication) {
+                LOG.info("User " + authentication.getName() + " is successfully authenticated and "
+                        + "has the authorities " + authentication.getAuthorities().toString());
+            }
+
+            filterChain.doFilter(request, response);
+        }, BasicAuthenticationFilter.class).headers(headersConfigurer ->
+                headersConfigurer.frameOptions(HeadersConfigurer.FrameOptionsConfig::sameOrigin));
 
         http.authorizeHttpRequests(auth ->
                 auth
