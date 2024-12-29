@@ -1,0 +1,6 @@
+Docker
+--
+
+docker build . -t ajcm/springsecuritymvc
+
+docker run -p 8080:8080  ajcm/springsecuritymvc
